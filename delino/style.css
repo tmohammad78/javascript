@@ -1,54 +1,166 @@
-
+body{
+    width: 100%;
+    height: 500px;
+}
 .myheader{
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    background-color: #ffffff;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+
+    /* padding-bottom: 10px;
     padding-top: 10px;
     margin-left: 10px;
-    margin-right: 10px;
-
+    margin-right: 10px; */
+    height: 60px;
+    padding:12px 15px;
+    position: fixed;
+    top: 0;
+    left:0;
+    right: 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
 }
-.myheader .logodelino{
+ .logodelino{
     position: absolute;
     left: 50%;
     top: 50%;
 }
+.header-right{
+    direction: rtl;
+    float: right;
+}
+.header-left{
+    direction: rtl;
+    float: left;
+    /* position: relative;
+    z-index: 2; */
+}
+@media only screen and (min-width:767px){
+.myheader{
+    padding: 18px;
+    height: 50px;
+}
+}
+/********* logo **********/
+.myheader .logodelino{
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    width: 80px;
+    height:72px;
+    margin-left: -20px;
+    margin-top: -30px;
+    padding-bottom: 10px;
+    overflow: hidden;
+
+}
+.myheader .logodelino img{
+    float: left;
+    width: 100%;
+}
 .myheader .logodelino img.desktop{
+    display:none;
+}
+@media only screen and (min-width:767px){
+    .myheader .logodelino{
+        width: 101px;
+        height: 35px;
+        margin-left: -50px;
+        margin-top: -17px;
+    }
+    
+}
+@media only screen and (min-width:650px){
+    .myheader .logodelino{
+    
+    width: 83px;
+    height: 30px;
+    margin-left: -41.5px;
+    margin-top: -15px;
+    }
+    .myheader .logodelino img.mobile{
+        display: none;
+    }
+    .myheader .logodelino img.desktop{
+        display: block;
+    }
+}
+/* left header */
+.myheader .cartbtn{
+    direction: rtl;
+    height: 39px;
+    min-width: 60px;
+    border: none;
+    padding: 0 10px;
+    background: linear-gradient(-60deg,#ef4123,#ef2379);
+    /* display: inline-block; */
+    color: white;
+    border-radius: 5px;
+    margin-left:10px; 
+}
+@media only screen and (min-width:767px){
+    .myheader .cartbtn{
+        font-size: 1rem;
+        padding: 3px 15px;
+    }
+
+}
+
+/* btn login */
+
+@media  only screen and (min-width:767px){
+    .loginbtn {
+        font-size: 16px;
+        font-size: 1rem;
+        padding: 3px 15px;
+        height: 42px;
+    }
+}
+.loginbtn{
+    padding: 0 15px;
+    border: 1px solid #ef4123;
+    background: white;
+    border-radius: 5px;
+    color: #ef4123;
+    height: 35px;
+    margin-left: 10px;
+}
+/* btn login */
+
+/* registerbtn */
+.registerbtn{
     display: none;
 }
-.myheader .rightinheader{
-    float: right;
-    direction: rtl;
+@media only screen and (min-width: 767px){
+.registerbtn {
+    background: white;
+    border: none;
+    display: inline-block;
+    font-size: 20px;
 }
-.myheader .rightinheader .loginbtn{
-    border-radius: 7px;
-    border-color: #EF5036;
-    color: #EF5036;
-    background-color: white;
 }
-.myheader .rightinheader .registerbtn{
-   display: none;   
-}
-.myheader .leftinheader{
-    float: left;
-    direction: rtl;
-}
-.myheader .leftinheader .cartbtn{
-    background: linear-gradient(to right ,#EE2969,#EE3A32);
+/* registerbtn */
+
+
+.location{
+    position: fixed;
+    top: 80px;
+
 }
 .location{
     position: relative;
-    background:white;
-    top: 60px;
-
+    font-size: 14px;
+    font-size: .875rem;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    height: 47px;
+    direction: rtl;
 }
 .location .wrapper{
-    margin: 0 auto;
-    width: 70%;
+    margin: 0 5%;
+    width: 90%;
+}
+.location .wrapper div{
     text-align: center;
 }
 .location .wrapper .city{
@@ -56,92 +168,76 @@
     font-size: 20px;
     color: #EE4427;
 }
-.location .wrapper i{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    font-size: 30px;
-}
-.searching{
-    background-color: #f8f8f8;
-}
 .section{
+    height: auto;
     position: relative;
+    background-color: #f8f8f8;
+    padding: 15px 0;
     top: 70px;
 }
+.searching{
+    margin: 0 5%;
+    width: 90%;
+}
 .searchbtn{
+    /* ///???? */
     background: linear-gradient(to right ,#EE2969,#EE3A32);
+    padding: 5px 8px;
+    height: 40px;
+    position: relative;
     color: white;
-    font-size: 20px;
     border: none;
-    width: 170px;
-    height: 60px;
+    font-size: 14px;
+    font-size: .875rem;
+    text-align: center;
+    display: inline;
+}
+@media only screen and (min-width: 767px){
+    .searchbtn{
+        float: left;
+        width: 30%;
+        border-radius: 5px;
+        height: 50px;
+        padding: 8px 10px;
+        font-size: 20px;
+    }
+
+}
+.searchingtext{
+    overflow: hidden;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 5px 30px 5px 5px;
+    position: relative;
     border-radius: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 190px;
+    font-size: 14px;
+    font-size: .875rem;
 }
 .searchinput{
     float: right;
-    direction: rtl;
-    width: 70%;
     height: 100%;
+    background: none;
     border: none;
-    background-color:white;
-    overflow: hidden;
-    font-size: 30px;
-    border: 1px solid #eee;
+    direction: rtl;
+    width: 100%;
 }
-@media only screen and  (min-width: 1400px){
-    .section .searching .wrapper .searchingtext{
-        font-size: 24px;
-        padding: 10px 60px 10px 10px;
-        height: 50px;
+.slider{
+    top: 13%;
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    
+    position: relative;
+    background-color: rgb(156, 145, 145);
+}
+@media only screen and (min-width: 767px){
+    .searchingtext{
+        overflow: hidden;
+        /* float: right; */
+        font-size: 18px;
+        font-size: 1.125rem;
+        /* padding: 8px 35px 8px 8px; */
+        /* height: 50px; */
     }
 }
-
-@media only screen and (min-width:767px){
-    .myheader .leftinheader .cartbtn{
-        border-radius: 8px;
-        font-size: 20px;
-        padding: 7px 15px;  
-        color: white;
-        border: none;
-    }
-}
-.myheader .carbtn{
-font-size: 14px;
-}
-
-
-@media only screen and (min-width:767px){
-    .myheader .rightinheader .registerbtn{
-        background: transparent;
-        border: none;
-        font-size: 20px;
-        display: inline-block;
-    }
-
-
-}
-@media only screen and (min-width:767px){
-.myheader .rightinheader .loginbtn{
-    font-size: 20px;
-    padding: 7px 15px;
-}
-}
-@media only screen and (min-width: 650px) {
-    .myheader .logodelino img.desktop{
-        display: block;
-    }
-}
-@media only screen and (min-width:767px){
- .myheader .logodelino{
-     top: -15%;
-     width: 101px;
-     height: 35px;
-     margin-left: -50px;
-     margin-top: 17px;
- }   
-}
-
