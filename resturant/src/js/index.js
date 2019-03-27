@@ -1,2 +1,3 @@
 import x from './test';
-console.log(`this is number ${x} for testing`);
+const y=2;
+console.log(`this is number ${x} for testing ${y}`);
