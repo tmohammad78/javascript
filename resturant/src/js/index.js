@@ -6,16 +6,7 @@
 
 // 36833e2f2d29f546b4599c757b1394c4
 //https://www.food2fork.com/api/search
-import axios from 'axios';
-async function getResult(query){
-    const key='36833e2f2d29f546b4599c757b1394c4';
-    try {
-        const res=await axios(`https://www.food2fork.com/api/search?key=${key}&q=${query}`);
-        const recipes=res.data.recipes;
-        console.log(recipes);
-    } catch (error) {
-        alert(error);
-        
-    }
-}
-getResult('pizza'); 
+import Search from './models/Search';
+const search=new Search('pizza');
+console.log(search);
+search.getResult();
