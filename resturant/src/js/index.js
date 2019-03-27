@@ -1,3 +1,3 @@
-import x from './test';
-const y=2;
-console.log(`this is number ${x} for testing ${y}`);
+import string from './models/Search';
+import { add,multiply,ID } from './views/searchView';
+console.log(`this is a example ${add(ID,2)} and ${multiply(3,5)}.${string}`)
