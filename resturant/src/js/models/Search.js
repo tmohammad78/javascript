@@ -1,1 +1,1 @@
-export default 'i am an exported string';
+// export default 'i am an exported string';
