@@ -39,7 +39,9 @@ const renderrecipe = recipe =>{
     `;
     elements.searchResult.insertAdjacentHTML('beforeend',markup);
 }
-export const renderResult = recipes =>{
+export const renderResult = (recipes,page=3,resperpage=10) =>{
+    const start=(page-1)*resperpage;
+    const end=page*resperpage;
     // console.log(recipes);
-    recipes.forEach(renderrecipe);
+    recipes.slice(start,end).forEach(renderrecipe);
 }
