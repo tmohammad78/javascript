@@ -39,9 +39,36 @@ const renderrecipe = recipe =>{
     `;
     elements.searchResult.insertAdjacentHTML('beforeend',markup);
 }
+const createbutton=(page,type)=>`
+    <button class="btn-inline results__btn--${type}">
+    <svg class="search__icon">
+        <use href="img/icons.svg#icon-triangle-${type==='prev' ? 'left' :'right' }"></use>
+    </svg>
+    <span>Page ${type==='prev' ? page-1 : page+1 }</span>
+    </button>
+`;
+export const renderbutton=(page,numResults,resperpage) => {
+    const pages=Math.ceil(numResults/resperpage);
+    let button;
+    if(page === 1 && pages>1){
+        //only one button
+        button=createbutton(page,'next');
+    }else if(page<pages){
+        //both button
+        button=`
+        ${createbutton(page,'prev')}
+        ${createbutton(page,'next')}
+        `;
+    }else if(page===pages && pages>1){
+        //only prev button
+        button=createbutton(page,'prev');
+
+        
+    }
+}
 export const renderResult = (recipes,page=3,resperpage=10) =>{
     const start=(page-1)*resperpage;
     const end=page*resperpage;
     // console.log(recipes);
     recipes.slice(start,end).forEach(renderrecipe);
-}
+}   
