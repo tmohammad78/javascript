@@ -9,6 +9,7 @@ export const clearInput=()=>{
 export const clearResult=()=>{
     elements.searchResult.innerHTML='';
 }
+
 const limitrecipetitle=(title,limit=17)=>{
     const newtitle=[];
     if(title.length > limit){
