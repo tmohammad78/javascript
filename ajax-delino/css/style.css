@@ -31,19 +31,19 @@
 .clearfix {
   overflow: auto; }
 
-.american__pizza {
+.food_section {
   width: 80%;
   margin: 0 auto; }
-  .american__pizza-info {
+  .food_section-info {
     width: 100%;
     margin: 0 auto;
     display: inline-block; }
-  .american__pizza-infobox {
+  .food_section-infobox {
     padding: 10px;
     margin: 20px;
     border-radius: 6px;
     transition: all .5s; }
-  .american__pizza-category {
+  .food_section-category {
     border-radius: 6px;
     background-color: #eee;
     display: inline-block;
@@ -51,15 +51,15 @@
     overflow: hidden;
     margin: 8px 8px;
     cursor: pointer; }
-    .american__pizza-category:hover, .american__pizza-category:active {
+    .food_section-category:hover, .food_section-category:active {
       transform: translateY(-10px) scale(1.2);
       -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76); }
-    .american__pizza-category__img {
+    .food_section-category__img {
       width: 100%;
       overflow: hidden; }
-  .american__pizza__caption {
+  .food_section__caption {
     font-size: 17px;
     text-align: center;
     display: block;

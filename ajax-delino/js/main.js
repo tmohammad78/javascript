@@ -1,10 +1,6 @@
 $(document).ready(function(){
     const $categorywrapper=$('.categories');
-    const $wrapper=$('.american__pizza-info');
-    const $wrapper2=$('.italian');
-    const $wrapper3=$('.burger');
-    const $wrapper4=$('.pasta');
-
+    const $wrapper=$('.food_section-info');
     let delinodata;
     const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
     $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
@@ -12,6 +8,11 @@ $(document).ready(function(){
             // console.log(delinodata);
             rendercategory(delinodata);
             console.log(delinodata);
+            // renderfood(delinodata[1]);
+            // renderfood(delinodata[2]);
+            // renderfood(delinodata[3]);
+            // renderfood(delinodata[4]);
+            // return;
             for (var i=0 ; i< delinodata.length ; i++){
                 renderfood(delinodata[i]);
             }
@@ -40,54 +41,28 @@ $(document).ready(function(){
         $categorywrapper.html(html);
     }
     function renderfood(data){
+        console.log(data)
+        //return;
         let html = "";
         // console.log(data.sub[0].food[0]);
         // console.log(data.sub[0]);
         const subdata=data.sub[0].food;
         if(subdata){
-            // const itemcategory=$.each(data,(i,item)=>{
-            //     // const image =  item.food[i].img ? '<img  class="american__pizza-category__img" src="' + item.food[i].img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
-            //     return `
-            //         <div class="american__pizza-category col-1-of-3">
-                      
-            //             <b class="american__pizza__caption">${item.food[i]}</b>
-            //         </div>
-            //     </div>
-            //     `;
-            // });
-            // console.log(itemcategory);
-
             const fake=subdata.map((item,i)=>{
                 console.log(item);
-                const image =  item.img ? '<img  class="american__pizza-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
+                const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
-                <div class="american__pizza-category col-1-of-3">
+                <div class="food_section-category col-1-of-3">
                     ${image}
-                    <b class="american__pizza__caption">${item.title}</b>
+                    <b class="food_section__caption">${item.title}</b>
                 </div>
                </div>
             `;
             })
-            // const itemcategory=data.map((item,i)=>{
-            //     // console.log(item);
-            //     console.log(item);
-            //     const image =  item.food[i].img ? '<img  class="american__pizza-category__img" src="' + item.food[i].img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
-            //     return `
-            //         <div class="american__pizza-category col-1-of-3">
-            //             ${image}
-            //             <b class="american__pizza__caption">${item.food[i].title}</b>
-            //         </div>
-            //     </div>
-            //     `;
-            // });
             html=fake.join("");
         }
         $wrapper.html(html);
     }
-   
-
-
-
     //popup
     $wrapper.on("click","img",function(){
         renderpopup(delinodata[0].sub);
@@ -114,149 +89,8 @@ $(document).ready(function(){
         }
         $("body").html(html);
     }
-
     $('.popup__close').on("click",function(){
         $('.test').fadeOute(2000,function(){    });
     });
-
     //popup
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // renderitalianpizza(delinodata[1].sub[0].food);
-            // renderburger(delinodata[2].sub[0].food);
-            // renderpasta(delinodata[3].sub[0].food);
-
-
-
-
-
-
-
-
-
-
- // function renderitalianpizza(data){
-    //     let html = "";
-        
-    //     if(data){
-    //         const itemcategory=data.map((item,i)=>{
-    //             // console.log(item.title);
-    //             return `
-    //                 <div class="american__pizza-category col-1-of-3">
-    //                     <img class="american__pizza-category__img" src="img/pizza5.jpg" alt="pizza3">
-    //                     <b class="american__pizza__caption">${item.title}</b>
-    //                 </div>
-    //             </div>
-    //             `;
-    //         });
-    //         html=itemcategory.join("");
-    //     }
-    //     $wrapper2.html(html);
-    // }
-    // function renderburger(data){
-    //     let html = "";
-        
-    //     if(data){
-    //         const itemcategory=data.map((item,i)=>{
-    //             // console.log(item.title);
-    //             return `
-    //                 <div class="american__pizza-category col-1-of-3">
-    //                     <img class="american__pizza-category__img" src="img/burger.jpg" alt="pizza3">
-    //                     <b class="american__pizza__caption">${item.title}</b>
-    //                 </div>
-    //             </div>
-    //             `;
-    //         });
-    //         html=itemcategory.join("");
-    //     }
-    //     $wrapper3.html(html);
-    // }
-    // function renderpasta(data){
-    //     let html = "";
-        
-    //     if(data){
-    //         const itemcategory=data.map((item,i)=>{
-    //             console.log(item.title);
-    //             return `
-    //                 <div class="american__pizza-category col-1-of-3">
-    //                     <img class="american__pizza-category__img" src="img/pasta.jpg" alt="pizza3">
-    //                     <b class="american__pizza__caption">${item.title}</b>
-    //                 </div>
-    //             </div>
-    //             `;
-    //         });
-    //         html=itemcategory.join("");
-    //     }
-    //     $wrapper4.html(html);
-    // }
-    // function renderfood(data){
-    //     let html='';
-    //     const itemfood=data.array.map((item,i) => {
-    //         const image =  item.food[0].img ? '<img  class="american__pizza-category__img" src="' + item.food[i].img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
-    //         return `                   
-    //         <div class="american__pizza-category col-1-of-3">
-    //             ${image}
-    //             <b class="american__pizza__caption">${item.title}</b>
-    //          </div>
-    // </div>`;
-    //     });
-    // }
-    // $.ajax({
-    //     method:"GET",
-    //     url:'https://api.delino.com/restaurant/menu/d8ecd310-a541-452d-957f-5b2e9361a74e',
-    //     crossDomain: true,
-    //     dataType: 'jsonp',
-    //     success:function(){
-    //      console.log('sd');   
-    //     }
-
-    // }).done(function(){
-    //     console.log('sfdas');
-    // });
-
