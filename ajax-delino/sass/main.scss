@@ -54,6 +54,11 @@ $gutter-horizontal: 9px;
         transition: all .5s;
     }
     &-category{
+        @media only screen and (max-width:600px){
+            max-width: 50%;
+            border-radius: 6px;
+            background-color: red;
+        }
         border-radius: 6px;
         background-color: #eee;
         // width: 25%;
@@ -84,6 +89,7 @@ $gutter-horizontal: 9px;
 .col-1-of-3{
     width: calc((90% - 2 * #{$gutter-horizontal}) / 3);
 }
+
 .left_ul{
     list-style: none;
     text-decoration: none;

@@ -8,7 +8,6 @@ $(document).ready(function(){
             // console.log(delinodata);
             rendercategory(delinodata);
             console.log(delinodata);
-            // renderfood(delinodata[1]);
             // renderfood(delinodata[2]);
             // renderfood(delinodata[3]);
             // renderfood(delinodata[4]);
@@ -27,9 +26,9 @@ $(document).ready(function(){
         if(data){
             const itemmenue=data.map((item,i)=>{
                 return `
-                <div class="categories__indexbox">
+                <div class="categories__indexbox" >
                     <span class="categories__span clearfix">
-                        <a href="${item.id}"><img class="categories__img" src="img/pizzaamerican.png" alt="pizza"></a>
+                        <a href="#${item.id}"><img class="categories__img" src="img/pizzaamerican.png" alt="pizza"></a>
                         <b class="categories__caption">${item.title}</b>
                     </span>
                 </div>
@@ -43,12 +42,11 @@ $(document).ready(function(){
     function renderfood(data){
         console.log(data)
         //return;
-        let html = "";
         // console.log(data.sub[0].food[0]);
         // console.log(data.sub[0]);
         const subdata=data.sub[0].food;
         if(subdata){
-            const fake=subdata.map((item,i)=>{
+            const itemsBox = subdata.map((item,i)=>{
                 console.log(item);
                 const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
@@ -56,12 +54,13 @@ $(document).ready(function(){
                     ${image}
                     <b class="food_section__caption">${item.title}</b>
                 </div>
-               </div>
             `;
-            })
-            html=fake.join("");
+            });
+            
+            html=` <div style="border: 1px solid red"  id="${data.id}">`+itemsBox.join("")+`</div>`;
+            $wrapper.append(html);
         }
-        $wrapper.html(html);
+        
     }
     //popup
     $wrapper.on("click","img",function(){
