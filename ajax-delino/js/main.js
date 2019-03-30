@@ -2,7 +2,10 @@ $(document).ready(function(){
     const $categorywrapper=$('.categories');
     const $wrapper=$('.food_section-info');
     let delinodata;
-    const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
+    // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
+    const key='48ff20a8-c1a4-4843-8826-ae0ba77f4254';
+    //a5fa43c3-234d-462a-990a-9ec7ed82159f
+    
     $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
             delinodata=result.categories;
             // console.log(delinodata);
@@ -51,9 +54,25 @@ $(document).ready(function(){
                 const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
                 <div class="food_section-category col-1-of-3">
-                    ${image}
-                    <b class="food_section__caption">${item.title}</b>
+                <div class="food_section-img">
+                     ${image}    
                 </div>
+                <div class="food_section-description">
+                     <div class="food_section-description-index">
+                          <h3 class="food_section-description-title">${item.title}</h3>
+                          <span >${item.ingredient}</span>
+                     </div>
+                </div>
+                <div class="food_section-last clearfix">
+                      <div class="food_section-last-price">
+                          <p>${item.price}</p>
+                      </div>
+                      <div class="food_section-last-cart">
+                          <a class="food_section-last-carticon" href=""><span >
+                          <i class="fas fa-shopping-cart"></i></span></a>
+                      </div>
+                </div>
+          </div>
             `;
             });
             

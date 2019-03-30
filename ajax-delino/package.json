@@ -6,9 +6,7 @@
   "scripts": {
     "compile:sass": "node-sass sass/main.scss css/style.css -w"
   },
-  "author": "mohammad",
-  "license": "ISC",
-  "devDependencies": {
-    "node-sass": "^4.11.0"
-  }
+  "author": "mohammad taheri",
+  "license": "ISC"
 }
+

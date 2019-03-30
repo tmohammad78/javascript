@@ -1,3 +1,77 @@
+.clearfix {
+  overflow: auto; }
+
+.left_ul {
+  list-style: none;
+  text-decoration: none; }
+
+.left_li {
+  list-style: none;
+  text-decoration: none; }
+
+.food_section {
+  width: 60%;
+  margin: 0 auto; }
+  .food_section-info {
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block; }
+  .food_section-last {
+    background-color: #eee;
+    width: 100%;
+    font-size: 20px; }
+    .food_section-last-carticon {
+      color: #668d2c; }
+    .food_section-last-price {
+      width: 100%;
+      text-align: center; }
+    .food_section-last-cart {
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      padding-bottom: 6px; }
+  .food_section-description {
+    width: 100%;
+    background-color: #ffffff;
+    text-align: right;
+    cursor: pointer; }
+    .food_section-description-index {
+      padding: 8px 0px; }
+    .food_section-description-title {
+      margin: 0;
+      padding: 7px 7px;
+      font-size: 30px; }
+  .food_section-infobox {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 6px;
+    transition: all .5s; }
+  .food_section-category {
+    border: 1px solid #eee;
+    border-radius: 9px;
+    display: inline-block;
+    transition: all .5s;
+    overflow: hidden;
+    margin: 8px 8px; }
+    @media only screen and (max-width: 600px) {
+      .food_section-category {
+        max-width: 50%;
+        border-radius: 6px;
+        background-color: red; } }
+    .food_section-category:hover, .food_section-category:active {
+      -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
+      -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
+      box-shadow: 14px 29px 46px 0px rgba(170, 170, 170, 0.76); }
+    .food_section-category__img {
+      width: 100%;
+      overflow: hidden;
+      cursor: pointer; }
+  .food_section__caption {
+    font-size: 17px;
+    text-align: center;
+    display: block;
+    padding: 9px; }
+
 .categories {
   width: 100%;
   position: relative;
@@ -28,58 +102,8 @@
       -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76); }
 
-.clearfix {
-  overflow: auto; }
-
-.food_section {
-  width: 80%;
-  margin: 0 auto; }
-  .food_section-info {
-    width: 100%;
-    margin: 0 auto;
-    display: inline-block; }
-  .food_section-infobox {
-    padding: 10px;
-    margin: 20px;
-    border-radius: 6px;
-    transition: all .5s; }
-  .food_section-category {
-    border-radius: 6px;
-    background-color: #eee;
-    display: inline-block;
-    transition: all .5s;
-    overflow: hidden;
-    margin: 8px 8px;
-    cursor: pointer; }
-    @media only screen and (max-width: 600px) {
-      .food_section-category {
-        max-width: 50%;
-        border-radius: 6px;
-        background-color: red; } }
-    .food_section-category:hover, .food_section-category:active {
-      transform: translateY(-10px) scale(1.2);
-      -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
-      -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
-      box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76); }
-    .food_section-category__img {
-      width: 100%;
-      overflow: hidden; }
-  .food_section__caption {
-    font-size: 17px;
-    text-align: center;
-    display: block;
-    padding: 9px; }
-
 .col-1-of-3 {
   width: calc((90% - 2 * 9px) / 3); }
-
-.left_ul {
-  list-style: none;
-  text-decoration: none; }
-
-.left_li {
-  list-style: none;
-  text-decoration: none; }
 
 .popup {
   width: 100%;
