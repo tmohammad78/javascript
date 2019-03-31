@@ -6,7 +6,7 @@ $(document).ready(function(){
     // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
     const key='48ff20a8-c1a4-4843-8826-ae0ba77f4254';
     //a5fa43c3-234d-462a-990a-9ec7ed82159f
-    
+
     $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
             delinodata=result.categories;
             // console.log(delinodata);
@@ -50,7 +50,9 @@ $(document).ready(function(){
         for (var i=0;i<data.sub.length;i++){
         const subdata=data.sub[i].food;
         if(subdata){
+            
             const itemsBox = subdata.map((item,i)=>{
+                console.log(helper.truncate(item.ingredient));
                 // console.log(item);
                 const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
