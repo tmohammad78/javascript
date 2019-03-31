@@ -1,6 +1,8 @@
 .food_section{
     width: 60%;
     margin: 0 auto;
+    position: relative;
+    top: 90px;
     &-info{
         width: 100%;
         margin: 0 auto;
@@ -37,7 +39,6 @@
         &-title{
             margin: 0;
             padding: 7px 7px;
-            font-size: 30px;
         }
     }
     &-infobox{

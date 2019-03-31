@@ -1,8 +1,9 @@
 .categories{
     width: 100%;
-    position: relative;
-    margin: 0 auto;
-                        
+    position: fixed;
+    margin: 0 auto;     
+    z-index: 1000;
+    background-color: $color-white;
     &__img{
         width: 40%;
         text-align: center;

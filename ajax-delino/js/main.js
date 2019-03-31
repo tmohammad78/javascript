@@ -1,6 +1,8 @@
+import 'module';
 $(document).ready(function(){
     const $categorywrapper=$('.categories');
     const $wrapper=$('.food_section-info');
+    // const $wrapper=$('');
     let delinodata;
     // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
     const key='48ff20a8-c1a4-4843-8826-ae0ba77f4254';
@@ -29,9 +31,9 @@ $(document).ready(function(){
         if(data){
             const itemmenue=data.map((item,i)=>{
                 return `
-                <div class="categories__indexbox" >
+                <div class="categories__indexbox" data-cat-id="${item.id}" >
                     <span class="categories__span clearfix">
-                        <a href="#${item.id}"><img class="categories__img" src="img/pizzaamerican.png" alt="pizza"></a>
+                        <a id='' href="#${item.id}"><img class="categories__img " src="img/pizzaamerican.png" alt="pizza"></a>
                         <b class="categories__caption">${item.title}</b>
                     </span>
                 </div>
@@ -47,7 +49,10 @@ $(document).ready(function(){
         //return;
         // console.log(data.sub[0].food[0]);
         // console.log(data.sub[0]);
-        const subdata=data.sub[0].food;
+        for (var i=0;i<data.sub.length;i++){
+
+        
+        const subdata=data.sub[i].food;
         if(subdata){
             const itemsBox = subdata.map((item,i)=>{
                 console.log(item);
@@ -60,7 +65,7 @@ $(document).ready(function(){
                 <div class="food_section-description">
                      <div class="food_section-description-index">
                           <h3 class="food_section-description-title">${item.title}</h3>
-                          <span >${item.ingredient}</span>
+                          <span >${helper.truncate(item.ingredient)}</span>
                      </div>
                 </div>
                 <div class="food_section-last clearfix">
@@ -76,10 +81,10 @@ $(document).ready(function(){
             `;
             });
             
-            html=` <div style="border: 1px solid red"  id="${data.id}">`+itemsBox.join("")+`</div>`;
+            html=` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${data.id}">`+itemsBox.join("")+`</div>`;
             $wrapper.append(html);
         }
-        
+        }
     }
     //popup
     $wrapper.on("click","img",function(){
@@ -111,4 +116,34 @@ $(document).ready(function(){
         $('.test').fadeOute(2000,function(){    });
     });
     //popup
+
+
+  
+    $categorywrapper.on("click","a",function(){
+        //debugger;
+        const $box = $("#box-" + $(this).closest("div").data("cat-id"));
+
+        if ($box.length){
+            $('body').stop().animate({
+                scrollTop: $box.offset().top - 90
+              }, 600 );
+        }
+
+
+
+        
+
+            
+    });
+
+
+
+helper.currancy()
+
+
+
 });
+
+
+
+
