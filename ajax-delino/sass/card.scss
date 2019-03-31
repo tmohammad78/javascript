@@ -15,9 +15,10 @@
         &-carticon{
             color: rgb(102, 141, 44);
         }
-
         &-price{
-            width: 100%;
+            padding: 5px 0px;
+            width: 45%;
+            margin: 0 auto;
             text-align: center;
         }
         &-cart{
@@ -32,7 +33,6 @@
         background-color: $color-white;
         text-align: right;
         cursor: pointer;
-
         &-index{
             padding: 8px 0px;
         }
@@ -79,4 +79,8 @@
         display: block;
         padding: 9px; 
     }
+}
+.price-number{
+    float: left;
+    margin-left:40px; 
 }

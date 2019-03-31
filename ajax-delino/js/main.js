@@ -1,4 +1,3 @@
-import 'module';
 $(document).ready(function(){
     const $categorywrapper=$('.categories');
     const $wrapper=$('.food_section-info');
@@ -40,22 +39,19 @@ $(document).ready(function(){
                 `;
             });
             html=itemmenue.join("");
-
         }
         $categorywrapper.html(html);
     }
     function renderfood(data){
-        console.log(data)
+        // console.log(data)
         //return;
         // console.log(data.sub[0].food[0]);
         // console.log(data.sub[0]);
         for (var i=0;i<data.sub.length;i++){
-
-        
         const subdata=data.sub[i].food;
         if(subdata){
             const itemsBox = subdata.map((item,i)=>{
-                console.log(item);
+                // console.log(item);
                 const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
                 <div class="food_section-category col-1-of-3">
@@ -70,7 +66,7 @@ $(document).ready(function(){
                 </div>
                 <div class="food_section-last clearfix">
                       <div class="food_section-last-price">
-                          <p>${item.price}</p>
+                          ${helper.currancy(item.price)}
                       </div>
                       <div class="food_section-last-cart">
                           <a class="food_section-last-carticon" href=""><span >
@@ -80,7 +76,6 @@ $(document).ready(function(){
           </div>
             `;
             });
-            
             html=` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${data.id}">`+itemsBox.join("")+`</div>`;
             $wrapper.append(html);
         }
@@ -94,9 +89,8 @@ $(document).ready(function(){
     function renderpopup(data){
         let html= "";
         if(data){
-
             $('.test').addClass('popup',function(){
-                console.log('works');
+                // console.log('works');
             });
             const itempoup=data.map((item,id)=>{
                 return `
@@ -106,9 +100,7 @@ $(document).ready(function(){
                 </div>
                 `;
             });
-            html=itempoup.join("");
-
-            
+            html=itempoup.join("");            
         }
         $("body").html(html);
     }
@@ -116,9 +108,6 @@ $(document).ready(function(){
         $('.test').fadeOute(2000,function(){    });
     });
     //popup
-
-
-  
     $categorywrapper.on("click","a",function(){
         //debugger;
         const $box = $("#box-" + $(this).closest("div").data("cat-id"));
@@ -127,20 +116,8 @@ $(document).ready(function(){
             $('body').stop().animate({
                 scrollTop: $box.offset().top - 90
               }, 600 );
-        }
-
-
-
-        
-
-            
+        }            
     });
-
-
-
-helper.currancy()
-
-
 
 });
 
