@@ -4,18 +4,13 @@ $(document).ready(function(){
     // const $wrapper=$('');
     let delinodata;
     // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
-    const key='48ff20a8-c1a4-4843-8826-ae0ba77f4254';
+    const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
     //a5fa43c3-234d-462a-990a-9ec7ed82159f
 
     $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
             delinodata=result.categories;
-            // console.log(delinodata);
             rendercategory(delinodata);
             console.log(delinodata);
-            // renderfood(delinodata[2]);
-            // renderfood(delinodata[3]);
-            // renderfood(delinodata[4]);
-            // return;
             for (var i=0 ; i< delinodata.length ; i++){
                 renderfood(delinodata[i]);
             }
@@ -44,16 +39,12 @@ $(document).ready(function(){
     }
     function renderfood(data){
         // console.log(data)
-        //return;
-        // console.log(data.sub[0].food[0]);
         // console.log(data.sub[0]);
         for (var i=0;i<data.sub.length;i++){
         const subdata=data.sub[i].food;
         if(subdata){
-            
             const itemsBox = subdata.map((item,i)=>{
                 console.log(helper.truncate(item.ingredient));
-                // console.log(item);
                 const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
                 <div class="food_section-category col-1-of-3">
@@ -87,7 +78,6 @@ $(document).ready(function(){
     $wrapper.on("click","img",function(){
         renderpopup(delinodata[0].sub);
     });
-
     function renderpopup(data){
         let html= "";
         if(data){
@@ -113,12 +103,20 @@ $(document).ready(function(){
     $categorywrapper.on("click","a",function(){
         //debugger;
         const $box = $("#box-" + $(this).closest("div").data("cat-id"));
-
         if ($box.length){
             $('body').stop().animate({
                 scrollTop: $box.offset().top - 90
               }, 600 );
         }            
+    });
+    $(window).scroll(function(){
+        var scrolldefault=$(window).scrollTop;
+        
+        const $box = $("#box-" + $(this).closest("div").data("cat-id"));
+        var scrolllocation=$box.offset().top -20;
+        if()
+        $('').
+
     });
 
 });

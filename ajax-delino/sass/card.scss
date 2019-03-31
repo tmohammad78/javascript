@@ -3,6 +3,10 @@
     margin: 0 auto;
     position: relative;
     top: 90px;
+    // @include respond(tab-port){
+    //     max-width: 100px;
+    // }
+      
     &-info{
         width: 100%;
         margin: 0 auto;
@@ -16,6 +20,7 @@
             color: rgb(102, 141, 44);
         }
         &-price{
+            direction: rtl;
             padding: 5px 0px;
             width: 45%;
             margin: 0 auto;
@@ -49,11 +54,6 @@
         transition: all .5s;
     }
     &-category{
-        @media only screen and (max-width:600px){
-            max-width: 50%;
-            border-radius: 6px;
-            background-color: red;
-        }
         border: 1px solid $color-gray-light;
         border-radius: 9px;
         // background-color: #eee;
@@ -84,4 +84,11 @@
 .price-number{
     float: left;
     margin-left:40px; 
+}
+
+
+@media only screen and (max-width:600px) {
+    .food_section{
+        width: 100;
+    }
 }

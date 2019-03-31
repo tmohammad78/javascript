@@ -1,3 +1,27 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 62.5%; }
+  @media only screen and (max-width: 1200px) {
+    html {
+      font-size: 56.25%; } }
+  @media only screen and (max-width: 900px) {
+    html {
+      font-size: 50%; } }
+  @media only screen and (min-width: 1800px) {
+    html {
+      font-size: 100%; } }
+
+body {
+  box-sizing: border-box; }
+  @media only screen and (max-width: 900px) {
+    body {
+      padding: 0; } }
+
 .clearfix {
   overflow: auto; }
 
@@ -17,6 +41,7 @@
     .food_section-last-carticon {
       color: #668d2c; }
     .food_section-last-price {
+      direction: rtl;
       padding: 5px 0px;
       width: 45%;
       margin: 0 auto;
@@ -49,11 +74,6 @@
     transition: all .5s;
     overflow: hidden;
     margin: 8px 8px; }
-    @media only screen and (max-width: 600px) {
-      .food_section-category {
-        max-width: 50%;
-        border-radius: 6px;
-        background-color: red; } }
     .food_section-category:hover, .food_section-category:active {
       -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
@@ -71,6 +91,10 @@
 .price-number {
   float: left;
   margin-left: 40px; }
+
+@media only screen and (max-width: 600px) {
+  .food_section {
+    width: 100; } }
 
 .categories {
   width: 100%;
