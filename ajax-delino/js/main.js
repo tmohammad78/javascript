@@ -4,7 +4,7 @@ $(document).ready(function(){
     // const $wrapper=$('');
     let delinodata;
     // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
-    const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
+    const key='48ff20a8-c1a4-4843-8826-ae0ba77f4254';
     //a5fa43c3-234d-462a-990a-9ec7ed82159f
 
     $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
@@ -75,26 +75,36 @@ $(document).ready(function(){
         }
     }
     //popup
-    $wrapper.on("click","img",function(){
-        renderpopup(delinodata[0].sub);
+    $wrapper.on("click","img",function(data){
+        // for(var i=0 ;i<data.sub.length;i++){
+        //     // renderpopup(delinodata[i].sub);
+        //     console.log(data.sub);
+
+        // }
+        // // console.log(delinodata);
+        // return;
+        renderpopup(data);
+        
     });
     function renderpopup(data){
         let html= "";
         if(data){
+            alert('s');
             $('.test').addClass('popup',function(){
                 // console.log('works');
+                return ' ';
             });
-            const itempoup=data.map((item,id)=>{
-                return `
-                <div class="popup__content">
-                    <a href="" class="popup__close" >&times;</a>
-                    <h3 class="popup_description">${item.description} </h3>
-                </div>
-                `;
-            });
-            html=itempoup.join("");            
+            // const itempoup=data.map((item,id)=>{
+            //     return `
+            //     <div class="popup__content">
+            //         <a href="" class="popup__close" >&times;</a>
+            //         <h3 class="popup_description">${item.ingredient} </h3>
+            //     </div>
+            //     `;
+            // });
+            // html=itempoup.join("");            
         }
-        $("body").html(html);
+        // $("body").html(html);
     }
     $('.popup__close').on("click",function(){
         $('.test').fadeOute(2000,function(){    });
@@ -109,15 +119,15 @@ $(document).ready(function(){
               }, 600 );
         }            
     });
-    $(window).scroll(function(){
-        var scrolldefault=$(window).scrollTop;
+    // $(window).scroll(function(){
+    //     var scrolldefault=$(window).scrollTop;
         
-        const $box = $("#box-" + $(this).closest("div").data("cat-id"));
-        var scrolllocation=$box.offset().top -20;
-        if()
-        $('').
+    //     const $box = $("#box-" + $(this).closest("div").data("cat-id"));
+    //     var scrolllocation=$box.offset().top -20;
+    //     if()
+    //     $('').
 
-    });
+    // });
 
 });
 
