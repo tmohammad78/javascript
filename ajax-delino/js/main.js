@@ -22,25 +22,9 @@ $(document).ready(function(){
     });
     function icon(logo){
         switch(logo){
-            //burger
-            case 12:
-            
-            break;
-            //soda
-            case 3:
-            break;
-            //pish ghaza
-            case 21:
-            break;
-            //sanswitch
-            case 22:
-            break;
-            //sokhari
-            case 25:
-            break;
-            //pizza
-            case 7:
-            break;
+ 
+            //children food
+ 
         }
     }
     function rendercategory(data){
@@ -55,7 +39,7 @@ $(document).ready(function(){
                 return `
                 <div class="categories__indexbox" data-cat-id="${item.id}" >
                     <span class="categories__span clearfix">
-                        <a id='' href="#${item.id}"><img class="categories__img " src="img/pizzaamerican.png" alt="pizza"></a>
+                        <a id='' href="#${item.id}"><img class="categories__img " src="img/${item.logo}.png" alt="${item.title}"></a>
                         <b class="categories__caption">${item.title}</b>
                     </span>
                 </div>
