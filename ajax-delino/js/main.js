@@ -33,7 +33,6 @@ $(document).ready(function(){
             data.sort(function(a, b){return a.index-b.index});
 
             console.log(data);            
-            let j=0
             const itemmenue=data.map((item,i)=>{
             
                 return `
