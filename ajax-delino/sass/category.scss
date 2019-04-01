@@ -35,4 +35,8 @@
             box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
         }
     }
+    @include respond('mobile'){
+        width: 40%;
+        background-color: red;
+    }
 }

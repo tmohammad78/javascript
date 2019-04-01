@@ -20,14 +20,32 @@ $(document).ready(function(){
             alert('not found');
         }
     });
+    function icon(logo){
+        switch(logo){
+            //burger
+            case 12:
+            
+            break;
+            //soda
+            case 3:
+            break;
+            //pish ghaza
+            case 21:
+            break;
+            //sanswitch
+            case 22:
+            break;
+            //sokhari
+            case 25:
+            break;
+            //pizza
+            case 7:
+            break;
+        }
+    }
     function rendercategory(data){
         let html="";
         if(data){
-            let newarr=[];
-            // data.forEach(element => {
-            //     newarr.push(element.index);
-
-            // });
             data.sort(function(a, b){return a.index-b.index});
 
             console.log(data);            
