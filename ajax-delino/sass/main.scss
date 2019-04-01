@@ -1,8 +1,18 @@
-@import "mixin.scss";
-@import "base.scss";
-@import "variable.scss";
-@import "card.scss";
-@import "category.scss";
-@import "grid.scss";
-@import "popup.scss";
+@import "abstracts/mixin";
+@import "abstracts/variable";
+
+@import "layout/grid";
+@import "layout/header";
+
+@import "base/base";
+@import "base/typography";
+@import "base/utitities";
+
+@import "component/card";
+@import "component/category";
+@import "component/popup";
+
+@import "page/home";
+
+
 

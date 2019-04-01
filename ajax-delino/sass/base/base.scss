@@ -3,9 +3,10 @@
 *::before{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html{
-    font-size: 62.5%;
+    font-size: 100%;
     @include respond(tab-land){
       font-size: 56.25%;
     }
@@ -25,3 +26,4 @@ body {
 .clearfix{
     overflow: auto;
 }
+
