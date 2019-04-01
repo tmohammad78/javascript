@@ -1,6 +1,4 @@
 .food_section{
-    width: 60%;
-    margin: 0 auto;
     position: relative;
     top: 90px;
     // @include respond(tab-port){
@@ -37,6 +35,7 @@
         background-color: $color-white;
         text-align: right;
         direction: rtl;
+        font-size: $default-font;
         cursor: pointer;
         &-index{
             padding: 8px 0px;
@@ -45,6 +44,11 @@
             margin: 0;
             padding: 7px 7px;
         }
+        @media only screen and  (max-width:600px){
+            font-size: $default-font-mobile;
+            float: right;
+            width: 50%;
+        } 
     }
     &-infobox{
         padding: 10px;
@@ -71,6 +75,8 @@
             width: 100%;
             overflow: hidden;
             cursor: pointer;
+
+            
         }
     }
     &__caption{
@@ -82,6 +88,13 @@
     @media only screen and  (max-width:600px){
         width: 100%;
     } 
+    &-img{
+        @media only screen and  (max-width:600px){
+            float: left;
+            width: 50%;
+        } 
+
+    }
 }
 .price-number{
     float: left;

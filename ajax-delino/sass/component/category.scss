@@ -9,6 +9,7 @@
         text-align: center;
         margin: 0 auto;  
         display: block;
+ 
     }
     &__span{
      cursor: pointer;
@@ -16,7 +17,7 @@
      text-align: center;
     }
     &__caption{
-        font-size: 15px;
+        font-size: $default-font;
         text-align: center;
         display: block;
         padding: 5px;
@@ -34,7 +35,33 @@
             box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
         }
     }
-    @media only screen and (max-width:600px){
-        width: 100%;
-    }
+}
+
+@media only screen and (max-width:600px){
+    .categories{
+              width: 100%;
+        &__indexbox{
+            &:not(:last-child){
+                border-left: 1px solid red;
+            }
+             border-radius: 0px;
+            background-color: #eee;
+            width: 16.2066666666%;
+            display: inline-block;
+            &:hover{
+                border-bottom: 4px solid red;
+            }
+        }
+        &__img{
+                display: none;
+            } 
+        &__span{
+         cursor: pointer;
+         width: 100%;
+         text-align: center;
+        }
+        &__caption{
+                font-size: $default-font-mobile;
+            } 
+        }
 }

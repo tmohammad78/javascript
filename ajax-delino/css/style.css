@@ -40,8 +40,6 @@ body {
   padding: 0; }
 
 .food_section {
-  width: 60%;
-  margin: 0 auto;
   position: relative;
   top: 90px; }
   .food_section-info {
@@ -70,12 +68,18 @@ body {
     background-color: #ffffff;
     text-align: right;
     direction: rtl;
+    font-size: 1.2rem;
     cursor: pointer; }
     .food_section-description-index {
       padding: 8px 0px; }
     .food_section-description-title {
       margin: 0;
       padding: 7px 7px; }
+    @media only screen and (max-width: 600px) {
+      .food_section-description {
+        font-size: 3rem;
+        float: right;
+        width: 50%; } }
   .food_section-infobox {
     padding: 10px;
     margin: 20px;
@@ -104,6 +108,10 @@ body {
   @media only screen and (max-width: 600px) {
     .food_section {
       width: 100%; } }
+  @media only screen and (max-width: 600px) {
+    .food_section-img {
+      float: left;
+      width: 50%; } }
 
 .price-number {
   float: left;
@@ -125,7 +133,7 @@ body {
     width: 100%;
     text-align: center; }
   .categories__caption {
-    font-size: 15px;
+    font-size: 1.2rem;
     text-align: center;
     display: block;
     padding: 5px; }
@@ -140,9 +148,27 @@ body {
       -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76); }
-  @media only screen and (max-width: 600px) {
-    .categories {
-      width: 100%; } }
+
+@media only screen and (max-width: 600px) {
+  .categories {
+    width: 100%; }
+    .categories__indexbox {
+      border-radius: 0px;
+      background-color: #eee;
+      width: 16.2066666666%;
+      display: inline-block; }
+      .categories__indexbox:not(:last-child) {
+        border-left: 1px solid red; }
+      .categories__indexbox:hover {
+        border-bottom: 4px solid red; }
+    .categories__img {
+      display: none; }
+    .categories__span {
+      cursor: pointer;
+      width: 100%;
+      text-align: center; }
+    .categories__caption {
+      font-size: 3rem; } }
 
 .popup {
   width: 100%;
