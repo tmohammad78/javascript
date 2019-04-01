@@ -97,6 +97,7 @@ body {
     width: 100; } }
 
 .categories {
+  direction: rtl;
   width: 100%;
   position: fixed;
   margin: 0 auto;

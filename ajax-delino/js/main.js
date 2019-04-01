@@ -23,7 +23,17 @@ $(document).ready(function(){
     function rendercategory(data){
         let html="";
         if(data){
+            let newarr=[];
+            // data.forEach(element => {
+            //     newarr.push(element.index);
+
+            // });
+            data.sort(function(a, b){return a.index-b.index});
+
+            console.log(data);            
+            let j=0
             const itemmenue=data.map((item,i)=>{
+            
                 return `
                 <div class="categories__indexbox" data-cat-id="${item.id}" >
                     <span class="categories__span clearfix">
