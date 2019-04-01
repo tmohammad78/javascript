@@ -13,3 +13,6 @@
         @media  only screen and (min-width:1800px){ @content };//1800 
     }
 }
+@mixin  font-family($fontfamily) {
+    src: url('../../css/fontiran.css');
+}
