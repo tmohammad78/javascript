@@ -1,9 +1,5 @@
-.fullbox{
-    
-}
 .categories{
     direction: rtl;
-    width: 60%;
     position: fixed;
     margin: 0 auto;     
     z-index: 1000;
@@ -38,5 +34,7 @@
             box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
         }
     }
-
+    @media only screen and (max-width:600px){
+        width: 100%;
+    }
 }

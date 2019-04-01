@@ -79,6 +79,9 @@
         display: block;
         padding: 9px; 
     }
+    @media only screen and  (max-width:600px){
+        width: 100%;
+    } 
 }
 .price-number{
     float: left;
