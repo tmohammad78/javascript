@@ -43,7 +43,6 @@ const controlRecipe=async ()=>{
 
         renderloader(elements.recipe);
         //create new recipe object
-
         state.recipe=new Recipe(id);
 
         try {
@@ -51,26 +50,19 @@ const controlRecipe=async ()=>{
          await state.recipe.getRecipe();
          state.recipe.parsIngredient();
          //calling function
-        state.recipe.calctime();
-        state.recipe.calcserving();
+         state.recipe.calctime();
+         state.recipe.calcserving();
+         console.log('work');
  
          //render the recipe
             clearloader();
-            recipeView.renderrecipe(state.recipe);
+         recipeView.renderrecipe(state.recipe);
         } catch (error) {
             alert('error processing recipe');
-        }
-        
+        }   
     }
-
 }
 window.addEventListener('hashchange',controlRecipe);
-
-
-
-
-
-
 
 
 
