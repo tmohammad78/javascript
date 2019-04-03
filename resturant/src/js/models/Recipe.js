@@ -29,6 +29,7 @@ import { key } from '../config';
      parsIngredient(){
         const unitslong=['tablespoons','tablespoon','ounces','ounce','teaspoons','teaspoon','cups','pounds'];
         const unitsshort=['tbsp','tbsp','oz','oz','tsp','tsp','cup','pound'];
+        const units=[...unitsshort,'kg','g'];
         const newingredient=this.ingredients.map(el =>{
            //1.uniform unit
             let ingredient= el.toLowerCase();
@@ -41,7 +42,7 @@ import { key } from '../config';
 
             //3.parse ingredient into count,unit and ingredient
             const arrIng=ingredient.split(' ');
-            const unitindex=arrIng.findIndex(el2 => unitsshort.includes(el2));  
+            const unitindex=arrIng.findIndex(el2 => units.includes(el2));  
             let objIng;
             if(unitindex >-1){
                //there is unit
