@@ -25,4 +25,60 @@ import { key } from '../config';
      calcserving(){
         this.serving=4;
      }
+
+     parsIngredient(){
+        const unitslong=['tablespoons','tablespoon','ounces','ounce','teaspoons','teaspoon','cups','pounds'];
+        const unitsshort=['tbsp','tbsp','oz','oz','tsp','tsp','cup','pound'];
+        const newingredient=this.ingredients.map(el =>{
+           //1.uniform unit
+            let ingredient= el.toLowerCase();
+            unitslong.forEach((unit,i)=>{
+               ingredient=ingredient.replace(unit,unitsshort[i]);
+            });
+
+            //2.remove parantes
+            ingredient=ingredient.replace(/ *\([^)]*\) */g,'');
+
+            //3.parse ingredient into count,unit and ingredient
+            const arrIng=ingredient.split(' ');
+            const unitindex=arrIng.findIndex(el2 => unitsshort.includes(el2));  
+            let objIng;
+            if(unitindex >-1){
+               //there is unit
+               // 4 1/2 cups ,arrcount [4,1/2]
+               const arrcount=arrIng.slice(0,unitindex);
+               let count;
+               if(arrcount.length === 1){
+                  count=eval(arrIng[0].replace('-','+'));
+               }else{
+                  count=eval(arrIng.slice(0,unitindex).join('+'));
+               }
+
+               objIng = {
+                  count,
+                  unit:arrIng[unitindex],
+                  ingredient:arrIng.slice(1).join(' ')
+               };
+            }else if(parseInt(arrIng[0],10)){
+               //there is no unit but there is number is first position
+               objIng = {
+                  count:parseInt(arrIng[0],10),
+                  unit:'',
+                  ingredient:arrIng.slice(1).join(' ')
+               };
+            }
+            else if(unitindex== -1){
+               //there is no unit and no number in first position 
+            objIng = {
+               count:1,
+               unit:'',
+               ingredient
+            };
+            
+            }
+            return objIng;
+        });
+
+        this.ingredients=newingredient;
+     }
  }
