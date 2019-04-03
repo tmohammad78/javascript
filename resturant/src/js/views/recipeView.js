@@ -11,6 +11,9 @@ const createIngredient=ingredient =>`
         </div>
     </li>
 `;
+export const clearrecipe=()=>{
+    elements.recipe.innerHTML='';
+}
 export const renderrecipe=recipe=>{
     const markup=`
     <figure class="recipe__fig">
