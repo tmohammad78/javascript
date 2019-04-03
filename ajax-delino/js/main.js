@@ -20,13 +20,6 @@ $(document).ready(function(){
             alert('not found');
         }
     });
-    function icon(logo){
-        switch(logo){
- 
-            //children food
- 
-        }
-    }
     function rendercategory(data){
         let html="";
         if(data){
@@ -34,7 +27,6 @@ $(document).ready(function(){
 
             console.log(data);            
             const itemmenue=data.map((item,i)=>{
-            
                 return `
                 <div class="categories__indexbox" data-cat-id="${item.id}" >
                     <span class="categories__span clearfix">
@@ -58,6 +50,7 @@ $(document).ready(function(){
                 console.log(helper.truncate(item.ingredient));
                 const image =  item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") +'"/>' : "";
                 return `
+                <a href=#${item.id} >
                 <div class="food_section-category col-1-of-3">
                 <div class="food_section-img">
                      ${image}    
@@ -78,6 +71,7 @@ $(document).ready(function(){
                       </div>
                 </div>
           </div>
+          </a>
             `;
             });
             html=` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${data.id}">`+itemsBox.join("")+`</div>`;
@@ -86,37 +80,69 @@ $(document).ready(function(){
         }
     }
     //popup
-    $wrapper.on("click","img",function(data){
-        // for(var i=0 ;i<data.sub.length;i++){
-        //     // renderpopup(delinodata[i].sub);
-        //     console.log(data.sub);
+    // $wrapper.on("click","a",function(data){
+    //     // for(var i=0 ;i<data.sub.length;i++){
+    //     //     // renderpopup(delinodata[i].sub);
+    //     //     console.log(data.sub);
 
-        // }
-        // // console.log(delinodata);
-        // return;
-        renderpopup(data);
+    //     // }
+    //     // // console.log(delinodata);
+    //     // return;
+    //     // renderpopup(data);
+    //     controlpop();
+    //     getfood();
+
         
-    });
-    function renderpopup(data){
-        let html= "";
-        if(data){
-            alert('s');
-            $('.test').addClass('popup',function(){
-                // console.log('works');
-                return ' ';
-            });
-            // const itempoup=data.map((item,id)=>{
-            //     return `
-            //     <div class="popup__content">
-            //         <a href="" class="popup__close" >&times;</a>
-            //         <h3 class="popup_description">${item.ingredient} </h3>
-            //     </div>
-            //     `;
-            // });
-            // html=itempoup.join("");            
+    // });
+    const getfood=function(data){
+        // this.id=id;
+        $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
+            // this.title=getting.categories
+            // this.title=result.categories[0].sub[0].food;
+            $wtf=result.categories;
+            $test1=$wtf.map((item,i)=>{
+                const $test=item.id.toString().indexOf(1741);
+                console.log($wtf[$test]);
+            })
+            // console.log($wtf[$test]);
+
+            // for (var i=0 ; i< delinodata.length ; i++){
+            //     renderfood(delinodata[i]);
+            // }
+        }).fail((xhr)=>{
+        if(xhr.status==404)
+        {
+            alert('not found');
         }
-        // $("body").html(html);
+    });
     }
+    const controlpop=function(data){
+        const id=window.location.hash.replace('#','');
+        console.log(id);
+        if(id){
+            getfood(data);
+        }
+    }
+    // function renderpopup(data){
+    //     let html= "";
+    //     if(data){
+    //         alert('s');
+    //         $('.test').addClass('popup',function(){
+    //             // console.log('works');
+    //             return ' ';
+    //         });
+    //         // const itempoup=data.map((item,id)=>{
+    //         //     return `
+    //         //     <div class="popup__content">
+    //         //         <a href="" class="popup__close" >&times;</a>
+    //         //         <h3 class="popup_description">${item.ingredient} </h3>
+    //         //     </div>
+    //         //     `;
+    //         // });
+    //         // html=itempoup.join("");            
+    //     }
+    //     // $("body").html(html);
+    // }
     $('.popup__close').on("click",function(){
         $('.test').fadeOute(2000,function(){    });
     });
@@ -130,6 +156,7 @@ $(document).ready(function(){
               }, 600 );
         }            
     });
+    window.addEventListener('hashchange',controlpop);
     // $(window).scroll(function(){
     //     var scrolldefault=$(window).scrollTop;
         
