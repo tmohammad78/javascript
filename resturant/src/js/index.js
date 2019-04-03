@@ -3,7 +3,6 @@ import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
 // import * as recipeView from './views/recipeView';
 import { elements, renderloader, clearloader } from './views/base';
-import { stat } from 'fs';
 const state={};//Like prototype ??
 
 /* search controler*/
