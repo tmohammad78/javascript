@@ -1,8 +1,9 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
-import * as recipeView from './views/recipeView';
+// import * as recipeView from './views/recipeView';
 import { elements, renderloader, clearloader } from './views/base';
+import { stat } from 'fs';
 const state={};//Like prototype ??
 
 /* search controler*/
@@ -32,10 +33,39 @@ elements.searchForm.addEventListener('submit',e=>{
 });
 
 /* recipe controler*/
-const r=new Recipe(12913);
-r.getRecipe();
-console.log(r);
 
+const controlRecipe=async ()=>{
+    //GET id from URL
+    const id=window.location.hash.replace('#','');
+    console.log(id);
+
+    if(id){
+        //prepare UI for changes
+
+
+        //create new recipe object
+
+        state.recipe=new Recipe(id);
+
+        try {
+            //get recipe data
+         await state.recipe.getRecipe();
+
+
+         //calling function
+ state.recipe.calctime();
+ state.recipe.calcserving();
+ 
+         //render the recipe
+         console.log(state.recipe);
+        } catch (error) {
+            alert('error processing recipe');
+        }
+        
+    }
+
+}
+window.addEventListener('hashchange',controlRecipe);
 
 
 

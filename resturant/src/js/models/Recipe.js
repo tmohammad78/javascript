@@ -17,4 +17,12 @@ import { key } from '../config';
             console.log(error);
          }
      }
+     calctime(){
+         const numIng=this.ingredients.length;
+         const periods=Math.ceil(numIng/3);
+         this.time=periods*15;
+     }
+     calcserving(){
+        this.serving=4;
+     }
  }
