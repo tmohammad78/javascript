@@ -94,33 +94,58 @@ $(document).ready(function(){
 
         
     // });
-    const getfood=function(data){
+    const renderpop=function(data){
+        for (var i=0;i<data.sub.length;i++){
+            const subdata=data.sub[i].food;
+            // subdata.indexOf(10035);
+            let arr=[];
+
+            $items=subdata.map((item,i)=>{
+                arr.push(item.id);
+            });
+            console.log(arr.find(function(element,number=10035){
+                if(number==element) return true;
+            }));
+            // if(subdata){
+            //     $test1=$wtf.map((item,i)=>{
+            //         const $test=item.id.toString().indexOf(10035);
+            //         console.log($wtf[$test]);
+            //     })
+            // }
+        }
+    }
+    const getfood=function(delinodata){
         // this.id=id;
-        $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
             // this.title=getting.categories
             // this.title=result.categories[0].sub[0].food;
-            $wtf=result.categories;
-            $test1=$wtf.map((item,i)=>{
-                const $test=item.id.toString().indexOf(1741);
-                console.log($wtf[$test]);
-            })
+            // $wtf=data.categories;
+            // console.log($wtf);
+            for (var i=0 ; i< delinodata.length ; i++){
+                renderpop(delinodata[i]);
+            }
+
+            
+
             // console.log($wtf[$test]);
 
             // for (var i=0 ; i< delinodata.length ; i++){
             //     renderfood(delinodata[i]);
             // }
-        }).fail((xhr)=>{
-        if(xhr.status==404)
-        {
-            alert('not found');
-        }
-    });
+      
     }
-    const controlpop=function(data){
+    const controlpop=function(){
+    $.get(`https://api.delino.com/restaurant/menu/${key}`).done(result=>{
+        delinodata=result.categories;
+            }).fail((xhr)=>{
+            if(xhr.status==404)
+            {
+                alert('not found');
+            }
+        });
         const id=window.location.hash.replace('#','');
         console.log(id);
         if(id){
-            getfood(data);
+            getfood(delinodata);
         }
     }
     // function renderpopup(data){
