@@ -69,7 +69,8 @@ body {
   .food_section-info {
     width: 100%;
     margin: 0 auto;
-    display: inline-block; }
+    display: inline-block;
+    text-align: center; }
   .food_section-last {
     background-color: #eee;
     width: 100%;
@@ -115,7 +116,7 @@ body {
     display: inline-block;
     transition: all .5s;
     overflow: hidden;
-    margin: 8px 8px; }
+    margin: 8px 10px; }
     .food_section-category:hover, .food_section-category:active {
       -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
