@@ -1,11 +1,16 @@
-.categories{
-    direction: rtl;
+.parent{
+    width: 100%;
+    height: 87px;
+    overflow: hidden;
     position: fixed;
-    margin: 0 auto;     
     z-index: 1000;
-    background-color: $color-white;
+}
+.categories{
+    direction: rtl;  
+    overflow-x: auto;
+    white-space: nowrap;
     &__img{
-        width: 40%;
+        width: 45px;
         text-align: center;
         margin: 0 auto;  
         display: block;
@@ -21,9 +26,10 @@
         padding: 5px;
     }
     &__indexbox{   
+
         border-radius: 6px;
         background-color: #eee;
-        width: 16.2066666666%;
+        width: 12.2066666666%;
         display: inline-block;
         transition: all .5s;
         &:hover{

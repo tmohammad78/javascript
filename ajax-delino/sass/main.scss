@@ -1,8 +1,15 @@
+
+
 @import "abstracts/mixin";
 @import "abstracts/variable";
 
 @import "layout/grid";
 @import "layout/header";
+
+// Custom Fonts
+
+@import "fonts/iransans.woff.scss";
+@import "fonts/iransans.woff2.scss";
 
 @import "base/base";
 @import "base/typography";
@@ -11,7 +18,6 @@
 @import "component/card";
 @import "component/category";
 @import "component/popup";
-@import "component/sell.scss";
 @import "component/fullbox.scss";
 
 @import "page/home";

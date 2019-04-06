@@ -1,5 +1,5 @@
 .col-1-of-3{
-    width: calc((90% - 2 * #{$gutter-horizontal}) / 3);
+    width: calc((90% - 3 * #{$gutter-horizontal}) / 4);
   
 }
 @media only screen and  (max-width:600px){

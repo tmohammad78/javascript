@@ -46,21 +46,13 @@ $(document).ready(function () {
         $categorywrapper.html(html);
     }
     function renderfood(data) {
-        // console.log(data)
-        // console.log(data.sub[0]);
-
         let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + '</h1>';
-
         for (var i = 0; i < data.sub.length; i++) {
-
-            //debugger
-
             if (data.sub[i].id == 0) {
 
                 const subdata = data.sub[i].food;
                 if (subdata) {
                     const itemsBox = subdata.map((item, i) => {
-                        //console.log(helper.truncate(item.ingredient));
                         let image = item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") + '"/>' : "";
                         return `
                     <div class="food_section-category col-1-of-3" data-food='${JSON.stringify(item)}'>
@@ -86,10 +78,8 @@ $(document).ready(function () {
                 `;
                     });
                     html += ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${data.id}">` + itemsBox.join("") + `</div>`;
-
                 }
             } else {
-
                 let image = data.sub[i].img ? '<img  class="food_section-category__img" src="' + data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") + '"/>' : "";
                 html += `
                 <div class="food_section-category col-1-of-3" data-food-id="${data.sub[i].id}">
@@ -115,25 +105,31 @@ $(document).ready(function () {
             `;
             }
         }
-
         $wrapper.append(html);
     }
+    // <svg class="popup-close">
+    //                  <use xlink:href="img/close.svg" ></use>
+    //              </svg>
+    
     function renderpopup(data) {
         console.log(data);
+        console.log(data.id);
+        let image = data.img ? '<img  class="popup__content-img--inner"" src="' + data.img.replace("#SIZEOFIMAGE#", "560x350") + '"/>' : "";//560×350
         $('.test').addClass('popup').html(`
            <div class="popup__content">
-                <i class="fas fa-times popup__content-close"></i>
+                <div class="popup__content-close">
+                    <img class="popup__content-close--icon" src="img/close.svg"  />
+                </div>
                 <div class="popup__content-img">
-                    <img src="img/pizza3.jpg" alt="">
+                    ${image}
                 </div>
                 <div class="popup__content-text">
-                   sfgehws
+                 ${data.title}
                 </div>
  
             </div>
            `);
     }
-
     //popup
     $categorywrapper.on("click", "a", function () {
         //debugger;
@@ -144,16 +140,14 @@ $(document).ready(function () {
             }, 600);
         }
     });
-    $test.on("click", "i", function () {
+    $test.on("click", ".popup__content-close", function () {
         $('.test').removeClass("popup")//.fadeOut(.5);
     })
     $wrapper.on("click", "img", function () {
-
         const itemData = $(this).closest(".food_section-category").data("food")
-
-        console.log(itemData.id)
+        // console.log(itemData.id)
         //const data = id//$(this)
-        //renderpopup(data);
+        renderpopup(itemData);
     });
 
 

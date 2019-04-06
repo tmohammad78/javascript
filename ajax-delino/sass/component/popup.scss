@@ -8,7 +8,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    background-color: rgba(black,.8);
+    background-color: rgba(black,.7);
     z-index: 1000;
 &__content{
     // margin: 0 auto;
@@ -23,20 +23,35 @@
     // opacity: 0;
     // transform: translate(-50%,-50%) scale(.5);
     // animation: popup 1s;
-    width: 50%;
+    border-radius: 5px;
+    width: 35%;
     height: 80%;
     transform: translateY(10%);
-
     margin: 0 auto;
     background-color: white;
     &-img{
-        display: block;
-        width: 100%;
+        width: 80%;
+        margin: 0 auto;
+        &--inner{
+            width: 100%;
+            border-radius: 10px;
+        }
     }
     &-text{
         color: darkblue;
     }
-    &-close
+    &-close{
+        width: 100%;
+        padding: 12px 12px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid grey;
+        &--icon{
+            width: 20px;
+            height: 20px;
+            fill: lightgrey;
+        }
+    }
     &:link,
     &:visited{
         color: white;
