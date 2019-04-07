@@ -20,7 +20,7 @@
      width: 100%;
     }
     &__caption{
-        font-size: $default-font;
+        font-size:1.2rem;
         text-align: center;
         display: block;
         padding: 5px;
@@ -37,6 +37,22 @@
             -moz-box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
             box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
         }
+        &--inner{
+            display: block;
+            text-decoration:none;
+            color: black;
+        }
+        &--inner:active{
+            color: white;
+        }
+        // &--inner:visited,
+        // &--inner:link,
+        // &--inner:active{
+
+        // }
+    }
+    .categories__active{
+        border-bottom: 2px solid red;
     }
 }
 @media only screen and (max-width:600px){
@@ -63,7 +79,7 @@
          text-align: center;
         }
         &__caption{
-                font-size: $default-font-mobile;
+                font-size: 3rem;
             } 
         }
 }

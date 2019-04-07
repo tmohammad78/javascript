@@ -177,6 +177,14 @@ body {
       -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
       box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76); }
+    .categories__indexbox--inner {
+      display: block;
+      text-decoration: none;
+      color: black; }
+    .categories__indexbox--inner:active {
+      color: white; }
+  .categories .categories__active {
+    border-bottom: 2px solid red; }
 
 @media only screen and (max-width: 600px) {
   .categories {

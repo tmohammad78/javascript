@@ -1,9 +1,5 @@
 $(document).ready(function () {
-    const $categorywrapper = $('.categories');
-
-
-
-
+    const $categoryWrapper = $('.categories');
     const $wrapper = $('.food_section-info');
     const $test = $('.test');
     // const $wrapper=$('');
@@ -29,21 +25,22 @@ $(document).ready(function () {
         let html = "";
         if (data) {
             data.sort(function (a, b) { return a.index - b.index });
-
             console.log(data);
             const itemmenue = data.map((item, i) => {
                 // <a href="" class="clearfix scroll" data-cat-id="${item.id}" >
                 // </a>
                 return `
                     <div class="categories__indexbox " data-cat-id="${item.id}" >
-                            <a id='' href="#${item.id}"><img class="categories__img " src="img/${item.logo}.png" alt="${item.title}"></a>
-                        <b class="categories__caption">${item.title}</b>
+                        <a class="categories__indexbox--inner" href="#${item.id}">
+                            <img class="categories__img " src="img/${item.logo}.png" alt="${item.title}">
+                            <b class="categories__caption">${item.title}</b>
+                        </a>
                     </div>
                 `;
             });
             html = itemmenue.join("");
         }
-        $categorywrapper.html(html);
+        $categoryWrapper.html(html);
     }
     function renderfood(data) {
         let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + '</h1>';
@@ -131,14 +128,19 @@ $(document).ready(function () {
            `);
     }
     //popup
-    $categorywrapper.on("click", "a", function () {
+    $categoryWrapper.on("click", "a", function () {
         //debugger;
+        // const test=$('.categories__indexbox');
+        // test.addClass('categories__active');
+        // $test.siblings().removeClass('categories__active');
+
         const $box = $("#box-" + $(this).closest("div").data("cat-id"));
         if ($box.length) {
             $('body').stop().animate({
                 scrollTop: $box.offset().top - 90
             }, 600);
         }
+
     });
     $test.on("click", ".popup__content-close", function () {
         $('.test').removeClass("popup")//.fadeOut(.5);
