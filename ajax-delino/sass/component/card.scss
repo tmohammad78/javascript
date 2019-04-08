@@ -1,102 +1,194 @@
-.food_section{
+.food_section {
+  position: relative;
+  top: 90px;
+  .food_section-info {
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+  }
+  .food_section-last {
+    background-color: #eeeeee;
+    width: 100%;
+    font-size: 20px;
+    display: inline-block;
+    .food_section-last-carticon {
+      width: 100%;
+      color: rgb(102, 141, 44);
+    }
+    .food_section-last-price {
+      float: right;
+      text-align: right;
+      direction: rtl;
+      padding: 5px 4px;
+      width: 80%;
+    }
+    .food_section-last-cart {
+      float: left;
+      padding: 7px 0px;
+      width: 20%;
+      font-size: 25px;
+      padding-bottom: 6px;
+    }
+  }
+  .food_section-description {
+    width: 100%;
+    background-color: #ffffff;
+    text-align: right;
+    direction: rtl;
+    font-size: 1.2rem;
+    cursor: pointer;
+    .food_section-description-index {
+      padding: 8px 0px;
+    }
+    .food_section-description-title {
+      margin: 0;
+      padding: 7px 7px;
+    }
+    @media only screen and (max-width: 600px) {
+      font-size: 3rem;
+      float: right;
+      width: 50%;
+    }
+  }
+  .food_section-infobox {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 6px;
+    transition: all 0.5s;
+  }
+  .food_section-category {
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    display: inline-block;
+    transition: all 0.5s;
+    overflow: hidden;
+    margin: 8px 56px;
+    .food_section-category:hover,
+    .food_section-category:active {
+      -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
+      -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
+      box-shadow: 14px 29px 46px 0px rgba(170, 170, 170, 0.76);
+    }
+    .food_section-category__img {
+      width: 100%;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+  }
+  .food_section__caption {
+    font-size: 17px;
+    text-align: center;
+    display: block;
+    padding: 9px;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+  .food_section-img {
+    @media only screen and (max-width: 600px) {
+      float: left;
+      width: 50%;
+    }
+  }
+}
+.price-number {
+  float: left;
+  margin-left: 40px;
+}
+
+//mobile style
+
+@media only screen and (max-width: 600px) {
+  .food_section {
     position: relative;
     top: 90px;
-   
-    // @include respond(tab-port){
-    //     max-width: 100px;
-    // } 
-    &-info{
-        width: 100%;
-        margin: 0 auto;
-        display: inline-block;
-        text-align: center;
+    width: 100%;
+    .food_section-info {
+      width: 100%;
+      margin: 0 auto;
+      display: inline-block;
+      text-align: center;
     }
-    &-last{
-        background-color: $color-gray-light;
-        width: 100%;    
-        font-size: 20px;
-        &-carticon{
-            color: rgb(102, 141, 44);
-        }
-        &-price{
-            direction: rtl;
-            padding: 5px 0px;
-            width: 45%;
-            margin: 0 auto;
-            text-align: center;
-        }
-        &-cart{
-            width: 100%;
-            text-align: center;
-            font-size: 30px;
-            padding-bottom: 6px;
-        }
-    }
-    &-description{
+    .food_section-last {
+      background-color: #eeeeee;
+      width: 100%;
+      font-size: 20px;
+      display: inline-block;
+      .food_section-last-carticon {
         width: 100%;
-        background-color: $color-white;
+        color: rgb(102, 141, 44);
+      }
+      .food_section-last-price {
+        float: right;
         text-align: right;
         direction: rtl;
-        font-size: $default-font;
-        cursor: pointer;
-        &-index{
-            padding: 8px 0px;
-        }
-        &-title{
-            margin: 0;
-            padding: 7px 7px;
-        }
-        @media only screen and  (max-width:600px){
-            font-size: $default-font-mobile;
-            float: right;
-            width: 50%;
-        } 
+        padding: 5px 4px;
+        width: 80%;
+      }
+      .food_section-last-cart {
+        float: left;
+        padding: 7px 0px;
+        width: 20%;
+        font-size: 25px;
+        padding-bottom: 6px;
+      }
     }
-    &-infobox{
-        padding: 10px;
-        margin: 20px;
-        border-radius: 6px;
-        transition: all .5s;
+    .food_section-description {
+      width: 50%;
+      background-color: #ffffff;
+      text-align: right;
+      direction: rtl;
+      font-size: 3rem;
+      float: right;
+      cursor: pointer;
+      .food_section-description-index {
+        font-size: 15px;
+        padding: 8px 0px;
+      }
+      .food_section-description-title {
+        margin: 0;
+        padding: 7px 7px;
+      }
     }
-    &-category{
-        border: 1px solid $color-gray-light;
-        border-radius: 9px;
-        // background-color: #eee;
-        // width: 25%;
-        display: inline-block;
-        transition: all .5s;
-        overflow: hidden;
-        margin: 8px 10px;
-        &:hover,
-        &:active{
-            -webkit-box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
-            -moz-box-shadow: 14px 29px 46px 0px rgba(0,0,0,0.76);
-            box-shadow: 14px 29px 46px 0px rgba(170, 170, 170, 0.76);
-        }
-        &__img{
-            width: 100%;
-            overflow: hidden;
-            cursor: pointer;
-        }
+    .food_section-infobox {
+      padding: 10px;
+      margin: 20px;
+      border-radius: 6px;
+      transition: all 0.5s;
     }
-    &__caption{
-        font-size: 17px;
-        text-align: center;
-        display: block;
-        padding: 9px; 
-    }
-    @media only screen and  (max-width:600px){
+    .food_section-category {
+      border: 1px solid #eeeeee;
+      border-radius: 9px;
+      display: inline-block;
+      transition: all 0.5s;
+      overflow: hidden;
+      margin: 10px auto;
+      .food_section-category:hover,
+      .food_section-category:active {
+        -webkit-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
+        -moz-box-shadow: 14px 29px 46px 0px rgba(0, 0, 0, 0.76);
+        box-shadow: 14px 29px 46px 0px rgba(170, 170, 170, 0.76);
+      }
+      .food_section-category__img {
         width: 100%;
-    } 
-    &-img{
-        @media only screen and  (max-width:600px){
-            float: left;
-            width: 50%;
-        } 
-
+        overflow: hidden;
+        cursor: pointer;
+      }
     }
-}
-.price-number{
+    .food_section__caption {
+      font-size: 17px;
+      text-align: center;
+      display: block;
+      padding: 9px;
+    }
+    .food_section-img {
+      float: left;
+      width: 50%;
+    }
+  }
+  .price-number {
     float: left;
-    margin-left:40px; 
+    margin-left: 40px;
+  }
 }

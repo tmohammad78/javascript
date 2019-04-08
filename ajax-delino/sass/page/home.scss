@@ -1,19 +1,19 @@
-.fullbox{
-    float: right;
-    @media only screen and  (max-width:600px){
-        width: 100%;
-    }
+.fullbox {
+  float: right;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 }
-.sellbox{
-    width: 30%;
-    float: left;
-    background-color: red;
-    display: block;
-    position: fixed;
-    @media only screen and (max-width:600px){
-            display: none;
-        }
+.sellbox {
+  width: 30%;
+  float: left;
+  background-color: red;
+  display: block;
+  position: fixed;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 }
-.clearfix{
-    overflow: auto;
+.clearfix {
+  overflow: auto;
 }

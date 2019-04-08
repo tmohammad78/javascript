@@ -121,11 +121,26 @@ $(document).ready(function () {
                     ${image}
                 </div>
                 <div class="popup__content-text">
-                 ${data.title}
+                    <div class="popup__content-title">
+                        ${data.title}
+                    </div>
+                    <div class="popup__content-ingredient">
+                        ${data.ingredient}
+                    </div>
+                    <footer class="footerpopup">
+                    <span class="popup__content-price">${helper.currancy(data.price)} </span>
+                        <a class="popup__content-addbtn">
+                            <img class="plusbtn" src="img/plus.svg" alt="plus">
+                        </a>
+                    </footer>
+                </div>
+                <div class="popup__content-holder">
+                    <button class="popup__content-btn" data-modal-button=false >افزودن به سبد خرید</button>
                 </div>
  
             </div>
            `);
+           //
     }
     //popup
     $categoryWrapper.on("click", "a", function () {

@@ -1,8 +1,9 @@
-.col-1-of-3{
-    width: calc((90% - 3 * #{$gutter-horizontal}) / 4);
+.col-1-of-3 {
+  // width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+  width: calc((40% - 2 * 20px) / 2);
 }
-@media only screen and  (max-width:600px){
-    .col-1-of-3{
-        width: 100%;
-    }
+@media only screen and (max-width: 600px) {
+  .col-1-of-3 {
+    width: 100%;
+  }
 }
