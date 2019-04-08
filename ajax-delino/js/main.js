@@ -102,9 +102,6 @@ $(document).ready(function() {
             }">` +
             itemsBox.join("") +
             `</div>`;
-          //    let position;
-          //   position=$('food_section-category').offset.top();
-          //   console.log('position:'+position);
         }
       } else {
         let image = data.sub[i].img
@@ -183,16 +180,37 @@ $(document).ready(function() {
            `);
 
     //for style before click on plus bottom
-    //    const $testing=$('.popup__content-btn').data("modal-button");
-    //    if($testing===false){
-    //        $('.popup__content-btn').css("background-color","red");
-    //    }
-    //
+       const $testing=$('.popup__content-btn').data("modal-button");
+       if($testing===false){
+           $('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
+       }
+       $('.popup__content-addbtn').on("click",function(){
+
+       });
+
+       $('.popup__content-addbtn').on("click",function(){
+          rendercart();
+      });
   }
-  //   function offset(){
-  //       let arr=[];
-  //       for(var i=0 ;i<data)
-  //   }
+  function rendercart(){
+    function calcute(){
+      // $('.add_btn').on("click",function(){
+      //     let number=1;
+      //     return number+=1;
+      // });
+      var counter=1;
+      $('.add_btn').on("click",function(){
+          console.log('c'+counter);
+      });
+      // console.log($num);
+  }
+  calcute();
+    $('.popup__content-addbtn').addClass('countcart').html(`
+    <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
+      <span class="count-span" >1</span>
+      <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
+    `);
+  }
   //popup
   $categoryWrapper.on("click", "a", function() {
     scrolling = true;

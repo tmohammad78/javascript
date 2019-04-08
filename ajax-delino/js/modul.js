@@ -11,5 +11,16 @@ const helper = {
             return str;
         }
     }
-
 }
+// const calcute ={
+//     number:function(){
+   
+//         $('.minus_btn').on("click",function(){
+//             let currnumber;
+//             return currnumber-=1;
+//         });
+//     }
+
+    
+// }
+
