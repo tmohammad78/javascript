@@ -10,7 +10,6 @@ $(document).ready(function() {
   //const key = '48ff20a8-c1a4-4843-8826-ae0ba77f4254';
   //a5fa43c3-234d-462a-990a-9ec7ed82159f
   const key = "890d958f-9e64-4211-a2fa-d732c7a3920f"; // https://www.delino.com/restaurant/toasthouse
-
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinodata = result.categories;
@@ -19,12 +18,10 @@ $(document).ready(function() {
       for (var i = 0; i < delinodata.length; i++) {
         renderfood(delinodata[i]);
       }
-
       $wrapper.find("h1").each((i, h1) => {
         const top = $(h1).offset().top;
         itemsTop.push(parseInt(top));
       });
-
       console.log(itemsTop);
     })
     .fail(xhr => {
@@ -146,8 +143,6 @@ $(document).ready(function() {
       }
     }
     $wrapper.append(html);
-
-    // $('').offset().top();
   }
   function renderpopup(data) {
     console.log(data);
