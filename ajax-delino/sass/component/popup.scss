@@ -37,7 +37,7 @@
       height: 188px;
     }
     .popup__content-ingredient {
-      padding:10px 0px;
+      padding: 10px 0px;
       color: rgb(116, 114, 114);
     }
     .popup__content-close {
@@ -52,40 +52,38 @@
         fill: lightgrey;
       }
     }
-    .popup__content-holder{
-
-        border-top: 1px solid grey;
-        width: 100%;
-        text-align: center;
-        padding-bottom:5px;
-    }   
-    .popup__content-btn{
-        cursor: pointer;
-        font-size: 1.8rem;
-        padding: 5px;
-        color: white;
-        margin-top: 15px;
-        border: none;
-        border-radius: 5px;
-        background: linear-gradient(-60deg,#ef4123,#ef2379);
+    .popup__content-holder {
+      border-top: 1px solid grey;
+      width: 100%;
+      text-align: center;
+      padding-bottom: 5px;
     }
-    .popup__content-addbtn{
+    .popup__content-btn {
+      cursor: pointer;
+      font-size: 1.8rem;
+      padding: 5px;
+      color: white;
+      margin-top: 15px;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(-60deg, #ef4123, #ef2379);
+    }
+    .popup__content-addbtn {
       overflow: auto;
       cursor: pointer;
       display: block;
       float: left;
     }
-    .popup__content-holder{
-        display: block;
+    .popup__content-holder {
+      display: block;
     }
-    .plusbtn{
-        width: 50px;
-        height: 50px;
-        
+    .plusbtn {
+      width: 50px;
+      height: 50px;
     }
   }
 }
-.footerpopup{
+.footerpopup {
   overflow: hidden;
 }
 @media only screen and (max-width: 600px) {

@@ -1,14 +1,17 @@
 .parent {
   width: 100%;
-  height: 87px;
+  height: 115px;
   overflow: hidden;
   position: fixed;
   z-index: 1000;
+  padding-top:10px; 
 }
 .categories {
   direction: rtl;
   overflow-x: auto;
   white-space: nowrap;
+  height: 125px;
+  padding-top: 10px;
   .categories__img {
     width: 45px;
     text-align: center;
@@ -28,7 +31,7 @@
   .categories__indexbox {
     border-radius: 6px;
     background-color: #eee;
-    width: 12.2066666666%;
+    width: 11.2066666666%;
     display: inline-block;
     transition: all 0.5s;
     .categories__indexbox:hover {
@@ -48,12 +51,12 @@
     // &--inner:visited,
     // &--inner:link,
     // &--inner:active{
-
     // }
   }
-  .categories__active {
-    border-bottom: 2px solid red;
-  }
+}
+.active-box {
+  border: 3px solid red;
+  transform: translateY(-5%);
 }
 @media only screen and (max-width: 600px) {
   .categories {
@@ -62,9 +65,9 @@
       .categories__indexbox:not(:last-child) {
         border-left: 1px solid red;
       }
-      border-radius: 0px;
+      border-radius: 5px;
       background-color: #eee;
-      width: 16.2066666666%;
+      width: 20%;
       display: inline-block;
       .categories__indexbox:hover {
         border-bottom: 4px solid red;
@@ -79,7 +82,7 @@
       text-align: center;
     }
     .categories__caption {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
 }
