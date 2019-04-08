@@ -276,6 +276,9 @@ body {
   .categories {
     width: 100%; }
     .categories .categories__indexbox {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       border-radius: 5px;
       background-color: #eee;
       width: 20%;

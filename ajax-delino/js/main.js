@@ -3,7 +3,9 @@ $(document).ready(function() {
   const $wrapper = $(".food_section-info");
   const $test = $(".test");
   // const $wrapper=$('');
-  let delinodata;
+  let delinodata,
+    itemsTop = [],
+    scrolling = false;
   // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
   //const key = '48ff20a8-c1a4-4843-8826-ae0ba77f4254';
   //a5fa43c3-234d-462a-990a-9ec7ed82159f
@@ -17,6 +19,13 @@ $(document).ready(function() {
       for (var i = 0; i < delinodata.length; i++) {
         renderfood(delinodata[i]);
       }
+
+      $wrapper.find("h1").each((i, h1) => {
+        const top = $(h1).offset().top;
+        itemsTop.push(parseInt(top));
+      });
+
+      console.log(itemsTop);
     })
     .fail(xhr => {
       if (xhr.status == 404) {
@@ -31,21 +40,17 @@ $(document).ready(function() {
       });
       console.log(data);
       const itemmenue = data.map((item, i) => {
-        // <a href="" class="clearfix scroll" data-cat-id="${item.id}" >
-        // </a>
         return `
-                    <div class="categories__indexbox " data-cat-id="${
+                <div class="categories__indexbox " data-cat-id="${item.id}" >
+                    <a class="categories__indexbox--inner scroll" href="#${
                       item.id
-                    }" >
-                        <a class="categories__indexbox--inner" href="#${
-                          item.id
-                        }">
-                            <img class="categories__img " src="img/${
-                              item.logo
-                            }.png" alt="${item.title}">
-                            <b class="categories__caption">${item.title}</b>
-                        </a>
-                    </div>
+                    }">
+                        <img class="categories__img " src="img/${
+                          item.logo
+                        }.png" alt="${item.title}">
+                        <b class="categories__caption">${item.title}</b>
+                    </a>
+                </div>
                 `;
       });
       html = itemmenue.join("");
@@ -100,6 +105,9 @@ $(document).ready(function() {
             }">` +
             itemsBox.join("") +
             `</div>`;
+          //    let position;
+          //   position=$('food_section-category').offset.top();
+          //   console.log('position:'+position);
         }
       } else {
         let image = data.sub[i].img
@@ -138,12 +146,12 @@ $(document).ready(function() {
       }
     }
     $wrapper.append(html);
-  }      
 
+    // $('').offset().top();
+  }
   function renderpopup(data) {
     console.log(data);
     console.log(data.id);
-
     let image = data.img
       ? '<img  class="popup__content-img--inner"" src="' +
         data.img.replace("#SIZEOFIMAGE#", "560x350") +
@@ -176,46 +184,75 @@ $(document).ready(function() {
                 <div class="popup__content-holder">
                     <button class="popup__content-btn" data-modal-button="false" >افزودن به سبد خرید</button>
                 </div>
- 
             </div>
            `);
 
-
-           //for style before click on plus bottom
-        //    const $testing=$('.popup__content-btn').data("modal-button");
-        //    if($testing===false){
-        //        $('.popup__content-btn').css("background-color","red");
-        //    }
+    //for style before click on plus bottom
+    //    const $testing=$('.popup__content-btn').data("modal-button");
+    //    if($testing===false){
+    //        $('.popup__content-btn').css("background-color","red");
+    //    }
     //
   }
+  //   function offset(){
+  //       let arr=[];
+  //       for(var i=0 ;i<data)
+  //   }
   //popup
   $categoryWrapper.on("click", "a", function() {
-    const $box = $(
-      "#box-" +
-        $(this)
-          .closest("div")
-          .data("cat-id")
-    );
-    $(this)
-      .closest("div")
-      .addClass("active-box");
-    $(this)
-      .closest("div")
-      .siblings()
-      .removeClass("active-box");
-    if ($box.length) {
-      $("body")
-        .stop()
-        .animate(
-          {
-            scrollTop: $box.offset().top - 100
-          },
-          600
-        );
+    scrolling = true;
+    const catId = $(this)
+      .parent()
+      .data("cat-id");
+    actievCategory(catId);
+
+    let itemTopIndex = 0;
+    for (var i = 0; i < delinodata.length; i++) {
+      if (delinodata[i].id == catId) {
+        itemTopIndex = i;
+        break;
+      }
     }
+
+    $("body")
+      .stop()
+      .animate(
+        {
+          scrollTop: itemsTop[itemTopIndex] - 100
+        },
+        600
+      );
+    setTimeout(() => {
+      scrolling = false;
+    }, 600);
+
+    // const $box = $(
+    //   "#box-" +
+    //     $(this)
+    //       .closest("div")
+    //       .data("cat-id")
+    // );
+    // $(this)
+    //   .closest("div")
+    //   .addClass("active-box");
+    // $(this)
+    //   .closest("div")
+    //   .siblings()
+    //   .removeClass("active-box");
+    // if ($box.length) {
+    //   $("body")
+    //     .stop()
+    //     .animate(
+    //       {
+    //         scrollTop: $box.offset().top - 100
+    //       },
+    //       600
+    //     );
+    // }
   });
+
   $test.on("click", ".popup__content-close", function() {
-    $(".test").removeClass("popup"); //.fadeOut(.5);
+    $(".test").removeClass("popup");
   });
   $wrapper.on("click", "img", function() {
     const itemData = $(this)
@@ -223,17 +260,28 @@ $(document).ready(function() {
       .data("food");
     renderpopup(itemData);
   });
-
   //scrollwatcher
-  $(window).scroll(function(){
-      var scrollposition=$(window).scrollTop();
-      const $box = $("#box-"+$('.scroll').data("cat-id"));
-      $('.scroll').each(function(){
-          var scrollafter=$box.offset().top-20;
-          if ( scrollafter <= scrollposition ) {
-              $(this).addClass('active');
-              $(this).siblings().removeClass('active');
-            }
-      });
+  $(window).scroll(function() {
+    if (!scrolling) {
+      var scrollposition = $(window).scrollTop();
+      //console.log(scrollposition);
+      let activeBoxIndex = 0;
+      for (var i = 0; i < itemsTop.length; i++) {
+        if (scrollposition < itemsTop[i]) {
+          activeBoxIndex = i;
+          break;
+        }
+      }
+      const activeBox = delinodata[activeBoxIndex];
+      console.log(activeBox.id);
+      actievCategory(activeBox.id);
+    }
   });
+  function actievCategory(id) {
+    $(".categories")
+      .find('div[data-cat-id="' + id + '"]')
+      .addClass("active-box")
+      .siblings()
+      .removeClass("active-box");
+  }
 });

@@ -65,6 +65,9 @@
       .categories__indexbox:not(:last-child) {
         border-left: 1px solid red;
       }
+      white-space: nowrap; 
+      overflow: hidden;
+      text-overflow: ellipsis; 
       border-radius: 5px;
       background-color: #eee;
       width: 20%;
