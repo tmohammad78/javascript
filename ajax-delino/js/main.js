@@ -199,17 +199,28 @@ $(document).ready(function() {
       //     return number+=1;
       // });
       var counter=1;
-      $('.add_btn').on("click",function(){
-          console.log('c'+counter);
-      });
+ 
       // console.log($num);
   }
   calcute();
+
     $('.popup__content-addbtn').addClass('countcart').html(`
     <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
       <span class="count-span" >1</span>
       <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
     `);
+    function check(type){
+      let $number=2;
+      
+      const situation= type=== 'add' ? $number += 1 : $number - 1;
+      console.log( situation);
+    }
+  $('.add_btn').on("click",function(){
+      check('add');
+  });
+  $('.minus_btn').on("click",function(){
+    check('minus');
+  })
   }
   //popup
   $categoryWrapper.on("click", "a", function() {
