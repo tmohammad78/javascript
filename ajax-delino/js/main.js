@@ -180,17 +180,15 @@ $(document).ready(function() {
                 </div>
             </div>
            `);
-
     //for style before click on plus bottom
        const $testing=$('.popup__content-btn').data("modal-button");
-       function showcart(type){
-         type == true ? $('.popup__content-btn').addClass('changecart') :$('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
+       if($testing===false){
+           $('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
        }
-
        $('.popup__content-addbtn').on("click",function(){
-         $testing=true;
-          showcart(type);
+        // $('.popup__content-btn').data("modal-button")=true;
           rendercart();
+          $('.popup__content-btn').css({"background":"linear-gradient(-60deg, #ef4123, #ef2379)","cursor":"pointer"});
       });
   }
   function rendercart(){
