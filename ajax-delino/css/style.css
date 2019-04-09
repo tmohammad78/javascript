@@ -374,6 +374,9 @@ body {
   border-radius: 10px;
   padding: 5px; }
 
+.count-span {
+  color: white; }
+
 .add_btn {
   border-color: transparent;
   color: #ffffff;

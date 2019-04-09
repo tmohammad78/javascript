@@ -83,11 +83,17 @@
     }
   }
 }
+.changecart{
+  background: linear-gradient(-60deg, #ef4123, #ef2379);
+}
 .countcart{
   background: linear-gradient(-60deg,#ef4123,#ef2379); 
   width: 150px;
   border-radius: 10px;
   padding: 5px;   
+}
+.count-span{
+  color: white;
 }
 .add_btn{
   border-color: transparent;

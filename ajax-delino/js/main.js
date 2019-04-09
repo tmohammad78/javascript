@@ -2,10 +2,12 @@ $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
   const $test = $(".test");
+
   // const $wrapper=$('');
   let delinodata,
     itemsTop = [],
-    scrolling = false;
+    scrolling = false,
+    number=1;
   // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
   //const key = '48ff20a8-c1a4-4843-8826-ae0ba77f4254';
   //a5fa43c3-234d-462a-990a-9ec7ed82159f
@@ -181,45 +183,34 @@ $(document).ready(function() {
 
     //for style before click on plus bottom
        const $testing=$('.popup__content-btn').data("modal-button");
-       if($testing===false){
-           $('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
+       function showcart(type){
+         type == true ? $('.popup__content-btn').addClass('changecart') :$('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
        }
-       $('.popup__content-addbtn').on("click",function(){
-
-       });
 
        $('.popup__content-addbtn').on("click",function(){
+         $testing=true;
+          showcart(type);
           rendercart();
       });
   }
   function rendercart(){
-    function calcute(){
-      // $('.add_btn').on("click",function(){
-      //     let number=1;
-      //     return number+=1;
-      // });
-      var counter=1;
- 
-      // console.log($num);
-  }
-  calcute();
-
     $('.popup__content-addbtn').addClass('countcart').html(`
     <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
-      <span class="count-span" >1</span>
+      <span class="count-span" >${number}</span>
       <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
     `);
-    function check(type){
-      let $number=2;
-      
-      const situation= type=== 'add' ? $number += 1 : $number - 1;
+    function check(type){      
+      const situation= type === 'add' ? number += 1 : number -= 1;
       console.log( situation);
+      $('.count-span').text()=situation;
     }
   $('.add_btn').on("click",function(){
       check('add');
   });
   $('.minus_btn').on("click",function(){
-    check('minus');
+    if(number>1){
+      check('minus');
+    }
   })
   }
   //popup
