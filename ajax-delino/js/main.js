@@ -90,8 +90,7 @@ $(document).ready(function() {
                                 ${helper.currancy(item.price)}
                             </div>
                             <div class="food_section-last-cart">
-                                <a class="food_section-last-carticon" href=""><span >
-                                <i class="fas fa-shopping-cart"></i></span></a>
+                                <button class="food_section-last-carticon"><span ><i class="fas fa-shopping-cart"></i></span></button>
                             </div>
                         </div>
                     </div>
@@ -212,6 +211,9 @@ $(document).ready(function() {
     if(number>1){
       check('minus');
     }
+    // else if(number == 1){
+    //   $('.popup__content-addbtn').removeClass('countcart');
+    // }
   })
   }
   //popup

@@ -162,6 +162,8 @@ body {
       font-size: 20px;
       display: inline-block; }
       .food_section .food_section-last .food_section-last-carticon {
+        background: transparent;
+        border: none;
         width: 100%;
         color: #668d2c; }
       .food_section .food_section-last .food_section-last-price {
