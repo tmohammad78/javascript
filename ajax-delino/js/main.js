@@ -2,7 +2,6 @@ $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
   const $test = $(".test");
-
   // const $wrapper=$('');
   let delinodata,
     itemsTop = [],
@@ -188,8 +187,12 @@ $(document).ready(function() {
        $('.popup__content-addbtn').on("click",function(){
         // $('.popup__content-btn').data("modal-button")=true;
           rendercart();
+          sessionStorage.setItem(data.id,number);
           $('.popup__content-btn').css({"background":"linear-gradient(-60deg, #ef4123, #ef2379)","cursor":"pointer"});
-      });
+            for(var i=0; i<number;i++){
+              console.log(data);
+            }
+          });
   }
   function rendercart(){
     $('.popup__content-addbtn').addClass('countcart').html(`
