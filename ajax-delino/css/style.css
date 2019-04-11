@@ -77,19 +77,20 @@ body {
     font-size: 20px;
     display: inline-block; }
     .food_section .food_section-last .food_section-last-carticon {
-      width: 100%;
+      font-size: 20px;
+      border: none;
+      background: transparent;
       color: #668d2c; }
+    .food_section .food_section-last .food_section-last-carticon:focus {
+      outline: none; }
     .food_section .food_section-last .food_section-last-price {
       float: right;
       text-align: right;
       direction: rtl;
-      padding: 5px 4px;
-      width: 80%; }
+      padding: 5px 4px; }
     .food_section .food_section-last .food_section-last-cart {
       float: left;
-      padding: 7px 0px;
-      width: 20%;
-      font-size: 25px;
+      padding: 15px 23px;
       padding-bottom: 6px; }
   .food_section .food_section-description {
     width: 100%;
@@ -141,6 +142,9 @@ body {
     .food_section .food_section-img {
       float: left;
       width: 50%; } }
+
+.fa-shopping-cart {
+  cursor: pointer; }
 
 .price-number {
   float: left;
@@ -371,10 +375,11 @@ body {
       height: 50px; }
 
 .countcart {
-  background: linear-gradient(-60deg, #ef4123, #ef2379);
-  width: 150px;
+  background: linear-gradient(-60deg, #ef4123, #ef2379) !important;
+  direction: rtl;
   border-radius: 10px;
-  padding: 5px; }
+  padding: 1px;
+  margin: 6px 10px; }
 
 .count-span {
   color: white; }
@@ -386,6 +391,9 @@ body {
   font-size: 27px;
   cursor: pointer; }
 
+.add_btn:focus {
+  outline: none; }
+
 .count-span {
   font-size: 20px;
   padding: 0px 15px; }
@@ -396,6 +404,9 @@ body {
   color: #ffffff;
   background: transparent;
   font-size: 27px; }
+
+.minus_btn:focus {
+  outline: none; }
 
 .footerpopup {
   overflow: hidden; }

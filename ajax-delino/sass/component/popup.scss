@@ -84,10 +84,11 @@
   }
 }
 .countcart{
-  background: linear-gradient(-60deg,#ef4123,#ef2379); 
-  width: 150px;
+  background: linear-gradient(-60deg,#ef4123,#ef2379) !important;
+  direction: rtl;
   border-radius: 10px;
-  padding: 5px;   
+  padding: 1px;
+  margin: 6px 10px;
 }
 .count-span{
   color: white;
@@ -99,6 +100,9 @@
   font-size: 27px;
   cursor: pointer;
 }
+.add_btn:focus{
+outline: none;
+}
 .count-span{
   font-size: 20px;
   padding: 0px 15px;
@@ -109,6 +113,9 @@
   color: #ffffff;
   background: transparent;
   font-size: 27px;
+}
+.minus_btn:focus{
+  outline: none;
 }
 .footerpopup {
   overflow: hidden;

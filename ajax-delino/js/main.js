@@ -23,6 +23,12 @@ $(document).ready(function() {
         const top = $(h1).offset().top;
         itemsTop.push(parseInt(top));
       });
+      $wrapper.on("click",".food_section-last-carticon",function(){
+        $(this).closest('.food_section-last-cart').css({
+            "padding":"0"
+        });
+        rendercart($(this));
+      });
       console.log(itemsTop);
     })
     .fail(xhr => {
@@ -90,7 +96,7 @@ $(document).ready(function() {
                                 ${helper.currancy(item.price)}
                             </div>
                             <div class="food_section-last-cart">
-                                <button class="food_section-last-carticon"><span ><i class="fas fa-shopping-cart"></i></span></button>
+                                <button class="food_section-last-carticon"><i class="fas fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>
@@ -102,6 +108,7 @@ $(document).ready(function() {
             }">` +
             itemsBox.join("") +
             `</div>`;
+
         }
       } else {
         let image = data.sub[i].img
@@ -185,7 +192,7 @@ $(document).ready(function() {
        }
        $('.popup__content-addbtn').on("click",function(){
         // $('.popup__content-btn').data("modal-button")=true;
-          rendercart();
+          rendercart('.popup__content-addbtn');
           sessionStorage.setItem(data.id,number);
           $('.popup__content-btn').css({"background":"linear-gradient(-60deg, #ef4123, #ef2379)","cursor":"pointer"});
             for(var i=0; i<number;i++){
@@ -193,8 +200,9 @@ $(document).ready(function() {
             }
           });
   }
-  function rendercart(){
-    $('.popup__content-addbtn').addClass('countcart').html(`
+  function rendercart(classname){
+
+    $(classname).addClass('countcart').html(`
     <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
       <span class="count-span" >${number}</span>
       <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
