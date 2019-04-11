@@ -23,12 +23,17 @@ $(document).ready(function() {
         const top = $(h1).offset().top;
         itemsTop.push(parseInt(top));
       });
-      $wrapper.on("click",".food_section-last-carticon",function(){
-        $(this).closest('.food_section-last-cart').css({
-            "padding":"0"
+      $('button[data-buy="buyfood"]').on("click",function(){
+          $(this).closest('.food_section-last-cart').css({
+              "padding":"0"
+          });
+          rendercart($(this));
         });
-        rendercart($(this));
-      });
+        // const situation =sessionStorage.getItem(key);
+        // alert(situation);
+        // rendercart().updateUI(situation);
+
+  
       console.log(itemsTop);
     })
     .fail(xhr => {
@@ -96,7 +101,7 @@ $(document).ready(function() {
                                 ${helper.currancy(item.price)}
                             </div>
                             <div class="food_section-last-cart">
-                                <button class="food_section-last-carticon"><i class="fas fa-shopping-cart"></i></button>
+                                <button class="food_section-last-carticon" data-buy="buyfood"><i class="fas fa-shopping-cart"></i></button>
                             </div>
                         </div>
                     </div>
@@ -108,7 +113,6 @@ $(document).ready(function() {
             }">` +
             itemsBox.join("") +
             `</div>`;
-
         }
       } else {
         let image = data.sub[i].img
@@ -175,9 +179,9 @@ $(document).ready(function() {
                     <span class="popup__content-price">${helper.currancy(
                       data.price
                     )} </span>
-                        <a class="popup__content-addbtn">
+                        <button class="popup__content-addbtn" data-buy="buyfood">
                             <img class="plusbtn" src="img/plus.svg" alt="plus">
-                        </a>
+                        </button>
                     </footer>
                 </div>
                 <div class="popup__content-holder">
@@ -186,43 +190,64 @@ $(document).ready(function() {
             </div>
            `);
     //for style before click on plus bottom
-       const $testing=$('.popup__content-btn').data("modal-button");
-       if($testing===false){
-           $('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
+   
+       let $testing=$('.popup__content-btn').data("modal-button");
+      console.log('test',$testing);
+       if($testing === false){
+         $('.popup__content-btn').addClass('disactive');
+         $testing=$('.popup__content-btn').attr("data-modal-button","true");
        }
-       $('.popup__content-addbtn').on("click",function(){
-        // $('.popup__content-btn').data("modal-button")=true;
-          rendercart('.popup__content-addbtn');
-          sessionStorage.setItem(data.id,number);
-          $('.popup__content-btn').css({"background":"linear-gradient(-60deg, #ef4123, #ef2379)","cursor":"pointer"});
-            for(var i=0; i<number;i++){
-              console.log(data);
-            }
+         $('button[data-buy="buyfood"]').on("click",function(){
+              alert('true');
+              rendercart('.popup__content-addbtn');
+              sessionStorage.setItem(data.id,number);
+              $('.popup__content-btn').css({"background":"linear-gradient(-60deg, #ef4123, #ef2379)","cursor":"pointer"});
+                // for(var i=0; i<number;i++){
+                //   console.log(data);
+                // }
+           
+              // const situation1 =sessionStorage.getItem(data.id);
+              
+              // alert(situation1);
+       
+          
           });
+
+       
+
   }
   function rendercart(classname){
-
-    $(classname).addClass('countcart').html(`
-    <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
+    
+      $(classname).addClass('countcart').html(`
+      <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
       <span class="count-span" >${number}</span>
       <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
-    `);
-    function check(type){      
-      const situation= type === 'add' ? number += 1 : number -= 1;
-      console.log( situation);
-      $('.count-span').text()=situation;
-    }
-  $('.add_btn').on("click",function(){
+      `);
+      function check(type){      
+        const situation= type === 'add' ? number += 1 : number -= 1;
+        console.log( situation);
+        updateUI(situation);
+      }
+      function updateUI(situation){
+        $('.count-span').text()=situation;
+      }
+    $('.add_btn').on("click",function(){
       check('add');
-  });
-  $('.minus_btn').on("click",function(){
-    if(number>1){
-      check('minus');
-    }
+      $('.popup__content-btn').removeClass('disactive');
+    });
+    $('.minus_btn').on("click",function(){
+      if(number>1){
+        check('minus');
+      }else if(number==1){
+        $('.popup__content-btn').attr("data-modal-button","false");
+        $('.popup__content-btn').addClass('disactive');
+      }
+    });
+    
     // else if(number == 1){
     //   $('.popup__content-addbtn').removeClass('countcart');
     // }
-  })
+ 
   }
   //popup
   $categoryWrapper.on("click", "a", function() {
@@ -239,7 +264,6 @@ $(document).ready(function() {
         break;
       }
     }
-
     $("body")
       .stop()
       .animate(
@@ -276,7 +300,6 @@ $(document).ready(function() {
     //     );
     // }
   });
-
   $test.on("click", ".popup__content-close", function() {
     $(".test").removeClass("popup");
   });
