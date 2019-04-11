@@ -194,7 +194,7 @@ $(document).ready(function() {
        let $testing=$('.popup__content-btn').data("modal-button");
       console.log('test',$testing);
        if($testing === false){
-         $('.popup__content-btn').addClass('disactive');
+         $('.popup__content-btn').css({"background":"#d2d2d2","cursor":"default"});
          $testing=$('.popup__content-btn').attr("data-modal-button","true");
        }
          $('button[data-buy="buyfood"]').on("click",function(){
@@ -232,15 +232,13 @@ $(document).ready(function() {
         $('.count-span').text()=situation;
       }
     $('.add_btn').on("click",function(){
-      check('add');
-      $('.popup__content-btn').removeClass('disactive');
+        check('add');
     });
     $('.minus_btn').on("click",function(){
       if(number>1){
         check('minus');
       }else if(number==1){
         $('.popup__content-btn').attr("data-modal-button","false");
-        $('.popup__content-btn').addClass('disactive');
       }
     });
     
