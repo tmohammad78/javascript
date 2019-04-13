@@ -3,11 +3,8 @@
     <title>The Ajax Delino</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      type="text/javascript"
-      src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
-    ></script>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/plugins/tpl.js"></script>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -22,10 +19,43 @@
         <div class="categories"></div>
       </div>
       <section class="food_section" id="pizzaamerican">
-        <div class="food_section-info"></div>
+        <div class="food_section-info">
+        </div>
       </section>
     </div>
-    <div class="test"></div>
+    <div class="modal"></div>
+    <script type="text/html" id="template-food">
+      <div class="food_section-category col-1-of-3" data-food='<%=JSON.stringify(item)%>'>
+          <div class="food_section-img">
+              <%=image%> 
+          </div>
+          <div class="food_section-description">
+              <div class="food_section-description-index">
+                  <h3 class="food_section-description-title"><%=item.title%></h3>
+                  <span ><%=${helper.truncate(item.ingredient)}%></span>
+              </div>
+          </div>
+          <div class="food_section-last clearfix">
+              <div class="food_section-last-price">
+                <%=${helper.currancy(item.price)}%>
+              </div>
+              <div class="food_section-last-cart">
+                  <button class="food_section-last-carticon" data-buy="buyfood"><i class="fas fa-shopping-cart"></i></button>
+              </div>
+          </div>
+      </div>
+    </script>
+    <script type="text/html" id="template-category">
+        <div class="categories__indexbox " data-cat-id="<%=id%>" >
+          <a class="categories__indexbox--inner scroll" href="#dfgdfgdfg">
+              <% if(logo){ %>
+                <img class="categories__img " src="img/<%=logo%>" alt="<%=title%>">
+              <%}%>
+              <b class="categories__caption"><%=title%></b>
+          </a>
+      </div>
+    </script>
+
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
   </body>

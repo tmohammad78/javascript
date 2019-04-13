@@ -12,6 +12,11 @@ const helper = {
         }
     }
 }
+const counting ={
+    count:function (number){
+
+    }
+}
 // const calcute ={
 //     number:function(){
    
