@@ -41,7 +41,10 @@
                 <%=curancy%>
               </div>
               <div class="food_section-last-cart">
-                  <button class="food_section-last-carticon" data-buy="buyfood"><i class="fas fa-shopping-cart"></i></button>
+                  <div class="food_section-last-carticon" data-buy="buyfood">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span><%=quantity%></span>
+                  </div>
               </div>
           </div>
       </div>
@@ -61,9 +64,12 @@
           <div class="food_section-last clearfix">
               <div class="food_section-last-price"><%=currancy%></div>
               <div class="food_section-last-cart">
-                  <a class="food_section-last-carticon" href=""><span >
-                  <sopn id="qty_<%=id%>"><%=quantity%></span>
-                  <i class="fas fa-shopping-cart"></i></span></a>
+                  <a class="food_section-last-carticon" href="">
+                    <span>
+                      <span id="qty_<%=id%>"><%=quantity%></span>
+                      <i class="fas fa-shopping-cart"></i>
+                    </span>
+                  </a>
               </div>
           </div>
       </div>
@@ -82,7 +88,7 @@
 
     <!-- its for popup -->
     <script type="text/html" id="template-popup" >
-      <div class="popup__content">
+      <div class="popup__content" data-popup="<%=id%>">
           <div class="popup__content-close">
               <img class="popup__content-close--icon" src="img/close.svg"  />
           </div>
@@ -97,7 +103,7 @@
                   <%=ingredient%>
               </div>
               <footer class="footerpopup">
-              <span class="popup__content-price">%=currancy%<> </span>
+              <span class="popup__content-price"><%=currancy%> </span>
                   <div class="popup__content-addbtn" data-buy="buyfood">
                       <img class="plusbtn" src="img/plus.svg" alt="plus">
                   </div>

@@ -6,16 +6,14 @@ $(document).ready(function() {
     cart=[],
     itemsTop = [],
     scrolling = false;
-  let number = 1;
+  let number = 0;
   let count = {};
   // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
   //const key = '48ff20a8-c1a4-4843-8826-ae0ba77f4254';
   //a5fa43c3-234d-462a-990a-9ec7ed82159f
   const key = "890d958f-9e64-4211-a2fa-d732c7a3920f"; // https://www.delino.com/restaurant/toasthouse
-  const tempCart = sessionStorage.getItem("cart");
-  if (tempCart){
-     cart = JSON.parse(tempCart) || [];
-  }
+  const tempCart = sessionStorage.getItem("count");
+  console.log(tempCart);
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
@@ -68,6 +66,12 @@ function renderFood(data){
     let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
     for (var i = 0; i < data.sub.length; i++) {
       if (data.sub[i].id == 0) {
+        const id = data.sub[i].id;
+        // console.log('asaa');
+        // console.log(id);
+        // console.log(cart[15088]);
+        const quantity = cart[0] || [];
+        // console.log(quantity);
         const subData = data.sub[i].food;
         if (subData) {
           const tpl_Food= tmpl($("#template-food").html());
@@ -78,7 +82,8 @@ function renderFood(data){
               image:image,
               title:item.title,
               truncate:helper.truncate(item.ingredient),
-              curancy:helper.currancy(item.price)
+              curancy:helper.currancy(item.price),
+              quantity:quantity
             })
           });
           html +=` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${data.id }">` + itemsBox.join("") + `</div>`;
@@ -87,7 +92,7 @@ function renderFood(data){
         const tpl_foodElse= tmpl($("#template-foodElse").html());
         let image = data.sub[i].img ? '<img  class="food_section-category__img" src="' + data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") + '"/>' : "";
         const id = data.sub[i].id;
-        const quantity = cart[id] || [];
+        const quantity = 2;
         const itemFood=tpl_foodElse({
           id:id,
           image:image,
@@ -110,75 +115,111 @@ function renderPopup(data) {
     console.log($id);
     let image = data.img ? '<img  class="popup__content-img--inner"" src="' + data.img.replace("#SIZEOFIMAGE#", "560x350") + '"/>': ""; //560×350
     const tpl_popup= tmpl($("#template-popup").html());
+    updateView($id);
     //Add to html
     const itempopup=tpl_popup({
+      id:$id,
       image:image,
       title:data.title,
       ingredient:data.ingredient,
       currancy:helper.currancy(data.price)
     })
     $modal.addClass("popup").html(itempopup);
-    let $modaling = $(".popup__content-btn").data("modal-button");
-    console.log("test", $modaling);
-    if ($modaling === false) {
-      $(".popup__content-btn").css({
-        background: "#d2d2d2",
-        cursor: "default"
-      });
-      $modaling = $(".popup__content-btn").attr("data-modal-button", "true");
-    }
+    // let $modaling = $(".popup__content-btn").data("modal-button");
+    // console.log("test", $modaling);
+    // if ($modaling === false) {
+    //   $(".popup__content-btn").css({
+    //     background: "#d2d2d2",
+    //     cursor: "default"
+    //   });
+    //   $modaling = $(".popup__content-btn").attr("data-modal-button", "true");
+    // }
+    $modal.on("click",'div[data-buy="buyfood"]',function(e){
+      e.preventDefault();
+      const tpl_countFood= tmpl($("#template-countFood").html());
+        const counting=tpl_countFood({
+          number:number
+        });
+       $(".popup__content-addbtn").addClass("countcart").html(counting);
+
+    });
 }
 //End render popup
-
-  $modal.on("click", 'div[data-buy="buyfood"]', function(e) {
-    e.preventDefault();
-    const tpl_countFood= tmpl($("#template-countFood").html());
-    const counting=tpl_countFood({
-      number:number
-    });
-    $(".popup__content-addbtn").addClass("countcart").html(counting);
-    function check(type) {
-      const situation = type === "add" ? (number += 1) : (number -= 1);
-      if (type === "add") {
-        count[$id] = number;
-      } else {
-        count[$id] = number;
+function updateView(id){
+  if (tempCart){
+     cart = JSON.parse(tempCart) || [];
+     console.log(cart);
+      if(cart[id]){
+        number=cart[id];
+      }else{
+          number=0;
       }
-      console.log(count);
-      // updateUI(count);
-    }
-    function updateUI(...count) {
-      //console.log (Object.keys());
-      console.log(count);
-    }
-    $(".add_btn").on("click", function() {
-      check("add");
-    });
-    $(".minus_btn").on("click", function() {
-      if (number > 1) {
-        check("minus");
-      } else if (number == 1) {
-        $(".popup__content-btn").attr("data-modal-button", "false");
-      }
-    });
-    // else if(number == 1){
-    //   $('.popup__content-addbtn').removeClass('countcart');
-    // }
+  }
+}
 
-    // rendercart('.popup__content-addbtn',data.id);
-    // sessionStorage.setItem(data.id,number);
-    $(".popup__content-btn").css({
-      background: "linear-gradient(-60deg, #ef4123, #ef2379)",
-      cursor: "pointer"
-    });
-    // for(var i=0; i<number;i++){
-    //   console.log(data);
-    // }
+$modal.on("click",".add_btn", function() {
+  const $id=$(this).closest('.popup__content').data("popup");  
+  calcute("add",$id);
+});
+$modal.on("click",".minus_btn",function(){
+  calcute("minus",$id);
+});
+function calcute(type,id){
+  const operation=type === "add" ? number+=1:number-=1 ;
+  count[id]=number; 
+  sessionStorage.setItem("count",JSON.stringify(count));
+  // console.log();
+}
+// $modal.on("click", 'div[data-buy="buyfood"]', function(e) {
+//     e.preventDefault();
+//     const tpl_countFood= tmpl($("#template-countFood").html());
+//     const counting=tpl_countFood({
+//       number:number
+//     });
+//     $(".popup__content-addbtn").addClass("countcart").html(counting);
+//     function check(type) {
+//       const situation = type === "add" ? (number += 1) : (number -= 1);
+//       if (type === "add") {
+//         count[$id] = number;
+//       } else {
+//         count[$id] = number;
+//       }
+//       console.log(count);
+//       // updateUI(count);
+//     }
+//     function updateUI(...count) {
+//       //console.log (Object.keys());
+//       console.log(count);
+//     }
+//     $(".add_btn").on("click", function() {
+//       check("add");
+//     });
+//     $(".minus_btn").on("click", function() {
+//       if (number > 1) {
+//         check("minus");
+//       } else if (number == 1) {
+//         $(".popup__content-btn").attr("data-modal-button", "false");
+//       }
+//     });
+//     // else if(number == 1){
+//     //   $('.popup__content-addbtn').removeClass('countcart');
+//     // }
 
-    // const situation1 =sessionStorage.getItem(data.id);
+//     // rendercart('.popup__content-addbtn',data.id);
+//     // sessionStorage.setItem(data.id,number);
+//     $(".popup__content-btn").css({
+//       background: "linear-gradient(-60deg, #ef4123, #ef2379)",
+//       cursor: "pointer"
+//     });
+//     // for(var i=0; i<number;i++){
+//     //   console.log(data);
+//     // }
 
-    // alert(situation1);
-  });
+//     // const situation1 =sessionStorage.getItem(data.id);
+
+//     // alert(situation1);
+//   });
+  
 
   // function rendercart(classname,number){
   //     $(classname).addClass('countcart').html(`
@@ -234,7 +275,7 @@ function renderPopup(data) {
   $modal.on("click", ".popup__content-close", function() {
     $(".modal").removeClass("popup");
   });
-  $wrapper.on("click", "img", function() {
+  $wrapper.on("click", "img", function(){
     const itemData = $(this).closest(".food_section-category").data("food");
     renderPopup(itemData);
   });
