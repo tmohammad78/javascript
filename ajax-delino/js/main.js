@@ -70,10 +70,11 @@ function renderFood(data){
         // console.log('asaa');
         // console.log(id);
         // console.log(cart[15088]);
-        const quantity = cart[0] || [];
+        const quantity = cart[15088] || [];
         // console.log(quantity);
         const subData = data.sub[i].food;
         if (subData) {
+          // updateView(id);
           const tpl_Food= tmpl($("#template-food").html());
           const itemsBox = subData.map((item, i) => {
             let image = item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") + '"/>': "";
@@ -92,7 +93,7 @@ function renderFood(data){
         const tpl_foodElse= tmpl($("#template-foodElse").html());
         let image = data.sub[i].img ? '<img  class="food_section-category__img" src="' + data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") + '"/>' : "";
         const id = data.sub[i].id;
-        const quantity = 2;
+        const quantity = '';
         const itemFood=tpl_foodElse({
           id:id,
           image:image,
@@ -138,6 +139,7 @@ function renderPopup(data) {
       e.preventDefault();
       const tpl_countFood= tmpl($("#template-countFood").html());
         const counting=tpl_countFood({
+          ////update
           number:number
         });
        $(".popup__content-addbtn").addClass("countcart").html(counting);
