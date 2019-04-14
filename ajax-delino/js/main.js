@@ -130,15 +130,13 @@ function renderPopup(data) {
 }
 //End render popup
 
-  $modal.on("click", 'button[data-buy="buyfood"]', function(e) {
+  $modal.on("click", 'div[data-buy="buyfood"]', function(e) {
     e.preventDefault();
-
-    $(".popup__content-addbtn").addClass("countcart").html(`
-          <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
-          <span class="count-span">${number}</span>
-          <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
-          `);
-
+    const tpl_countFood= tmpl($("#template-countFood").html());
+    const counting=tpl_countFood({
+      number:number
+    });
+    $(".popup__content-addbtn").addClass("countcart").html(counting);
     function check(type) {
       const situation = type === "add" ? (number += 1) : (number -= 1);
       if (type === "add") {

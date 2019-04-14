@@ -98,15 +98,21 @@
               </div>
               <footer class="footerpopup">
               <span class="popup__content-price">%=currancy%<> </span>
-                  <button class="popup__content-addbtn" data-buy="buyfood">
+                  <div class="popup__content-addbtn" data-buy="buyfood">
                       <img class="plusbtn" src="img/plus.svg" alt="plus">
-                  </button>
+                  </div>
               </footer>
           </div>
           <div class="popup__content-holder">
               <button class="popup__content-btn" data-modal-button="false" >افزودن به سبد خرید</button>
           </div>
       </div>
+    </script>
+    <!-- Its for counting food -->  
+    <script type="text/html" id="template-countFood">
+      <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
+      <span class="count-span"><%=number%></span>
+      <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
     </script>
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
