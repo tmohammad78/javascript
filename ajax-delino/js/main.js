@@ -2,10 +2,8 @@ $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
-  // const $wrapper=$('');
   let delinoData,
     cart=[],
-
     itemsTop = [],
     scrolling = false;
   let number = 1;
@@ -14,22 +12,14 @@ $(document).ready(function() {
   //const key = '48ff20a8-c1a4-4843-8826-ae0ba77f4254';
   //a5fa43c3-234d-462a-990a-9ec7ed82159f
   const key = "890d958f-9e64-4211-a2fa-d732c7a3920f"; // https://www.delino.com/restaurant/toasthouse
-
-
-
   const tempCart = sessionStorage.getItem("cart");
   if (tempCart){
      cart = JSON.parse(tempCart) || [];
   }
-
-
-
-
-
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
-      rendercategory(delinoData);
+      renderCategory(delinoData);
       console.log(delinoData);
       for (var i = 0; i < delinoData.length; i++) {
         renderFood(delinoData[i]);
@@ -39,16 +29,11 @@ $(document).ready(function() {
         itemsTop.push(parseInt(top));
       });
       $('button[data-buy="buyfood"]').on("click", function() {
-        $(this)
-          .closest(".food_section-last-cart")
-          .css({
+        $(this).closest(".food_section-last-cart").css({
             padding: "0"
-          });
-        rendercart($(this));
+        });
+        renderCart($(this));
       });
-      // const situation =sessionStorage.getItem(key);
-      // alert(situation);
-      // rendercart().updateUI(situation);
       console.log(itemsTop);
     })
     .fail(xhr => {
@@ -56,140 +41,83 @@ $(document).ready(function() {
         alert("not found");
       }
     });
-  function rendercategory(data) {
+//start rendering category
+function renderCategory(data) {
     let html = "";
     if (data) {
       data.sort(function(a, b) {
         return a.index - b.index;
       });
       console.log(data);
-
       const tpl_catItem = tmpl($("#template-category").html());
-
-      const itemmenue = data.map((item, i) => {
+      const itemMenue = data.map((item, i) => {
         return tpl_catItem({
           id: item.id,
           title: item.title,
           logo: item.logo ? item.logo + ".png" : ""
         });
       });
-      html = itemmenue.join("");
+      html = itemMenue.join("");
     }
     $categoryWrapper.html(html);
-  }
-  function renderFood(data) {
-    let html =
-      '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
+}
+//End rendering category
+
+// start rendering food card 
+function renderFood(data){
+    let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
     for (var i = 0; i < data.sub.length; i++) {
       if (data.sub[i].id == 0) {
-        const subdata = data.sub[i].food;
-        if (subdata) {
-          const tpl_catItem1= tmpl($("#template-food").html());
-          const itemsBox = subdata.map((item, i) => {
-            let image = item.img
-              ? '<img  class="food_section-category__img" src="' +
-                item.img.replace("#SIZEOFIMAGE#", "280x175") +
-                '"/>'
-              : "";
-              return tpl_catItem1({
-                image=
-              })
-            return `
-                   
-                `;
+        const subData = data.sub[i].food;
+        if (subData) {
+          const tpl_Food= tmpl($("#template-food").html());
+          const itemsBox = subData.map((item, i) => {
+            let image = item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") + '"/>': "";
+            return tpl_Food({
+              items:JSON.stringify(item),
+              image:image,
+              title:item.title,
+              truncate:helper.truncate(item.ingredient),
+              curancy:helper.currancy(item.price)
+            })
           });
-          html +=
-            ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${
-              data.id
-            }">` +
-            itemsBox.join("") +
-            `</div>`;
+          html +=` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${data.id }">` + itemsBox.join("") + `</div>`;
         }
-      } else {
-        let image = data.sub[i].img
-          ? '<img  class="food_section-category__img" src="' +
-            data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") +
-            '"/>'
-          : "";
-
+      }else{
+        const tpl_foodElse= tmpl($("#template-foodElse").html());
+        let image = data.sub[i].img ? '<img  class="food_section-category__img" src="' + data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") + '"/>' : "";
         const id = data.sub[i].id;
-      const quantity = cart[id] || [];
-
-
-        html += `
-                <div class="food_section-category col-1-of-3" data-food-id="${
-                  id
-                }">
-                    <div class="food_section-img">
-                        ${image}    
-                    </div>
-                    <div class="food_section-description">
-                        <div class="food_section-description-index">
-                            <h3 class="food_section-description-title">${
-                              data.sub[i].title
-                            }</h3>
-                            <span >${helper.truncate(
-                              data.sub[i].priceLabel
-                            )}</span>
-                        </div>
-                    </div>
-                    <div class="food_section-last clearfix">
-                        <div class="food_section-last-price">
-                            ${helper.currancy(data.sub[i].priceLabel || 0)}
-                        </div>
-                        <div class="food_section-last-cart">
-                            <a class="food_section-last-carticon" href=""><span >
-                            <sopn id="qty_${id}">${quantity}</span>
-                            <i class="fas fa-shopping-cart"></i></span></a>
-                        </div>
-                    </div>
-                </div>
-            `;
+        const quantity = cart[id] || [];
+        const itemFood=tpl_foodElse({
+          id:id,
+          image:image,
+          title:data.sub[i].title,
+          priceLabel:helper.truncate(data.sub[i].priceLabel),
+          currancy:helper.currancy(data.sub[i].priceLabel || 0),
+          quantity:quantity
+        })
+        html +=itemFood;
       }
     }
     $wrapper.append(html);
-  }
+}
+//End rendering food card
 
-  function renderPopup(data) {
+//start rendering popup
+function renderPopup(data) {
     console.log(data);
     $id = data.id;
     console.log($id);
-    let image = data.img
-      ? '<img  class="popup__content-img--inner"" src="' +
-        data.img.replace("#SIZEOFIMAGE#", "560x350") +
-        '"/>'
-      : ""; //560×350
-
-    $modal.addClass("popup").html(`
-           <div class="popup__content">
-                <div class="popup__content-close">
-                    <img class="popup__content-close--icon" src="img/close.svg"  />
-                </div>
-                <div class="popup__content-img">
-                    ${image}
-                </div>
-                <div class="popup__content-text">
-                    <div class="popup__content-title">
-                        ${data.title}
-                    </div>
-                    <div class="popup__content-ingredient">
-                        ${data.ingredient}
-                    </div>
-                    <footer class="footerpopup">
-                    <span class="popup__content-price">${helper.currancy(
-                      data.price
-                    )} </span>
-                        <button class="popup__content-addbtn" data-buy="buyfood">
-                            <img class="plusbtn" src="img/plus.svg" alt="plus">
-                        </button>
-                    </footer>
-                </div>
-                <div class="popup__content-holder">
-                    <button class="popup__content-btn" data-modal-button="false" >افزودن به سبد خرید</button>
-                </div>
-            </div>
-           `);
-    //for style before click on plus bottom
+    let image = data.img ? '<img  class="popup__content-img--inner"" src="' + data.img.replace("#SIZEOFIMAGE#", "560x350") + '"/>': ""; //560×350
+    const tpl_popup= tmpl($("#template-popup").html());
+    //Add to html
+    const itempopup=tpl_popup({
+      image:image,
+      title:data.title,
+      ingredient:data.ingredient,
+      currancy:helper.currancy(data.price)
+    })
+    $modal.addClass("popup").html(itempopup);
     let $modaling = $(".popup__content-btn").data("modal-button");
     console.log("test", $modaling);
     if ($modaling === false) {
@@ -199,7 +127,8 @@ $(document).ready(function() {
       });
       $modaling = $(".popup__content-btn").attr("data-modal-button", "true");
     }
-  }
+}
+//End render popup
 
   $modal.on("click", 'button[data-buy="buyfood"]', function(e) {
     e.preventDefault();
@@ -285,14 +214,10 @@ $(document).ready(function() {
   //popup
   $categoryWrapper.on("click", "a", function(e) {
     e.preventDefault();
-    //e.stopPropagation()''
-
+    //e.stopPropagation() baes mishe ke event ma edame peida nakone va avalin sath ro begire
     scrolling = true;
-    const catId = $(this)
-      .parent()
-      .data("cat-id");
+    const catId = $(this).parent().data("cat-id");
     actievCategory(catId);
-
     let itemTopIndex = 0;
     for (var i = 0; i < delinoData.length; i++) {
       if (delinoData[i].id == catId) {
@@ -300,17 +225,65 @@ $(document).ready(function() {
         break;
       }
     }
-    $("body")
-      .stop()
-      .animate(
+    $("body").stop().animate(
         {
           scrollTop: itemsTop[itemTopIndex] - 100
-        },
-        600
-      );
+        },600);
     setTimeout(() => {
       scrolling = false;
     }, 600);
+  });
+  $modal.on("click", ".popup__content-close", function() {
+    $(".modal").removeClass("popup");
+  });
+  $wrapper.on("click", "img", function() {
+    const itemData = $(this).closest(".food_section-category").data("food");
+    renderPopup(itemData);
+  });
+  //scrollwatcher
+  $(window).scroll(function() {
+    if (!scrolling) {
+      var scrollposition = $(window).scrollTop();
+      let activeBoxIndex = 0;
+      for (var i = 0; i < itemsTop.length; i++) {
+        if (scrollposition < itemsTop[i]) {
+           activeBoxIndex = i;
+          break;
+        }
+      }
+      const activeBox = delinoData[activeBoxIndex];
+      console.log(activeBox.id);
+      actievCategory(activeBox.id);
+    }
+  });
+  function actievCategory(id) {
+    $(".categories").find('div[data-cat-id="' + id + '"]').addClass("active-box").siblings().removeClass("active-box");
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // const $box = $(
     //   "#box-" +
@@ -335,38 +308,3 @@ $(document).ready(function() {
     //       600
     //     );
     // }
-  });
-  $modal.on("click", ".popup__content-close", function() {
-    $(".modal").removeClass("popup");
-  });
-  $wrapper.on("click", "img", function() {
-    const itemData = $(this)
-      .closest(".food_section-category")
-      .data("food");
-    renderPopup(itemData);
-  });
-  //scrollwatcher
-  $(window).scroll(function() {
-    if (!scrolling) {
-      var scrollposition = $(window).scrollTop();
-      //console.log(scrollposition);
-      let activeBoxIndex = 0;
-      for (var i = 0; i < itemsTop.length; i++) {
-        if (scrollposition < itemsTop[i]) {
-          activeBoxIndex = i;
-          break;
-        }
-      }
-      const activeBox = delinoData[activeBoxIndex];
-      console.log(activeBox.id);
-      actievCategory(activeBox.id);
-    }
-  });
-  function actievCategory(id) {
-    $(".categories")
-      .find('div[data-cat-id="' + id + '"]')
-      .addClass("active-box")
-      .siblings()
-      .removeClass("active-box");
-  }
-});
