@@ -86,9 +86,9 @@ console.log(cart);
               items: JSON.stringify(item),
               image: image,
               title: item.title,
-              truncate: helper.truncate(item.ingredient),
-              curancy: helper.currancy(item.price),
-              quantity: cart[0] || ''
+              ingredient: helper.truncate(item.ingredient),
+              price: helper.currancy(item.price),
+              quantity: cart[id] || ''
             });
           });
           html +=
@@ -170,6 +170,32 @@ console.log(cart);
     cart[id] = qty;
     $holder.find(".quantity").text(qty);
   });
+  
+//its for show count by click btn in card
+$wrapper.on("click", ".quantity-holder button", e => {
+  e.preventDefault();
+  const $btn = $(e.target).closest("button");
+  const $holder = $btn.parent();
+  const id =$btn.closest(".food_section-category").data("food").id;
+  let qty = id ? cart[parseInt(id)] || 0 :  0;
+  switch ($btn.data("cmd")) {
+    case "increase":
+      qty++;
+      $holder.addClass("selected") ;
+      break;
+    case "decrease":
+      qty--;
+      if (qty<1){
+        console.log(true);
+        $(".popup__content").removeClass("selected");
+        $holder.removeClass("selected") ;
+      }
+      break;
+  }
+  cart[id] = qty;
+  $holder.find(".quantity").text(qty);
+});
+
 
   // //Add count of food by clicking on btn-plus
   // $modal.on("click", ".btn-plus", function() {
@@ -212,7 +238,7 @@ console.log(cart);
       .stop()
       .animate(
         {
-          scrollTop: itemsTop[itemTopIndex] - 100
+          scrollTop: itemsTop[itemTopIndex] - 90
         },
         600
       );
@@ -226,11 +252,9 @@ console.log(cart);
     $(".modal").removeClass("popup");
   });
 
-  //get id of parent for render popup
+  //show popup after click on img in it
   $wrapper.on("click", "img", function() {
-    const itemData = $(this)
-      .closest(".food_section-category")
-      .data("food");
+    const itemData = $(this).closest(".food_section-category").data("food");
     renderPopup(itemData);
   });
 

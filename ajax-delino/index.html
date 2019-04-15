@@ -14,13 +14,8 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-
-
-<!-- 
-    <button class="btn-green">salam</button>
-    <div style="background-color: gray; padding: 10px;"><button class="btn-outline-white">salam</button></div>
-
- -->
+    <div class="orders">
+    </div>
     <div class="fullbox">
       <div class="parent">
         <div class="categories"></div>
@@ -39,17 +34,20 @@
           <div class="food_section-description">
               <div class="food_section-description-index">
                   <h3 class="food_section-description-title"><%=title%></h3>
-                  <span ><%=truncate%></span>
+                  <span ><%=ingredient%></span>
               </div>
           </div>
           <div class="food_section-last clearfix">
               <div class="food_section-last-price">
-                <%=curancy%>
+                <%=price%>
               </div>
               <div class="food_section-last-cart">
                   <div class="food_section-last-carticon" data-buy="buyfood">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span><%=quantity%></span>
+                      <div class="quantity-holder <%=quantity> 0 ? 'selected' : '' %>" data-buy="buyfood">
+                          <button class="btn-plus" data-cmd="increase"><i class="fas fa-plus"></i></button>
+                          <span class="quantity"><%=quantity%></span>
+                          <button class="btn-minus" data-cmd="decrease"><i class="fas fa-minus"></i></button>
+                      </div>
                   </div>
               </div>
           </div>
@@ -121,6 +119,9 @@
           </div>
         </section>
       </div>
+    </script>
+    <script>
+      
     </script>
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
