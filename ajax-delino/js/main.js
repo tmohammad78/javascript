@@ -7,13 +7,14 @@ $(document).ready(function() {
     itemsTop = [],
     scrolling = false;
   let number = 0;
-  let count = {};
+  //let cart = {};
   // const key='2a54ea59-76ad-4f8b-9856-1a7bdbc22c4c';
   //const key = '48ff20a8-c1a4-4843-8826-ae0ba77f4254';
   //a5fa43c3-234d-462a-990a-9ec7ed82159f
   const key = "890d958f-9e64-4211-a2fa-d732c7a3920f"; // https://www.delino.com/restaurant/toasthouse
-  const tempCart = sessionStorage.getItem("count");
+  const tempCart = sessionStorage.getItem("cart");
   console.log(tempCart);
+
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
@@ -66,18 +67,14 @@ function renderFood(data){
     let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
     for (var i = 0; i < data.sub.length; i++) {
       if (data.sub[i].id == 0) {
-        const id = data.sub[i].id;
-        // console.log('asaa');
-        // console.log(id);
-        // console.log(cart[15088]);
-        const quantity = cart[15088] || [];
-        // console.log(quantity);
+        //const id = data.sub[i].id;
         const subData = data.sub[i].food;
         if (subData) {
           // updateView(id);
           const tpl_Food= tmpl($("#template-food").html());
           const itemsBox = subData.map((item, i) => {
-            let image = item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") + '"/>': "";
+            const quantity = cart[item.id] || 0;
+            const image = item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") + '"/>': "";
             return tpl_Food({
               items:JSON.stringify(item),
               image:image,
@@ -100,7 +97,7 @@ function renderFood(data){
           title:data.sub[i].title,
           priceLabel:helper.truncate(data.sub[i].priceLabel),
           currancy:helper.currancy(data.sub[i].priceLabel || 0),
-          quantity:quantity
+          quantity:  0//quantity
         })
         html +=itemFood;
       }
@@ -112,18 +109,19 @@ function renderFood(data){
 //start rendering popup
 function renderPopup(data) {
     console.log(data);
-    $id = data.id;
-    console.log($id);
+    id = data.id;
+    console.log(id);
     let image = data.img ? '<img  class="popup__content-img--inner"" src="' + data.img.replace("#SIZEOFIMAGE#", "560x350") + '"/>': ""; //560×350
     const tpl_popup= tmpl($("#template-popup").html());
-    updateView($id);
+    //updateView(id);
     //Add to html
     const itempopup=tpl_popup({
-      id:$id,
+      id: id,
       image:image,
       title:data.title,
       ingredient:data.ingredient,
-      currancy:helper.currancy(data.price)
+      currancy:helper.currancy(data.price),
+      quantity: cart[id] || 0
     })
     $modal.addClass("popup").html(itempopup);
     // let $modaling = $(".popup__content-btn").data("modal-button");
@@ -147,31 +145,46 @@ function renderPopup(data) {
     });
 }
 //End render popup
-function updateView(id){
-  if (tempCart){
-     cart = JSON.parse(tempCart) || [];
-     console.log(cart);
-      if(cart[id]){
-        number=cart[id];
-      }else{
-          number=0;
-      }
-  }
-}
+// function updateView(id){
+//   if (tempCart){
+//      cart = JSON.parse(tempCart) || [];
+//      console.log(cart);
+//       if(cart[id]){
+//         number=cart[id];
+//       }else{
+//           number=0;
+//       }
+//   }
+// }
 
-$modal.on("click",".add_btn", function() {
+$modal.on("click",".cart-action", function() {
   const $id=$(this).closest('.popup__content').data("popup");  
   calcute("add",$id);
 });
 $modal.on("click",".minus_btn",function(){
   calcute("minus",$id);
 });
+
 function calcute(type,id){
+
+
+
   const operation=type === "add" ? number+=1:number-=1 ;
-  count[id]=number; 
-  sessionStorage.setItem("count",JSON.stringify(count));
+  cart[id]=number; 
+
+  sessionStorage.setItem("cart",JSON.stringify(cart));
   // console.log();
 }
+
+function storeCart(){
+
+}
+
+
+
+
+
+
 // $modal.on("click", 'div[data-buy="buyfood"]', function(e) {
 //     e.preventDefault();
 //     const tpl_countFood= tmpl($("#template-countFood").html());

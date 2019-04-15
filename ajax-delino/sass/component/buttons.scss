@@ -1,0 +1,62 @@
+
+
+@mixin btn-base() {
+  border-radius: 10px;
+  padding: 5px 15px;
+  line-height: 1;
+  border: none;
+}
+
+@mixin btn($background:$color-primary, $textColor: white) {
+  @include btn-base();
+
+  background-color: $background;
+  color: $textColor;
+
+  &:hover{
+      background-color: darken($background,5%)
+  }
+
+  &:active{
+      transform: scale(0.95);
+  }
+}
+
+@mixin btn-outline($borderColor: #333, $textColor: #333, $var3) {
+    @include btn-base();
+  
+    background: none;
+    border: 1px solid $borderColor;
+    color: $textColor;
+  
+    &:hover{
+        background: $color-primary;
+    }
+  
+    &:active{
+        transform: scale(0.95);
+    }
+  }
+
+
+[class^='btn'],
+[class*=' btn']{
+    @include btn();
+}
+
+[class^='btn-outline'],
+[class*=' btn-outline']{
+    @include btn-outline();
+}
+
+.btn-default {
+  @include btn();
+}
+
+.btn-green{
+    @include btn(green, white);
+}
+
+.btn-outline-white{
+    @include btn-outline($color-white, $color-white);
+}

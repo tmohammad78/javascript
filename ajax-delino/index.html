@@ -14,13 +14,23 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+
+
+
+    <button class="btn-green">salam</button>
+    <div style="background-color: gray; padding: 10px;"><button class="btn-outline-white">salam</button></div>
+
+
+
+
+
+
     <div class="fullbox">
       <div class="parent">
         <div class="categories"></div>
       </div>
       <section class="food_section" id="pizzaamerican">
-        <div class="food_section-info">
-        </div>
+        <div class="food_section-info"></div>
       </section>
     </div>
     <div class="modal"></div>
@@ -28,7 +38,7 @@
     <script type="text/html" id="template-food">
       <div class="food_section-category col-1-of-3" data-food='<%=items%>'>
           <div class="food_section-img">
-              <%=image%> 
+              <%=image%>
           </div>
           <div class="food_section-description">
               <div class="food_section-description-index">
@@ -87,39 +97,45 @@
     </script>
 
     <!-- its for popup -->
-    <script type="text/html" id="template-popup" >
+    <script type="text/html" id="template-popup">
       <div class="popup__content" data-popup="<%=id%>">
-          <div class="popup__content-close">
-              <img class="popup__content-close--icon" src="img/close.svg"  />
-          </div>
-          <div class="popup__content-img">
-            <%=image%>
-          </div>
-          <div class="popup__content-text">
-              <div class="popup__content-title">
-                  <%=title%>
+        <header>
+          <button class="action-button anc-close">
+              <i class="icon icon-cross"></i>
+          </button>
+          <button class="action-button anc-share">
+              <i class="icon icon-share"></i>
+              <span>Share me!</span>
+          </button>
+        </header>
+        <section>
+            <figure>
+                <%=image%>
+              </figure>
+              <div class="details">
+                  <h2><%=title%></h2>
+                  <div class="ingredient"><%=ingredient%></div>
+                  <footer>
+                      <span class="price"><%=currancy%> </span>
+                      <div class="quantity-holder" data-buy="buyfood">
+                          <button class="btn-plus" data-cmd="increase" ><i class="fas fa-plus"></i></button>
+                          <span class="quantity"><%=number%></span>
+                          <button class="btn-minus" data-cmd="reduce"><i class="fas fa-minus"></i></button>
+                      </div>
+                  </footer>
               </div>
-              <div class="popup__content-ingredient">
-                  <%=ingredient%>
+              <div class="holder">
+                <% if(quantity){ %>
+                      <span><%=quantity%></span>
+                  <%}else{%>
+                  <%}%>
               </div>
-              <footer class="footerpopup">
-              <span class="popup__content-price"><%=currancy%> </span>
-                  <div class="popup__content-addbtn" data-buy="buyfood">
-                      <img class="plusbtn" src="img/plus.svg" alt="plus">
-                  </div>
-              </footer>
-          </div>
-          <div class="popup__content-holder">
-              <button class="popup__content-btn" data-modal-button="false" >افزودن به سبد خرید</button>
-          </div>
+
+              <button class="btn-default" data-modal-button="false" disabled>افزودن به سبد خرید</button>
+        </section>
       </div>
     </script>
-    <!-- Its for counting food -->  
-    <script type="text/html" id="template-countFood">
-      <button class="minus_btn" data-cmd="delete" ><i class="fas fa-minus"></i></button>
-      <span class="count-span"><%=number%></span>
-      <button class="add_btn" data-cmd="add"><i class="fas fa-plus"></i></button>
-    </script>
+
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
   </body>
