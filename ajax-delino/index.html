@@ -16,15 +16,11 @@
   <body>
 
 
-
+<!-- 
     <button class="btn-green">salam</button>
     <div style="background-color: gray; padding: 10px;"><button class="btn-outline-white">salam</button></div>
 
-
-
-
-
-
+ -->
     <div class="fullbox">
       <div class="parent">
         <div class="categories"></div>
@@ -98,37 +94,34 @@
 
     <!-- its for popup -->
     <script type="text/html" id="template-popup">
-      <div class="popup__content" data-popup="<%=id%>">
+      <div class="popup__content" data-food-id="<%=id%>">
         <header>
-          <button class="action-button anc-close">
-              <i class="icon icon-cross"></i>
-          </button>
-          <button class="action-button anc-share">
-              <i class="icon icon-share"></i>
-              <span>Share me!</span>
+          <button class="btn-action anc-close">
+              <i class="fas fa-times"></i>
           </button>
         </header>
         <section>
-            <figure>
-                <%=image%>
-              </figure>
-              <div class="details">
-                  <h2><%=title%></h2>
-                  <div class="ingredient"><%=ingredient%></div>
-                  <footer>
-                      <span class="price"><%=currancy%> </span>
-                      <div class="quantity-holder" data-buy="buyfood">
-                          <button class="btn-plus" data-cmd="increase" ><i class="fas fa-plus"></i></button>
-                          <span class="quantity"><%=number%></span>
-                          <button class="btn-minus" data-cmd="reduce"><i class="fas fa-minus"></i></button>
-                      </div>
-                  </footer>
-              </div>
-              <button class="btn-default" data-modal-button="false" disabled>افزودن به سبد خرید</button>
+          <figure>
+            <%=image%>
+          </figure>
+          <div class="details">
+              <h2><%=title%></h2>
+              <div class="ingredient"><%=ingredient%></div>
+              <footer>
+                <span class="price"><%=currancy%></span>
+                  <div class="quantity-holder <%=quantity> 0 ? 'selected' : '' %>" data-buy="buyfood">
+                      <button class="btn-plus" data-cmd="increase"><i class="fas fa-plus"></i></button>
+                      <span class="quantity"><%=quantity%></span>
+                      <button class="btn-minus" data-cmd="decrease"><i class="fas fa-minus"></i></button>
+                  </div>
+              </footer>
+          </div>
+          <div class="parent-btn">
+            <button class="btn-cart" data-modal-button="false" disabled>افزودن به سبد خرید</button>
+          </div>
         </section>
       </div>
     </script>
-
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
   </body>
