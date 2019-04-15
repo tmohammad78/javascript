@@ -123,61 +123,36 @@ console.log(cart);
   //End rendering food card
 
   //start rendering popup
-  function renderPopup(data) {
-    console.log(data);
-    let id = data.id;
-    console.log(id);
-    let image = data.img
-      ? '<img  class="imageFood"" src="' +
-        data.img.replace("#SIZEOFIMAGE#", "560x350") +
-        '"/>'
-      : ""; //560×350
-    const tpl_popup = tmpl($("#template-popup").html());
-    //Add to html
-    const itempopup = tpl_popup({
-      id: id,
-      image: image,
-      title: data.title,
-      ingredient: data.ingredient,
-      currancy: helper.currancy(data.price),
-      quantity: cart[id] || 0
-    });
-    $modal.addClass("popup").html(itempopup);
-  }
+function renderPopup(data) {
+  console.log(data);
+  let id = data.id;
+  console.log(id);
+  let image = data.img
+    ? '<img  class="imageFood"" src="' +
+      data.img.replace("#SIZEOFIMAGE#", "560x350") +
+      '"/>'
+    : ""; //560×350
+  const tpl_popup = tmpl($("#template-popup").html());
+  //Add to html
+  const itempopup = tpl_popup({
+    id: id,
+    image: image,
+    title: data.title,
+    ingredient: data.ingredient,
+    currancy: helper.currancy(data.price),
+    quantity: cart[id] || 0
+  });
+  $modal.addClass("popup").html(itempopup);
+}
   //End render popup
 
-  $modal.on("click", ".quantity-holder button", e => {
-    e.preventDefault();
-    const $btn = $(e.target).closest("button");
-    const $holder = $btn.parent()
-    const id = $btn.closest(".popup__content").data("food-id");
-    let qty = id ? cart[parseInt(id)] || 0 :  0;
-    //debugger
-    switch ($btn.data("cmd")) {
-      case "increase":
-        qty++;
-        $holder.addClass("selected") ;
-        break;
-      case "decrease":
-        qty--;
-        if (qty<1){
-          console.log(true);
-          $(".popup__content").removeClass("selected");
-          $holder.removeClass("selected") ;
-        }
-        break;
-    }
-    cart[id] = qty;
-    $holder.find(".quantity").text(qty);
-  });
-  
-//its for show count by click btn in card
-$wrapper.on("click", ".quantity-holder button", e => {
+$modal.on("click", ".quantity-holder button", e => {
   e.preventDefault();
   const $btn = $(e.target).closest("button");
-  const $holder = $btn.parent();
-  const id =$btn.closest(".food_section-category").data("food").id;
+  const $holder = $btn.parent()
+  const id = $btn.closest(".popup__content").data("food-id");
   let qty = id ? cart[parseInt(id)] || 0 :  0;
+  //debugger
   switch ($btn.data("cmd")) {
     case "increase":
       qty++;
@@ -195,6 +170,41 @@ $wrapper.on("click", ".quantity-holder button", e => {
   cart[id] = qty;
   $holder.find(".quantity").text(qty);
 });
+  
+//its for show count by click btn in card
+$wrapper.on("click", ".quantity-holder button", e => {
+  e.preventDefault();
+  const $btn = $(e.target).closest("button");
+  const $holder = $btn.parent();
+  const id =$btn.closest(".food_section-category").data("food").id;
+  const title =$btn.closest(".food_section-category").data("food").title;
+  const price =$btn.closest(".food_section-category").data("food").price;
+  let qty = id ? cart[parseInt(id)] || 0 :  0;
+  switch ($btn.data("cmd")) {
+    case "increase":
+      qty++;
+      $holder.addClass("selected") ;
+      break;
+    case "decrease":
+      qty--;
+      if (qty<1){
+        console.log(true);
+        $(".popup__content").removeClass("selected");
+        $holder.removeClass("selected") ;
+      }
+      break;
+  }
+  cart[id] = qty;
+  $holder.find(".quantity").text(qty);
+  $('.orderNumbers').text(qty);
+  $('.foodName').text(title);
+  $('.fullPrice').text(calcuteCost(price,qty));
+});
+function calcuteCost(price,count){
+  const newPrice=price*count;
+  return newPrice;
+}
+
 
 
   // //Add count of food by clicking on btn-plus
@@ -289,6 +299,7 @@ $wrapper.on("click", ".quantity-holder button", e => {
       .removeClass("active-box");
   }
 });
+
 
 
 
