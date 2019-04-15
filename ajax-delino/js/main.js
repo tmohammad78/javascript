@@ -70,13 +70,10 @@ console.log(cart);
     for (var i = 0; i < data.sub.length; i++) {
       if (data.sub[i].id == 0) {
         let id = data.sub[i].id;
-        console.log(data.sub[i].id);
         const subData = data.sub[i].food;
         if (subData) {
-          // updateView(id);
           const tpl_Food = tmpl($("#template-food").html());
           const itemsBox = subData.map((item, i) => {
-            // const quantity = cart[item.id] || 0;
             const image = item.img
               ? '<img  class="food_section-category__img" src="' +
                 item.img.replace("#SIZEOFIMAGE#", "280x175") +
@@ -194,26 +191,28 @@ $wrapper.on("click", ".quantity-holder button", e => {
       }
       break;
   }
+  console.log(cart);
   cart[id] = qty;
   $holder.find(".quantity").text(qty);
-  updateCart();
+  console.log(cart);
+  objectCart=Object.assign({},cart);
+  console.log(objectCart);
+  for(var i=0; i<Object.keys(objectCart).length;i++)   
+  updateCart(objectCart[i],id);
 });
-function updateCart(){
-  // $('.orderNumbers').text(qty);
-  // $('.foodName').text(title);
-  // $('.fullPrice').text(calcuteCost(price,qty));
-  for(var i=0 ;i<cart.length;i++){
-    getFood(cart[i]);    
-  }
+function updateCart(objectCart,id){
+  const price =$(".food_section-category").data("food").price;
   const tpl_updateCart = tmpl($("#template-updateCart").html());
-  const selectionItems =tpl_updateCart({
-    orderNumbers:qty,
-    foodName:title,
-    price:calcuteCost(price,qty)
-  })
-  $('.orders').html(selectionItems);
+  // for(var i=0; i<Object.keys(objectCart).length;i++){
+    const selectionItems =tpl_updateCart({
+    orderNumbers:objectCart,
+    foodName:getFood(id),
+    price:calcuteCost(price,objectCart[id])
+    })
+    $('.orders').html(selectionItems);
+  // }
 }
-function getFood(){
+function getFood(id){
 
 }
 function calcuteCost(price,count){
