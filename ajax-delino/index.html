@@ -15,10 +15,10 @@
   </head>
   <body>
     <div class="orders">
-        <span class="orderNumbers"></span>
-        <div class="foodName"></div>
-        <div class="fullPrice"></div>
-      </div>
+      <span class="orderNumbers"></span>
+      <div class="foodName"></div>
+      <div class="fullPrice"></div>
+    </div>
     <div class="fullbox">
       <div class="parent">
         <div class="categories"></div>
@@ -123,8 +123,10 @@
         </section>
       </div>
     </script>
-    <script>
-      
+    <script type="text/html" id="template-updateCart">
+      <span class="orderNumbers"><%=orderNumbers%></span>
+      <div class="foodName"><%=foodName%></div>
+      <div class="price"><%=price%></div>
     </script>
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>

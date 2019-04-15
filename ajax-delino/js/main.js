@@ -196,17 +196,30 @@ $wrapper.on("click", ".quantity-holder button", e => {
   }
   cart[id] = qty;
   $holder.find(".quantity").text(qty);
-  $('.orderNumbers').text(qty);
-  $('.foodName').text(title);
-  $('.fullPrice').text(calcuteCost(price,qty));
+  updateCart();
 });
+function updateCart(){
+  // $('.orderNumbers').text(qty);
+  // $('.foodName').text(title);
+  // $('.fullPrice').text(calcuteCost(price,qty));
+  for(var i=0 ;i<cart.length;i++){
+    // getFood();    
+  }
+  const tpl_updateCart = tmpl($("#template-updateCart").html());
+  const selectionItems =tpl_updateCart({
+    orderNumbers:qty,
+    foodName:title,
+    price:calcuteCost(price,qty)
+  })
+  $('.orders').html(selectionItems);
+}
+function getFood(){
+
+}
 function calcuteCost(price,count){
   const newPrice=price*count;
   return newPrice;
 }
-
-
-
   // //Add count of food by clicking on btn-plus
   // $modal.on("click", ".btn-plus", function() {
   //   const id = $(this)
