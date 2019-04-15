@@ -203,7 +203,7 @@ function updateCart(){
   // $('.foodName').text(title);
   // $('.fullPrice').text(calcuteCost(price,qty));
   for(var i=0 ;i<cart.length;i++){
-    // getFood();    
+    getFood(cart[i]);    
   }
   const tpl_updateCart = tmpl($("#template-updateCart").html());
   const selectionItems =tpl_updateCart({
