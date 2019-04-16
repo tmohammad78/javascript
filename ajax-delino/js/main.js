@@ -17,7 +17,6 @@ $(document).ready(function() {
       cart[item[0]] = item[1];
     });
   }
-
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
@@ -26,10 +25,9 @@ $(document).ready(function() {
         renderFood(delinoData[i]);
       }
       updateCart();
-      $wrapper.find("h1").each((i, h1) => {
-        const top = $(h1).offset().top;
-        itemsTop.push(parseInt(top));
-      });
+
+      //$(window).trigger("resize")
+      onResize()
 
     })
     .fail(xhr => {
@@ -37,7 +35,6 @@ $(document).ready(function() {
         alert("not found");
       }
     });
-
 
   function renderCategory(data) {
     let html = "";
@@ -58,7 +55,6 @@ $(document).ready(function() {
     }
     $categoryWrapper.html(html);
   }
-
   function renderFood(data) {
     let html =
       '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
@@ -113,9 +109,6 @@ $(document).ready(function() {
     }
     $wrapper.append(html);
   }
-
-
-
   //start rendering popup
   function renderPopup(data) {
     //console.log(data);
@@ -139,7 +132,6 @@ $(document).ready(function() {
     $modal.addClass("popup").html(itempopup);
   }
   //End render popup
-
   $modal.on("click", ".quantity-holder button", e => {
     e.preventDefault();
     const $btn = $(e.target).closest("button");
@@ -212,16 +204,13 @@ $(document).ready(function() {
     const foodList = [];
     const cart_arr = [];
     for (let [key, value] of Object.entries(cart)) {
-      console.log(key, value);
       const food = getFood(key);
-      console.log('ffosd');
-      console.log(food);
-      if(value !==0){
+      if (value !== 0) {
         foodList.push({
           id: key,
-          title:food.title, // food.title
-          price: "price", // food.price
-          quantity:value
+          title: food.title, // food.title
+          price: food.price, // food.price
+          quantity: value
         });
         cart_arr.push(key + ":" + value);
       }
@@ -230,30 +219,39 @@ $(document).ready(function() {
     $("#cart").html(tpl_cart({ foodList }));
     sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
   }
-  function getFood(key) {
-    //console.log(id);
+
+  function getFood(id) {
+    let food = null;
     for (var i = 0; i < delinoData.length; i++) {
       for (var j = 0; j < delinoData[i].sub.length; j++) {
         if (delinoData[i].sub[j].id == 0) {
           const subData = delinoData[i].sub[j].food;
           if (subData) {
             for (var z = 0; z < subData.length; z++) {
-              // console.log(subData[z].id);
-              if (key === subData[z].id) {
-                console.log(subData[z].title);
+              if (subData[z].id == id) {
+                food = subData[z];
                 break;
               }
             }
             // console.log(subData.id);
           }
+        } else {
+          // loop
+        }
+        if (food) {
+          break;
         }
       }
+      if (food) {
+        break;
+      }
     }
-}
+
+    return food;
+  }
 
   $categoryWrapper.on("click", "a", function(e) {
     e.preventDefault();
-    G;
     //e.stopPropagation() baes mishe ke event ma edame peida nakone va avalin sath ro begire
     scrolling = true;
     const catId = $(this)
@@ -301,6 +299,19 @@ $(document).ready(function() {
   });
 
   //scrollwatcher
+  
+  $(window).on("resize", onResize)
+
+  function onResize(){
+    itemsTop = [];
+    $wrapper.find("h1").each((i, h1) => {
+      const top = $(h1).offset().top;
+      itemsTop.push(parseInt(top));
+    });
+  }
+
+
+
   $(window).scroll(function() {
     if (!scrolling) {
       var scrollposition = $(window).scrollTop();
