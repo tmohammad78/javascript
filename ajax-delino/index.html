@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="orders">
-    </div>
+    <div class="orders" id="cart"></div>
     <div class="fullbox">
       <div class="parent">
         <div class="categories"></div>
@@ -120,10 +119,14 @@
         </section>
       </div>
     </script>
-    <script type="text/html" id="template-updateCart">
-      <span class="orderNumbers"><%=orderNumbers%></span>
-      <div class="foodName"><%=foodName%></div>
-      <div class="price"><%=price%></div>
+    <script type="text/html" id="template-cart">
+      <%for(var i=0; i< foodList.length; i++){%>
+        <div>
+          <span class="orderNumbers"><%=foodList[i].quantity%></span>
+          <div class="foodName"><%=foodList[i].title%></div>
+          <div class="price"><%=foodList[i].price%></div>
+        </div>
+      <%}%>
     </script>
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
