@@ -85,3 +85,9 @@
 .btn-outline-white {
   @include btn-outline($color-white, $color-white);
 }
+.btn-showCount{
+  border-radius: 5px;
+  padding: 15px;
+  position: absolute;
+  left: 7px;
+}

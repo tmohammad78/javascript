@@ -14,11 +14,23 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <div class="header-section">
+      <header>
+        <button class="btn btn-showCount">                      
+          <i class="fas fa-shopping-cart"></i>
+          <span class="header-number">1</span>
+        </button>
+        <div action="#" class="search">
+            <img class="search-img" src="./img/search.svg" alt="search">
+            <input type="text" class="search__input" placeholder="جستجوی غذا">
+          </div>
+      </header>
+    </div>
     <div class="orders" id="cart"></div>
     <div class="fullbox">
-      <div class="parent">
+      <!-- <div class="parent">
         <div class="categories"></div>
-      </div>
+      </div> -->
       <section class="food_section" id="pizzaamerican">
         <div class="food_section-info"></div>
       </section>
@@ -119,6 +131,8 @@
         </section>
       </div>
     </script>
+
+    <!-- Cart  -->
     <script type="text/html" id="template-cart">
       <%for(var i=0; i< foodList.length; i++){%>
         <div>
@@ -128,6 +142,7 @@
         </div>
       <%}%>
     </script>
+    <!-- cart -->
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
   </body>
