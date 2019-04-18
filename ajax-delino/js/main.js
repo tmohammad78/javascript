@@ -2,6 +2,7 @@ $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
+  let fullOrder=0;
   let delinoData,
     CART_NAME = "cart";
   (cart = {}), (itemsTop = []), (scrolling = false);
@@ -15,7 +16,9 @@ $(document).ready(function() {
     cart_arr.forEach(node => {
       let item = node.split(":");
       cart[item[0]] = item[1];
+      fullOrder +=parseInt(item[1]);
     });
+
   }
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
@@ -202,29 +205,41 @@ $(document).ready(function() {
     // updateCart(objectCart[i],id);
   });
 
-  function updateCart() {
-    
+  function updateCart() {    
   $('.btn-showCount').on("click",function(){
     const foodList = [];
     const cart_arr = [];
+    let number =0;
     for (let [key, value] of Object.entries(cart)) {
       const food = getFood(key);
+      // let number += food.price;
+      number=number + food.price;
       if (value !== 0) {
         foodList.push({
           id: key,
           title: food.title, // food.title
-          price: food.price, // food.price
-          quantity: value
+          price:helper.currancy(food.price), // food.price
+          quantity: value,
+          fullCost:number
         });
         cart_arr.push(key + ":" + value);
       }
+      console.log(number);
     }
+  
     const tpl_Cart = tmpl($("#template-Cart").html());
+    // calcutePrice(cart);
     $("#cart2").html(tpl_Cart({ foodList }));
     sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
     $('.shop').addClass("active-shop").html();
   });
 }
+// function calcutePrice(food){
+//   const full=0;
+//   full+=food.price;
+// return full;
+//   }
+
 
 
 

@@ -21,7 +21,7 @@
             <header>
               <button class="btn btn-showCount">                      
                 <i class="fas fa-shopping-cart"></i>
-                <span class="header-number">1</span>
+                <span class="header-number"></span>
               </button>
               <div action="#" class="search">
                   <img class="search-img" src="./img/search.svg" alt="search">
@@ -156,12 +156,18 @@
               </div>
           </header>
           <%for(var i=0; i< foodList.length; i++){%>
-            <div>
-              <span class="orderNumbers"><%=foodList[i].quantity%></span>
-              <div class="foodName"><%=foodList[i].title%></div>
-              <div class="price"><%=foodList[i].price%></div>
+            <div class="itemOrder">
+              <div class="orderNumbers">
+                <span><%=foodList[i].quantity%></span>
+              </div>
+              <div class="orderFood">
+                <h3><%=foodList[i].title%></h3>
+                <small><%=foodList[i].price%></small>
+              </div>
             </div>
           <%}%>
+
+          <div><%=fullCost%></div>
         </div>
     </script>
     <!-- cart -->

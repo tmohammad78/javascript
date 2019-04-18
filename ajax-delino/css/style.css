@@ -642,10 +642,17 @@ footer {
   .cart-text .cart-text > i {
     float: right; }
 
+.orderFood {
+  direction: rtl; }
+
+.itemOrder {
+  border-bottom: 1px solid #eeeeee;
+  padding: 5px 10px; }
+
 @keyframes open {
   0% {
     opacity: 0;
-    width: 0%; }
+    width: 0px; }
   100% {
     opacity: 1;
     width: 350px; } }
@@ -656,7 +663,7 @@ footer {
     width: 350px; }
   100% {
     opacity: 0;
-    width: 0%; } }
+    width: 0px; } }
 
 .fullbox {
   float: right; }
