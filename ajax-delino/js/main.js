@@ -298,6 +298,22 @@ $(document).ready(function() {
       .addClass("selected");
   });
 
+
+  $('.btn-showCount').on("click",function(){
+    const tpl_showCart = tmpl($("#template-Cart").html());
+    //Add to html
+    const itemCart = tpl_showCart({
+    });
+    $('.shop').addClass("active-shop").html(itemCart);
+  });
+  $('.shop').on("click", ".anc-close", function() {
+    // $('.active-shop').css({
+    //   "animation":'close .5s'
+    // }); 
+    $('.shop').addClass('close').removeClass('active-shop');
+  });
+
+
   //scrollwatcher
   
   $(window).on("resize", onResize)
@@ -309,6 +325,7 @@ $(document).ready(function() {
       itemsTop.push(parseInt(top));
     });
   }
+
 
 
 

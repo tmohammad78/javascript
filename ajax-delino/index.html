@@ -14,23 +14,24 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="header-section">
-      <header>
-        <button class="btn btn-showCount">                      
-          <i class="fas fa-shopping-cart"></i>
-          <span class="header-number">1</span>
-        </button>
-        <div action="#" class="search">
-            <img class="search-img" src="./img/search.svg" alt="search">
-            <input type="text" class="search__input" placeholder="جستجوی غذا">
-          </div>
-      </header>
-    </div>
+    <div class="shop"></div>
     <div class="orders" id="cart"></div>
     <div class="fullbox">
-      <!-- <div class="parent">
+        <div class="header-section">
+            <header>
+              <button class="btn btn-showCount">                      
+                <i class="fas fa-shopping-cart"></i>
+                <span class="header-number">1</span>
+              </button>
+              <div action="#" class="search">
+                  <img class="search-img" src="./img/search.svg" alt="search">
+                  <input type="text" class="search__input" placeholder="جستجوی غذا">
+                </div>
+            </header>
+          </div>
+      <div class="parent">
         <div class="categories"></div>
-      </div> -->
+      </div>
       <section class="food_section" id="pizzaamerican">
         <div class="food_section-info"></div>
       </section>
@@ -142,6 +143,25 @@
         </div>
       <%}%>
     </script>
+    <!-- cart -->
+    <script type="text/html" id="template-Cart" >
+      <div class="cartBox">
+          <header class="header-cart">
+              <button class="btn-action anc-close close-cart">
+                  <i class="fas fa-times"></i>
+              </button>
+              <div class="cart-text">
+                <i class="fas fa-shopping-cart cart-text-icon"></i>
+                <span >سبد خرید</span>
+              </div>
+          </header>
+        </div>
+    </script>
+    <!-- cart -->
+    <!-- <script type="text/html" id="template-shopping" >
+      
+    </script> -->
+
     <!-- cart -->
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>

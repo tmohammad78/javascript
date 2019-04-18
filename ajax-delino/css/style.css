@@ -7,7 +7,7 @@
 
 .header-section {
   width: 100%;
-  height: 80px;
+  height: 68px;
   position: fixed;
   z-index: 1100;
   padding: 18px;
@@ -16,9 +16,6 @@
   .header-section .header-section::hover {
     scale: 4px;
     height: 100px; }
-
-header {
-  height: 100%; }
 
 .header-number {
   font-size: 15px; }
@@ -34,7 +31,12 @@ header {
   border: none;
   text-decoration: none;
   border-radius: 5px;
-  width: 600px; }
+  width: 600px;
+  transition: all .5s; }
+  .search__input .search__input:focus {
+    transform: scaleX(10px); }
+  .search__input .search__input::-webkit-input-placeholder {
+    color: blue; }
 
 .search-img {
   right: 0;
@@ -111,7 +113,7 @@ body {
 
 .food_section {
   position: relative;
-  top: 90px; }
+  top: 170px; }
   .food_section .food_section-info {
     width: 100%;
     margin: 0 auto;
@@ -277,17 +279,18 @@ body {
 
 .parent {
   width: 100%;
-  height: 115px;
+  height: 100px;
   overflow: hidden;
   position: fixed;
   z-index: 1000;
-  padding-top: 10px; }
+  top: 63px;
+  background: white; }
 
 .categories {
   direction: rtl;
   overflow-x: auto;
   white-space: nowrap;
-  height: 125px;
+  height: 123px;
   padding-top: 10px; }
   .categories .categories__img {
     width: 45px;
@@ -359,7 +362,7 @@ body {
   top: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000; }
+  z-index: 3000; }
   .popup .popup__content {
     border-radius: 5px;
     width: 35%;
@@ -603,6 +606,57 @@ footer {
   padding: 15px;
   position: absolute;
   left: 7px; }
+
+.shop {
+  display: none; }
+
+.header-cart {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 15px; }
+
+.active-shop {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.7); }
+
+.cartBox {
+  width: 350px;
+  background: white;
+  height: 100vh;
+  animation: open .5s; }
+
+.cart-text {
+  text-align: right;
+  float: right;
+  width: 85%;
+  font-size: 30px;
+  line-height: 12px;
+  padding: 10px 5px; }
+  .cart-text .cart-text-icon {
+    float: right;
+    padding-right: 3px;
+    padding-left: 10px; }
+  .cart-text .cart-text > i {
+    float: right; }
+
+@keyframes open {
+  0% {
+    opacity: 0;
+    width: 0%; }
+  100% {
+    opacity: 1;
+    width: 350px; } }
+
+@keyframes close {
+  0% {
+    opacity: 1;
+    width: 350px; }
+  100% {
+    opacity: 0;
+    width: 0%; } }
 
 .fullbox {
   float: right; }

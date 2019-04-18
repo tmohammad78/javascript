@@ -1,0 +1,58 @@
+.shop{
+    display: none;
+}
+.header-cart{
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom:15px;
+}
+.active-shop{
+    display: block;
+    position: fixed;
+    width: 100%;
+    height:100vh;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.7);
+}
+.cartBox{
+    width: 350px;
+    background: white;
+    height: 100vh;
+    animation: open .5s;
+}
+.cart-text{
+    text-align: right;
+    float: right;
+    width: 85%;
+    font-size: 30px;
+    line-height: 12px;
+    padding: 10px 5px;
+  .cart-text-icon{
+      float: right;
+      padding-right: 3px;
+      padding-left: 10px;
+
+  }
+    .cart-text > i {
+        float :right;
+    }
+}
+@keyframes open{
+    0%{
+        opacity: 0;
+        width: 0px;
+    }
+    100%{
+        opacity: 1;
+        width: 350px;
+    }
+}
+@keyframes close{
+    0%{
+        opacity: 1;
+        width: 350px;
+    }
+    100%{
+        opacity: 0;
+        width: 0px;
+    }
+}
