@@ -87,6 +87,7 @@ $(document).ready(function() {
             itemsBox.join("") +
             `</div>`;
         }
+
       } else {
         const tpl_foodElse = tmpl($("#template-foodElse").html());
         let image = data.sub[i].img
@@ -108,6 +109,8 @@ $(document).ready(function() {
       }
     }
     $wrapper.append(html);
+    updateCart();
+
   }
   //start rendering popup
   function renderPopup(data) {
@@ -187,7 +190,6 @@ $(document).ready(function() {
     $holder.find(".quantity").text(qty);
 
     updateCart();
-
     // console.log(cart);
     // cart[id] = qty;
     // $holder.find(".quantity").text(qty);
@@ -201,6 +203,8 @@ $(document).ready(function() {
   });
 
   function updateCart() {
+    
+  $('.btn-showCount').on("click",function(){
     const foodList = [];
     const cart_arr = [];
     for (let [key, value] of Object.entries(cart)) {
@@ -215,10 +219,33 @@ $(document).ready(function() {
         cart_arr.push(key + ":" + value);
       }
     }
-    const tpl_cart = tmpl($("#template-cart").html());
-    $("#cart").html(tpl_cart({ foodList }));
+    const tpl_Cart = tmpl($("#template-Cart").html());
+    $("#cart2").html(tpl_Cart({ foodList }));
     sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
-  }
+    $('.shop').addClass("active-shop").html();
+  });
+}
+
+
+
+  //   const foodList = [];
+  //   const cart_arr = [];
+  //   for (let [key, value] of Object.entries(cart)) {
+  //     const food = getFood(key);
+  //     if (value !== 0) {
+  //       foodList.push({
+  //         id: key,
+  //         title: food.title, // food.title
+  //         price: food.price, // food.price
+  //         quantity: value
+  //       });
+  //       cart_arr.push(key + ":" + value);
+  //     }
+  //   }
+  //   const tpl_cart = tmpl($("#template-cart").html());
+  //   $("#cart").html(tpl_cart({ foodList }));
+  //   sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
+  // }
 
   function getFood(id) {
     let food = null;
@@ -299,25 +326,14 @@ $(document).ready(function() {
   });
 
 
-  $('.btn-showCount').on("click",function(){
-    const tpl_showCart = tmpl($("#template-Cart").html());
-    //Add to html
-    const itemCart = tpl_showCart({
-    });
-    $('.shop').addClass("active-shop").html(itemCart);
-  });
   $('.shop').on("click", ".anc-close", function() {
     // $('.active-shop').css({
     //   "animation":'close .5s'
     // }); 
     $('.shop').addClass('close').removeClass('active-shop');
   });
-
-
-  //scrollwatcher
-  
+//scrollwatcher
   $(window).on("resize", onResize)
-
   function onResize(){
     itemsTop = [];
     $wrapper.find("h1").each((i, h1) => {
@@ -325,10 +341,6 @@ $(document).ready(function() {
       itemsTop.push(parseInt(top));
     });
   }
-
-
-
-
   $(window).scroll(function() {
     if (!scrolling) {
       var scrollposition = $(window).scrollTop();
