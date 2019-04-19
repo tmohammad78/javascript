@@ -68,8 +68,6 @@
   .btn-minus {
     display: inline;
   }
-  .btn-plus{
-  }
   .btn-cart {
     @include btn($color-primary, white);
   }

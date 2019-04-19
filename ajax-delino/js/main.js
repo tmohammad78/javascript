@@ -68,12 +68,7 @@ $(document).ready(function() {
         if (subData) {
           const tpl_Food = tmpl($("#template-food").html());
           const itemsBox = subData.map((item, i) => {
-            const image = item.img
-              ? '<img  class="food_section-category__img" src="' +
-                item.img.replace("#SIZEOFIMAGE#", "280x175") +
-                '"/>'
-              : "";
-
+            const image = item.img ? '<img  class="food_section-category__img" src="' + item.img.replace("#SIZEOFIMAGE#", "280x175") + '"/>' : "";
             return tpl_Food({
               items: JSON.stringify(item),
               image: image,
@@ -83,14 +78,8 @@ $(document).ready(function() {
               quantity: cart[item.id] || ""
             });
           });
-          html +=
-            ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${
-              data.id
-            }">` +
-            itemsBox.join("") +
-            `</div>`;
+          html += ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${ data.id }">` + itemsBox.join("") + `</div>`;
         }
-
       } else {
         const tpl_foodElse = tmpl($("#template-foodElse").html());
         let image = data.sub[i].img
@@ -191,20 +180,37 @@ $(document).ready(function() {
 
     cart[id] = qty;
     $holder.find(".quantity").text(qty);
-
     updateCart();
-    // console.log(cart);
-    // cart[id] = qty;
-    // $holder.find(".quantity").text(qty);
-    // console.log(cart);
-    // objectCart = Object.assign({}, cart);
-    // console.log(objectCart[id]);
-    // getFood(id);
-
-    // for(var i=0; i<Object.keys(objectCart).length;i++)
-    // updateCart(objectCart[i],id);
   });
 
+
+  $('.shop').on("click", ".quantity-holder button", e => {
+    e.preventDefault();
+    const $btn = $(e.target).closest("button");
+    const $holder = $btn.parent();
+    const id = $btn.closest(".itemOrder").data("food-shop");
+    // const title = $btn.closest(".food_section-category").data("food").title;
+    // const price = $btn.closest(".food_section-category").data("food").price;
+    let qty = id ? cart[parseInt(id)] || 0 : 0;
+    switch ($btn.data("cmd")) {
+      case "increase":
+        qty++;
+        $holder.addClass("selected");
+        break;
+      case "decrease":
+        qty--;
+        if (qty < 1) {
+          //console.log(true);
+          $(".popup__content").removeClass("selected");
+          $holder.removeClass("selected");
+        }
+        break;
+    }
+
+    cart[id] = qty;
+    $holder.find(".quantity").text(qty);
+    updateCart();
+  });
   function updateCart() {    
   $('.btn-showCount').on("click",function(){
     const foodList = [];
@@ -213,6 +219,8 @@ $(document).ready(function() {
     for (let [key, value] of Object.entries(cart)) {
       const food = getFood(key);
       // let number += food.price;
+      // quantity: cart[id] || 0
+
       number=number + food.price;
       if (value !== 0) {
         foodList.push({
@@ -224,8 +232,7 @@ $(document).ready(function() {
         cart_arr.push(key + ":" + value);
       }
       console.log(number);
-    }
-  
+    }  
     const tpl_Cart = tmpl($("#template-Cart").html());
     // calcutePrice(cart);
     $("#cart2").html(tpl_Cart({ foodList }));

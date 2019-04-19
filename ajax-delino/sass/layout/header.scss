@@ -1,38 +1,32 @@
 .header-section{
+    position: fixed;
+    z-index: 4000;
     width: 100%;
     height: 68px;
-    position: fixed;
-    z-index: 1100;
-    padding: 18px;
-    text-align: center;
     background: darkkhaki;
-    .header-section::hover{
-        scale: 4px;
-        height: 100px;
-    }
+    padding: 15px 0px;
 }
 .header-number{
     font-size: 15px;
 }
 .search{
-    direction: rtl;
-    display: inline-block;
+    text-align: center;
+    direction:rtl;
 }
 .search__input{
     font-size: 24px;
     padding: 5px 10px;
     outline: none;
     border: none;
-    text-decoration: none;
     border-radius: 5px;
     width:600px;
-    transition: all .5s;
-    .search__input:focus{
-        transform: scaleX(10px);
-    }
-    .search__input::-webkit-input-placeholder{
-        color:blue;
-    }
+    transition: all .4s;
+}
+input:focus{
+    transform:scaleX(1.1);
+}
+input::-webkit-input-placeholder{
+    color:rgb(175, 175, 175);
 }
 .search-img{
     right: 0;
@@ -40,7 +34,11 @@
     color: grey;
 }
 @media only screen and (max-width: 600px) {
+    input:focus{
+        transform:none;
+    }
     .header-section{
+        padding: 12px 0px;
         width: 100%;
         background: darkkhaki;
     }
@@ -48,8 +46,12 @@
         font-size: 15px;
     }
     .search{
+        text-align: right;
         direction:rtl;
-        display: inline-block;
+    }
+    .header{
+        overflow: auto;
+        padding: 15px 2px;
     }
     .search__input{
         font-size: 24px;
@@ -58,7 +60,44 @@
         border: none;
         text-decoration: none;
         border-radius: 5px;
-        width:600px;
+        width:78%;
+        transition: all .5s;
+        .search__input:focus{
+            transform: scaleX(10px);
+        }
+        .search__input::-webkit-input-placeholder{
+            color:blue;
+        }
+    }
+}
+@media only screen and (max-width: 340px) {
+    input:focus{
+        transform:none;
+    }
+    .header-section{
+        padding: 12px 0px;
+        width: 100%;
+        background: darkkhaki;
+    }
+    .header-number{
+        font-size: 15px;
+    }
+    .search{
+        text-align: right;
+        direction:rtl;
+    }
+    .header{
+        overflow: auto;
+        padding: 15px 2px;
+    }
+    .search__input{
+        font-size: 24px;
+        padding: 5px 10px;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        border-radius: 5px;
+        width:70%;
         transition: all .5s;
         .search__input:focus{
             transform: scaleX(10px);

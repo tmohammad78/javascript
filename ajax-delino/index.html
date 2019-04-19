@@ -18,7 +18,6 @@
     <!-- <div class="orders" id="cart"></div> -->
     <div class="fullbox">
         <div class="header-section">
-            <header>
               <button class="btn btn-showCount">                      
                 <i class="fas fa-shopping-cart"></i>
                 <span class="header-number"></span>
@@ -27,7 +26,6 @@
                   <img class="search-img" src="./img/search.svg" alt="search">
                   <input type="text" class="search__input" placeholder="جستجوی غذا">
                 </div>
-            </header>
           </div>
       <div class="parent">
         <div class="categories"></div>
@@ -156,17 +154,18 @@
               </div>
           </header>
           <%for(var i=0; i< foodList.length; i++){%>
-            <div class="itemOrder">
-              <div class="orderNumbers">
-                <span><%=foodList[i].quantity%></span>
-              </div>
+            <div class="itemOrder" data-food-shop="<%=foodList[i].id%>">
+              <div class="quantity-holder <%=foodList[i].quantity> 0 ? 'selected' : '' %>" data-buy="buyfood">
+                    <button class="btn-plus" data-cmd="increase"><i class="fas fa-plus"></i></button>
+                    <span class="quantity"><%=foodList[i].quantity%></span>
+                    <button class="btn-minus" data-cmd="decrease"><i class="fas fa-minus"></i></button>
+                </div>
               <div class="orderFood">
                 <h3><%=foodList[i].title%></h3>
                 <small><%=foodList[i].price%></small>
               </div>
             </div>
           <%}%>
-
         </div>
     </script>
     <!-- cart -->
