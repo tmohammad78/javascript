@@ -68,6 +68,8 @@
   .btn-minus {
     display: inline;
   }
+  .btn-plus{
+  }
   .btn-cart {
     @include btn($color-primary, white);
   }
@@ -81,6 +83,9 @@
   @include btn(transparent, black);
   cursor: pointer;
   font-size: 23px;
+}
+.close-cart{
+  color: white;
 }
 .btn-outline-white {
   @include btn-outline($color-white, $color-white);

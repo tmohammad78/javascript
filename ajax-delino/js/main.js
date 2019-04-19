@@ -219,9 +219,8 @@ $(document).ready(function() {
           id: key,
           title: food.title, // food.title
           price:helper.currancy(food.price), // food.price
-          quantity: value,
-          fullCost:number
-        });
+          quantity: value
+          });
         cart_arr.push(key + ":" + value);
       }
       console.log(number);

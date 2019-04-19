@@ -2,8 +2,11 @@
     display: none;
 }
 .header-cart{
+    padding-top: 9px;
     border-bottom: 1px solid #eeeeee;
     padding-bottom:15px;
+    background:linear-gradient(-60deg,#ef4123,#ef2379);
+    color: white;
 }
 .active-shop{
     display: block;
@@ -30,7 +33,6 @@
       float: right;
       padding-right: 3px;
       padding-left: 10px;
-
   }
     .cart-text > i {
         float :right;
@@ -39,6 +41,7 @@
 .orderFood{
     direction: rtl;
 }
+
 .orderNumbers{
 }
 .itemOrder{
@@ -63,5 +66,24 @@
     100%{
         opacity: 0;
         width: 0px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .cartBox{
+        width: 100%;
+        transition: open .5s;
+    }
+    @keyframes open{
+        0%{
+            opacity: 0;
+            width: 0px;
+        }
+        100%{
+            opacity: 1;
+            width: 100%;
+        }
+    }
+    .itemOrder{
+        font-size: 15px;
     }
 }

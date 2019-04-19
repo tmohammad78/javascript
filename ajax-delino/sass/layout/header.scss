@@ -39,3 +39,32 @@
     width: 15px;
     color: grey;
 }
+@media only screen and (max-width: 600px) {
+    .header-section{
+        width: 100%;
+        background: darkkhaki;
+    }
+    .header-number{
+        font-size: 15px;
+    }
+    .search{
+        direction:rtl;
+        display: inline-block;
+    }
+    .search__input{
+        font-size: 24px;
+        padding: 5px 10px;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        border-radius: 5px;
+        width:600px;
+        transition: all .5s;
+        .search__input:focus{
+            transform: scaleX(10px);
+        }
+        .search__input::-webkit-input-placeholder{
+            color:blue;
+        }
+    }
+}
