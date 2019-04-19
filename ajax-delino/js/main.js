@@ -3,6 +3,7 @@ $(document).ready(function() {
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
   let fullOrder=0;
+  let cost=[];
   let delinoData,
     CART_NAME = "cart";
   (cart = {}), (itemsTop = []), (scrolling = false);
@@ -17,9 +18,12 @@ $(document).ready(function() {
       let item = node.split(":");
       cart[item[0]] = item[1];
       fullOrder +=parseInt(item[1]);
+      // console.log(fullOrder);
     });
-
+    // console.log(fullOrder);
+    console.log(cart);
   }
+  $('.header-number').text(fullOrder);
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
@@ -76,6 +80,7 @@ $(document).ready(function() {
               price: helper.currancy(item.price),
               quantity: cart[item.id] || ""
             });
+            debug
           });
           html += ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${ data.id }">` + itemsBox.join("") + `</div>`;
         }
@@ -100,7 +105,7 @@ $(document).ready(function() {
       }
     }
     $wrapper.append(html);
-
+    updateCart();
   }
   //start rendering popup
   function renderPopup(data) {
@@ -183,6 +188,7 @@ $(document).ready(function() {
 
   $('.shop').on("click", ".quantity-holder button", e => {
     e.preventDefault();
+    let number;
     const $btn = $(e.target).closest("button");
     const $holder = $btn.parent();
     const id = $btn.closest(".itemOrder").data("food-shop");
@@ -207,9 +213,15 @@ $(document).ready(function() {
     }
     cart[id] = qty;
     $holder.find(".quantity").text(qty);
+    const food = getFood(id);
+    cost[id]=food.price;
+    // number=food.price*qty;
+    console.log(cost);
     updateCart();
   });
-  function updateCart() {    
+  function updateCart() {   
+    console.log("sss"); 
+    console.log(fullOrder);
   $('.btn-showCount').on("click",function(){
     const foodList = [];
     const cart_arr = [];
@@ -218,7 +230,8 @@ $(document).ready(function() {
       const food = getFood(key);
       // let number += food.price;
       // quantity: cart[id] || 0
-      number=number + food.price;
+      // number=value*food.price;
+      // console.log(number);
   
       if (value !== 0 ) {
         foodList.push({
