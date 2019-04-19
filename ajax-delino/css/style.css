@@ -679,7 +679,7 @@ footer {
   position: fixed;
   width: 100%;
   height: 100vh;
-  z-index: 3000;
+  z-index: 6000;
   background: rgba(0, 0, 0, 0.7); }
 
 .cartBox {
@@ -713,6 +713,8 @@ footer {
   0% {
     opacity: 0;
     width: 0px; }
+  50% {
+    opacity: 0; }
   100% {
     opacity: 1;
     width: 350px; } }

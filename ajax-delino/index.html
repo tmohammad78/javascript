@@ -154,7 +154,7 @@
               </div>
           </header>
           <%for(var i=0; i< foodList.length; i++){%>
-            <div class="itemOrder" data-food-shop="<%=foodList[i].id%>">
+            <div class="itemOrder" data-food-shop="<%=foodList[i].id%>" data-show="true">
               <div class="quantity-holder <%=foodList[i].quantity> 0 ? 'selected' : '' %>" data-buy="buyfood">
                     <button class="btn-plus" data-cmd="increase"><i class="fas fa-plus"></i></button>
                     <span class="quantity"><%=foodList[i].quantity%></span>

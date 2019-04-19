@@ -27,7 +27,6 @@ $(document).ready(function() {
       for (var i = 0; i < delinoData.length; i++) {
         renderFood(delinoData[i]);
       }
-      updateCart();
 
       //$(window).trigger("resize")
       onResize()
@@ -101,7 +100,6 @@ $(document).ready(function() {
       }
     }
     $wrapper.append(html);
-    updateCart();
 
   }
   //start rendering popup
@@ -150,7 +148,6 @@ $(document).ready(function() {
     }
     cart[id] = qty;
     $holder.find(".quantity").text(qty);
-
     updateCart();
   });
 
@@ -203,10 +200,11 @@ $(document).ready(function() {
           //console.log(true);
           $(".popup__content").removeClass("selected");
           $holder.removeClass("selected");
+          // $(".itemOrder").data("show",false);
+          // $(this).attr("data-show",false);
         }
         break;
     }
-
     cart[id] = qty;
     $holder.find(".quantity").text(qty);
     updateCart();
@@ -220,9 +218,9 @@ $(document).ready(function() {
       const food = getFood(key);
       // let number += food.price;
       // quantity: cart[id] || 0
-
       number=number + food.price;
-      if (value !== 0) {
+  
+      if (value !== 0 ) {
         foodList.push({
           id: key,
           title: food.title, // food.title
@@ -231,8 +229,8 @@ $(document).ready(function() {
           });
         cart_arr.push(key + ":" + value);
       }
-      console.log(number);
     }  
+    
     const tpl_Cart = tmpl($("#template-Cart").html());
     // calcutePrice(cart);
     $("#cart2").html(tpl_Cart({ foodList }));
@@ -240,6 +238,7 @@ $(document).ready(function() {
     $('.shop').addClass("active-shop").html();
   });
 }
+
 // function calcutePrice(food){
 //   const full=0;
 //   full+=food.price;
