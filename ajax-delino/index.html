@@ -17,18 +17,18 @@
     <div class="shop" id="cart2"></div>
     <!-- <div class="orders" id="cart"></div> -->
     <div class="fullbox">
-        <div class="header-section">
-              <button class="btn btn-showCount">                      
-                <i class="fas fa-shopping-cart"></i>
-                <span class="header-number"></span>
-              </button>
-              <div action="#" class="search">
-                <div class="box-input">
-                  <img class="search-img" src="./img/search.svg" alt="search">
-                  <input type="text" class="search__input" placeholder="جستجوی غذا">
-                </div>
-              </div>
+      <div class="header-section">
+        <button class="btn btn-showCount ">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="header-number"></span>
+        </button>
+        <div action="#" class="search">
+          <div class="box-input">
+            <img class="search-img" src="./img/search.svg" alt="search" />
+            <input type="text" class="search__input" placeholder="جستجوی غذا" />
           </div>
+        </div>
+      </div>
       <div class="parent">
         <div class="categories"></div>
       </div>
@@ -39,7 +39,7 @@
     <div class="modal"></div>
     <!-- its for showing food -->
     <script type="text/html" id="template-food">
-      <div class="food_section-category col-1-of-3" data-food='<%=items%>'>
+      <div class="food_section-category food-box-holder col-1-of-3" data-food-id="<%=id%>" data-food='<%=items%>'>
           <div class="food_section-img">
               <%=image%>
           </div>
@@ -144,7 +144,7 @@
       <%}%>
     </script> -->
     <!-- cart -->
-    <script type="text/html" id="template-Cart" >
+    <script type="text/html" id="template-Cart">
       <div class="lightBox transition-all"></div>
       <div class="cartBox transition-all">
           <header class="header-cart">
@@ -157,7 +157,7 @@
               </div>
           </header>
           <%for(var i=0; i< foodList.length; i++){%>
-            <div class="itemOrder" data-food-shop="<%=foodList[i].id%>" data-show="true">
+            <div class="itemOrder food-box-holder" data-food-id="<%=foodList[i].id%>" data-show="true">
               <div class="quantity-holder <%=foodList[i].quantity> 0 ? 'selected' : '' %>" data-buy="buyfood">
                     <button class="btn-plus" data-cmd="increase"><i class="fas fa-plus"></i></button>
                     <span class="quantity"><%=foodList[i].quantity%></span>
@@ -169,6 +169,17 @@
               </div>
             </div>
           <%}%>
+
+            <div class="cart-bottom">
+              <div class="totalPrice">
+                <label for="">هزینه ی کل</label>
+                <span><%=totalPrice%></span>
+              </div>
+              <div class="finalOrder">
+                <button class="btn btn-finalOrder">نهایی کردن سفارش</button>
+              </div>
+
+            </div>
         </div>
     </script>
     <!-- cart -->

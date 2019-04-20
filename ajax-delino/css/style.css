@@ -26,7 +26,7 @@
   outline: none;
   border: none;
   width: 90%;
-  transition: all .4s; }
+  transition: all 0.4s; }
 
 .box-input {
   border-radius: 5px;
@@ -75,7 +75,7 @@ input::-webkit-input-placeholder {
     text-decoration: none;
     border-radius: 5px;
     width: 78%;
-    transition: all .5s; }
+    transition: all 0.5s; }
     .search__input .search__input:focus {
       transform: scaleX(10px); }
     .search__input .search__input::-webkit-input-placeholder {
@@ -104,7 +104,7 @@ input::-webkit-input-placeholder {
     text-decoration: none;
     border-radius: 5px;
     width: 70%;
-    transition: all .5s; }
+    transition: all 0.5s; }
     .search__input .search__input:focus {
       transform: scaleX(10px); }
     .search__input .search__input::-webkit-input-placeholder {
@@ -681,6 +681,12 @@ footer {
   position: absolute;
   left: 7px; }
 
+.btn-finalOrder {
+  font-size: 20px;
+  border-radius: 5px;
+  background: linear-gradient(-60deg, #ef4123, #ef2379);
+  padding: 11px 80px; }
+
 .shop {
   position: fixed;
   left: 0;
@@ -740,6 +746,16 @@ footer {
 .orderFood {
   direction: rtl; }
 
+.totalPrice {
+  padding: 15px; }
+  .totalPrice label {
+    float: right; }
+
+.finalOrder {
+  border-top: 1px solid #eeeeee;
+  padding-top: 10px;
+  text-align: center; }
+
 .itemOrder {
   border-bottom: 1px solid #eeeeee;
   padding: 5px 10px; }
@@ -753,6 +769,8 @@ footer {
     width: 0px; } }
 
 @media only screen and (max-width: 600px) {
+  .totalPrice {
+    font-size: 20px; }
   .cartBox {
     width: 100%; }
   @keyframes open {

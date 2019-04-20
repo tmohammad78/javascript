@@ -1,33 +1,33 @@
 *,
 *::after,
-*::before{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html{
+html {
+  font-size: 100%;
+  @include respond(tab-land) {
+    font-size: 56.25%;
+  }
+  @include respond(tab-port) {
+    font-size: 50%;
+  }
+  @include respond(big-desktop) {
     font-size: 100%;
-    @include respond(tab-land){
-      font-size: 56.25%;
-    }
-    @include respond(tab-port){
-      font-size: 50%;
-    }
-    @include respond(big-desktop){
-      font-size: 100%;
-    }
+  }
 }
 body {
   box-sizing: border-box;
-  @include respond(tab-port){
+  @include respond(tab-port) {
     padding: 0;
   }
-} 
-.clearfix{
-    overflow: auto;
+}
+.clearfix {
+  overflow: auto;
 }
 
-.transition-all{
+.transition-all {
   transition: all 250ms ease;
 }
 //for change scroll ,fun :)
