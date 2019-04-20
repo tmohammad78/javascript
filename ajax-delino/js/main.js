@@ -3,7 +3,6 @@ $(document).ready(function() {
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
   const $shop = $(".shop");
-  let fullOrder = 0;
   let delinoData,
     CART_NAME = "cart",
     cart = {},
@@ -18,21 +17,19 @@ $(document).ready(function() {
     let cart_arr = tempCart.split("-");
     cart_arr.forEach(node => {
       let item = node.split(":");
-      cart[item[0]] = item[1];
-      // console.log(fullOrder);
+      const quantity = parseInt(item[1]);
+      if (quantity > 0) {
+        cart[item[0]] = quantity;
+      }
     });
-    console.log("sssssss");
-    console.log(fullOrder);
-    console.log(cart);
   }
 
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
-      renderCategory(delinoData);
-      for (var i = 0; i < delinoData.length; i++) {
-        renderFood(delinoData[i]);
-      }
+      renderCategory();
+      renderFoodList(true); // true: first init
+
       //$(window).trigger("resize")
       onResize();
     })
@@ -42,13 +39,13 @@ $(document).ready(function() {
       }
     });
 
-  function renderCategory(data) {
-    let html = "";
+  function renderCategory() {
+    let html = "",
+      data = delinoData;
     if (data) {
       data.sort(function(a, b) {
         return a.index - b.index;
       });
-      //console.log(data);
       const tpl_catItem = tmpl($("#template-category").html());
       const itemMenue = data.map((item, i) => {
         return tpl_catItem({
@@ -62,67 +59,84 @@ $(document).ready(function() {
     $categoryWrapper.html(html);
   }
 
-  function renderFood(data) {
-    let html =
-      '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
-    for (var i = 0; i < data.sub.length; i++) {
-      if (data.sub[i].id == 0) {
-        let id = data.sub[i].id;
-        const subData = data.sub[i].food;
-        if (subData) {
-          const tpl_Food = tmpl($("#template-food").html());
-          const itemsBox = subData.map((item, i) => {
-            const image = item.img
-              ? '<img  class="food_section-category__img" src="' +
-                item.img.replace("#SIZEOFIMAGE#", "280x175") +
-                '"/>'
-              : "";
-            return tpl_Food({
-              id: item.id,
-              items: JSON.stringify(item),
-              image: image,
-              title: item.title,
-              ingredient: helper.truncate(item.ingredient),
-              price: helper.currancy(item.price),
-              quantity: cart[item.id] || ""
+  function renderFoodList(first = false) {
+    for (var catIndex = 0; catIndex < delinoData.length; catIndex++) {
+      const data = delinoData[catIndex];
+      console.log(data)
+      if (!first) {
+        //debugger
+        $wrapper.html("")
+        //return;
+      }
+      let html =
+        '<h1 style="font-size: 20px; text-align: center">' +
+        data.title +
+        "</h1>";
+      const tpl_Food = tmpl($("#template-food").html());
+      const tpl_foodElse = tmpl($("#template-foodElse").html());
+      for (var i = 0; i < data.sub.length; i++) {
+        if (data.sub[i].id == 0) {
+          const subData = data.sub[i].food;
+          if (subData) {
+            const itemsBox = [];
+            subData.forEach((item, i) => {
+              const image = item.img
+                ? '<img  class="food_section-category__img" src="' +
+                  item.img.replace("#SIZEOFIMAGE#", "280x175") +
+                  '"/>'
+                : "";
+              if (first) {
+                item.visible = true;
+              }
+              console.log(item.title,  item.visible)
+              itemsBox.push(tpl_Food({
+                id: item.id,
+                //items: JSON.stringify(item),
+                image,
+                title: item.title,
+                ingredient: helper.truncate(item.ingredient),
+                price: helper.currancy(item.price),
+                quantity: cart[item.id] || "",
+                visible: item.visible
+              }))
             });
-            debug;
+
+            html +=
+              ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${
+                data.id
+              }">` +
+              itemsBox.join("") +
+              `</div>`;
+          }
+        } else {
+          return;
+          let image = data.sub[i].img
+            ? '<img  class="food_section-category__img" src="' +
+              data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") +
+              '"/>'
+            : "";
+          const id = data.sub[i].id;
+          const quantity = "";
+          const itemFood = tpl_foodElse({
+            id: id,
+            image: image,
+            title: data.sub[i].title,
+            priceLabel: helper.truncate(data.sub[i].priceLabel),
+            currancy: helper.currancy(data.sub[i].priceLabel || 0),
+            quantity: 0, //quantity
+            visible: false
           });
-          html +=
-            ` <div style="border: 1px solid #eee" class="food_section-infobox" id="box-${
-              data.id
-            }">` +
-            itemsBox.join("") +
-            `</div>`;
+          html += itemFood;
         }
-      } else {
-        const tpl_foodElse = tmpl($("#template-foodElse").html());
-        let image = data.sub[i].img
-          ? '<img  class="food_section-category__img" src="' +
-            data.sub[i].img.replace("#SIZEOFIMAGE#", "280x175") +
-            '"/>'
-          : "";
-        const id = data.sub[i].id;
-        const quantity = "";
-        const itemFood = tpl_foodElse({
-          id: id,
-          image: image,
-          title: data.sub[i].title,
-          priceLabel: helper.truncate(data.sub[i].priceLabel),
-          currancy: helper.currancy(data.sub[i].priceLabel || 0),
-          quantity: 0 //quantity
-        });
-        html += itemFood;
+        $wrapper.append(html);
       }
     }
-    $wrapper.append(html);
+
     updateCart();
   }
 
   function renderPopup(data) {
-    //console.log(data);
     let id = data.id;
-    //console.log(id);
     let image = data.img
       ? '<img  class="imageFood"" src="' +
         data.img.replace("#SIZEOFIMAGE#", "560x350") +
@@ -165,7 +179,6 @@ $(document).ready(function() {
         case "decrease":
           qty--;
           if (qty < 1) {
-            //console.log(true);
             $(".popup__content").removeClass("selected");
             $holder.removeClass("selected");
           }
@@ -173,18 +186,14 @@ $(document).ready(function() {
       }
       cart[id] = qty;
 
-      //$holder.find(".quantity").text(qty);
       $('.food-box-holder[data-food-id="' + id + '"]')
         .find(".quantity")
         .text(qty);
-      // $('.header-number').text(fullOrder);
     }
-
-    console.log("sss");
-    console.log(fullOrder);
     const foodList = [];
     const cart_arr = [];
-    let totalPrice = 0;
+    let totalPrice = 0,
+      totalItems = 0;
     for (let [key, quantity] of Object.entries(cart)) {
       const food = getFood(key);
       if (quantity !== 0) {
@@ -196,13 +205,16 @@ $(document).ready(function() {
         });
         cart_arr.push(key + ":" + quantity);
         totalPrice += food.price * quantity;
+        totalItems += quantity;
       }
     }
     const tpl_Cart = tmpl($("#template-Cart").html());
-    // calcutePrice(cart);
     $("#cart2").html(
       tpl_Cart({ foodList, totalPrice: helper.currancy(totalPrice) })
     );
+
+    $("#cart-count").text(totalItems || "");
+
     sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
   }
 
@@ -226,7 +238,6 @@ $(document).ready(function() {
                 break;
               }
             }
-            // console.log(subData.id);
           }
         } else {
           // loop
@@ -317,6 +328,38 @@ $(document).ready(function() {
     });
   }
 
+  const $searchInput = $('input[name="search-input"]').on("keyup", e => {
+    const text = $searchInput.val();
+    console.log(text);
+
+    //  make food visible
+    for (var i = 0; i < delinoData.length; i++) {
+      for (var j = 0; j < delinoData[i].sub.length; j++) {
+        if (delinoData[i].sub[j].id == 0) {
+          const subData = delinoData[i].sub[j].food;
+          if (subData) {
+            for (var z = 0; z < subData.length; z++) {
+              if (text) {
+                if (subData[z].title.indexOf(text) > -1) {
+                  subData[z].visible = true;
+                  console.log(subData[z].title);
+                } else {
+                  subData[z].visible = false;
+                }
+              } else {
+                subData[z].visible = true;
+              }
+            }
+          }
+        } else {
+          // loop
+        }
+      }
+    }
+
+    renderFoodList();
+  });
+
   $(window).scroll(function() {
     if (!scrolling) {
       var scrollposition = $(window).scrollTop();
@@ -328,7 +371,7 @@ $(document).ready(function() {
         }
       }
       const activeBox = delinoData[activeBoxIndex];
-      console.log(activeBox.id);
+      // console.log(activeBox.id);
       actievCategory(activeBox.id);
     }
   });
@@ -341,65 +384,3 @@ $(document).ready(function() {
       .removeClass("active-box");
   }
 });
-
-// cart
-
-// e.preventDefault();
-// let number;
-// const $btn = $(e.target).closest("button");
-// const $holder = $btn.parent();
-// const id = $btn.closest(".itemOrder").data("food-shop");
-// // const title = $btn.closest(".food_section-category").data("food").title;
-// // const price = $btn.closest(".food_section-category").data("food").price;
-// let qty = id ? cart[parseInt(id)] || 0 : 0;
-// switch ($btn.data("cmd")) {
-//   case "increase":
-//     qty++;
-//     $holder.addClass("selected");
-//     break;
-//   case "decrease":
-//     qty--;
-//     if (qty < 1) {
-//       //console.log(true);
-//       $(".popup__content").removeClass("selected");
-//       $holder.removeClass("selected");
-//       // $(".itemOrder").data("show",false);
-//       // $(this).attr("data-show",false);
-//     }
-//     break;
-// }
-// cart[id] = qty;
-// $holder.find(".quantity").text(qty);
-// const food = getFood(id);
-// cost[id] = food.price;
-// // number=food.price*qty;
-// console.log(cost);
-
-//its for show count by click btn in card
-// $wrapper.on("click", ".quantity-holder button", e => {
-//   e.preventDefault();
-//   const $btn = $(e.target).closest("button");
-//   const $holder = $btn.parent();
-//   const id = $btn.closest(".food_section-category").data("food").id;
-//   const title = $btn.closest(".food_section-category").data("food").title;
-//   const price = $btn.closest(".food_section-category").data("food").price;
-//   let qty = id ? cart[parseInt(id)] || 0 : 0;
-//   switch ($btn.data("cmd")) {
-//     case "increase":
-//       qty++;
-//       $holder.addClass("selected");
-//       break;
-//     case "decrease":
-//       qty--;
-//       if (qty < 1) {
-//         //console.log(true);
-//         $(".popup__content").removeClass("selected");
-//         $holder.removeClass("selected");
-//       }
-//       break;
-//   }
-
-//   cart[id] = qty;
-//   $holder.find(".quantity").text(qty);
-//   updateCart();
-// });

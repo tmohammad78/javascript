@@ -783,11 +783,9 @@ footer {
   .itemOrder {
     font-size: 15px; } }
 
-.fullbox {
-  float: right; }
-  @media only screen and (max-width: 600px) {
-    .fullbox {
-      width: 100%; } }
+@media only screen and (max-width: 600px) {
+  .fullbox {
+    width: 100%; } }
 
 .sellbox {
   width: 30%;
