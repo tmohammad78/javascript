@@ -2,6 +2,7 @@ $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
+  const $shop=$('.shop');
   let fullOrder = 0;
   let cost = [];
   let delinoData,
@@ -23,25 +24,24 @@ $(document).ready(function() {
     // console.log(fullOrder);
     console.log(cart);
   }
-  
+
   $(".header-number").text(fullOrder);
 
-  $.get(`https://api.delino.com/restaurant/menu/${key}`)
-    .done(result => {
-      delinoData = result.categories;
-      renderCategory(delinoData);
-      for (var i = 0; i < delinoData.length; i++) {
-        renderFood(delinoData[i]);
-      }
-
-      //$(window).trigger("resize")
-      onResize();
-    })
-    .fail(xhr => {
-      if (xhr.status == 404) {
-        alert("not found");
-      }
-    });
+$.get(`https://api.delino.com/restaurant/menu/${key}`)
+  .done(result => {
+    delinoData = result.categories;
+    renderCategory(delinoData);
+    for (var i = 0; i < delinoData.length; i++) {
+      renderFood(delinoData[i]);
+    }
+    //$(window).trigger("resize")
+    onResize();
+  })
+  .fail(xhr => {
+    if (xhr.status == 404) {
+      alert("not found");
+    }
+  });
 
 function renderCategory(data) {
   let html = "";
@@ -145,72 +145,40 @@ function renderPopup(data) {
     }
 }
 
-
 $modal.on("click", ".quantity-holder button", e => {
   e.preventDefault();
   const $btn = $(e.target).closest("button");
   const $holder = $btn.parent();
-  const id = $btn.closest(".popup__content").data("food-id");
-  let qty = id ? cart[parseInt(id)] || 0 : 0;
-  //debugger
-  switch ($btn.data("cmd")) {
-    case "increase":
-      qty++;
-      $holder.addClass("selected");
-      break;
-    case "decrease":
-      qty--;
-      if (qty < 1) {
-        //console.log(true);
-        $(".popup__content").removeClass("selected");
-        $holder.removeClass("selected");
-      }
-      break;
-  }
-  cart[id] = qty;
-  $holder.find(".quantity").text(qty);
+  const data=$btn.data("cmd");
+  const  id = $btn.closest(".popup__content").data("food-id");
+  checking(id,$holder,data);
   updateCart();
 });
 
-//its for show count by click btn in card
 $wrapper.on("click", ".quantity-holder button", e => {
   e.preventDefault();
   const $btn = $(e.target).closest("button");
   const $holder = $btn.parent();
+  const data=$btn.data("cmd");
   const id = $btn.closest(".food_section-category").data("food").id;
-  const title = $btn.closest(".food_section-category").data("food").title;
-  const price = $btn.closest(".food_section-category").data("food").price;
-  let qty = id ? cart[parseInt(id)] || 0 : 0;
-  switch ($btn.data("cmd")) {
-    case "increase":
-      qty++;
-      $holder.addClass("selected");
-      break;
-    case "decrease":
-      qty--;
-      if (qty < 1) {
-        //console.log(true);
-        $(".popup__content").removeClass("selected");
-        $holder.removeClass("selected");
-      }
-      break;
-  }
-
-  cart[id] = qty;
-  $holder.find(".quantity").text(qty);
+  checking(id,$holder,data);
   updateCart();
 });
 
-$(".shop").on("click", ".quantity-holder button", e => {
+$shop.on("click", ".quantity-holder button", e => {
   e.preventDefault();
-  let number;
   const $btn = $(e.target).closest("button");
   const $holder = $btn.parent();
+  const data=$btn.data("cmd");
   const id = $btn.closest(".itemOrder").data("food-shop");
-  // const title = $btn.closest(".food_section-category").data("food").title;
-  // const price = $btn.closest(".food_section-category").data("food").price;
+  checking(id,$holder,data);
+   updateCart();
+});
+
+function checking(id,$holder,data){
+  let number;
   let qty = id ? cart[parseInt(id)] || 0 : 0;
-  switch ($btn.data("cmd")) {
+  switch (data) {
     case "increase":
       qty++;
       $holder.addClass("selected");
@@ -221,82 +189,48 @@ $(".shop").on("click", ".quantity-holder button", e => {
         //console.log(true);
         $(".popup__content").removeClass("selected");
         $holder.removeClass("selected");
-        // $(".itemOrder").data("show",false);
-        // $(this).attr("data-show",false);
       }
       break;
   }
   cart[id] = qty;
   $holder.find(".quantity").text(qty);
-  const food = getFood(id);
-  cost[id] = food.price;
-  // number=food.price*qty;
-  console.log(cost);
-  updateCart();
-});
+}
 
 function updateCart() {
   console.log("sss");
   console.log(fullOrder);
-  $(".btn-showCount").on("click", function() {
-    const foodList = [];
-    const cart_arr = [];
-    let number = 0;
-    for (let [key, value] of Object.entries(cart)) {
-      const food = getFood(key);
-      // let number += food.price;
-      // quantity: cart[id] || 0
-      // number=value*food.price;
-      // console.log(number);
-
-      if (value !== 0) {
-        foodList.push({
-          id: key,
-          title: food.title, // food.title
-          price: helper.currancy(food.price), // food.price
-          quantity: value
-        });
-        cart_arr.push(key + ":" + value);
-      }
+  const foodList = [];
+  const cart_arr = [];
+  let number = 0;
+  for (let [key, value] of Object.entries(cart)) {
+    const food = getFood(key);
+    // let number += food.price;
+    // quantity: cart[id] || 0
+    // number=value*food.price;
+    // console.log(number);
+    if (value !== 0) {
+      foodList.push({
+        id: key,
+        title: food.title, // food.title
+        price: helper.currancy(food.price), // food.price
+        quantity: value
+      });
+      cart_arr.push(key + ":" + value);
     }
-
-    const tpl_Cart = tmpl($("#template-Cart").html());
-    // calcutePrice(cart);
-    $("#cart2").html(tpl_Cart({ foodList }));
-    setTimeout(()=>{
-      $("#cart2").addClass("active-shop");
-    },50)
-    sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
-  });
-}
-function renderCart(){
-
+    //console.log("ddd:", pp)
+  }
+  const tpl_Cart = tmpl($("#template-Cart").html());
+  // calcutePrice(cart);
+  $("#cart2").html(tpl_Cart({ foodList }));
+  sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
 }
 
-  // function calcutePrice(food){
-  //   const full=0;
-  //   full+=food.price;
-  // return full;
-  //   }
-
-  //   const foodList = [];
-  //   const cart_arr = [];
-  //   for (let [key, value] of Object.entries(cart)) {
-  //     const food = getFood(key);
-  //     if (value !== 0) {
-  //       foodList.push({
-  //         id: key,
-  //         title: food.title, // food.title
-  //         price: food.price, // food.price
-  //         quantity: value
-  //       });
-  //       cart_arr.push(key + ":" + value);
-  //     }
-  //   }
-  //   const tpl_cart = tmpl($("#template-cart").html());
-  //   $("#cart").html(tpl_cart({ foodList }));
-  //   sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
-  // }
+$(".btn-showCount").on("click", function() {
+  setTimeout(()=>{
+    $("#cart2").addClass("active-shop");
+  },50)
+  updateCart();
+});
 
 function getFood(id) {
   let food = null;
@@ -427,3 +361,79 @@ function actievCategory(id) {
 }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// cart 
+
+// e.preventDefault();
+  // let number;
+  // const $btn = $(e.target).closest("button");
+  // const $holder = $btn.parent();
+  // const id = $btn.closest(".itemOrder").data("food-shop");
+  // // const title = $btn.closest(".food_section-category").data("food").title;
+  // // const price = $btn.closest(".food_section-category").data("food").price;
+  // let qty = id ? cart[parseInt(id)] || 0 : 0;
+  // switch ($btn.data("cmd")) {
+  //   case "increase":
+  //     qty++;
+  //     $holder.addClass("selected");
+  //     break;
+  //   case "decrease":
+  //     qty--;
+  //     if (qty < 1) {
+  //       //console.log(true);
+  //       $(".popup__content").removeClass("selected");
+  //       $holder.removeClass("selected");
+  //       // $(".itemOrder").data("show",false);
+  //       // $(this).attr("data-show",false);
+  //     }
+  //     break;
+  // }
+  // cart[id] = qty;
+  // $holder.find(".quantity").text(qty);
+  // const food = getFood(id);
+  // cost[id] = food.price;
+  // // number=food.price*qty;
+  // console.log(cost);
+
+
+
+
+  //its for show count by click btn in card
+// $wrapper.on("click", ".quantity-holder button", e => {
+//   e.preventDefault();
+//   const $btn = $(e.target).closest("button");
+//   const $holder = $btn.parent();
+//   const id = $btn.closest(".food_section-category").data("food").id;
+//   const title = $btn.closest(".food_section-category").data("food").title;
+//   const price = $btn.closest(".food_section-category").data("food").price;
+//   let qty = id ? cart[parseInt(id)] || 0 : 0;
+//   switch ($btn.data("cmd")) {
+//     case "increase":
+//       qty++;
+//       $holder.addClass("selected");
+//       break;
+//     case "decrease":
+//       qty--;
+//       if (qty < 1) {
+//         //console.log(true);
+//         $(".popup__content").removeClass("selected");
+//         $holder.removeClass("selected");
+//       }
+//       break;
+//   }
+
+//   cart[id] = qty;
+//   $holder.find(".quantity").text(qty);
+//   updateCart();
+// });

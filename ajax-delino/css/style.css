@@ -392,7 +392,7 @@ body {
       color: white; }
 
 .active-box {
-  border: 3px solid red;
+  border: 3px solid #ef4123;
   transform: translateY(-5%); }
 
 @media only screen and (max-width: 600px) {
@@ -407,9 +407,9 @@ body {
       width: 20%;
       display: inline-block; }
       .categories .categories__indexbox .categories__indexbox:not(:last-child) {
-        border-left: 1px solid red; }
+        border-left: 1px solid #ef4123; }
       .categories .categories__indexbox .categories__indexbox:hover {
-        border-bottom: 4px solid red; }
+        border-bottom: 4px solid #ef4123; }
     .categories .categories__img {
       display: none; }
     .categories .categories__span {
