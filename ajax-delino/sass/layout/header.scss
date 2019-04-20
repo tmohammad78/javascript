@@ -18,19 +18,28 @@
     padding: 5px 10px;
     outline: none;
     border: none;
-    border-radius: 5px;
-    width:600px;
+    width:90%;
     transition: all .4s;
 }
-input:focus{
+.box-input{
+    border-radius: 5px;
+    width: 35%;
+    margin: 0 auto;
+    background: white;
+}
+.box-input:focus{
     transform:scaleX(1.1);
 }
+// input:focus{
+//     transform:scaleX(1.1);
+// }
 input::-webkit-input-placeholder{
     color:rgb(175, 175, 175);
 }
 .search-img{
-    right: 0;
-    width: 15px;
+    float: right;
+    margin: 10px; 
+    width: 19px;
     color: grey;
 }
 @media only screen and (max-width: 600px) {
@@ -52,6 +61,13 @@ input::-webkit-input-placeholder{
     .header{
         overflow: auto;
         padding: 15px 2px;
+    }
+    .box-input{
+        margin-right: 5px;
+        border-radius: 5px;
+        width: 78%;
+        float: right;
+        background: white;
     }
     .search__input{
         font-size: 24px;

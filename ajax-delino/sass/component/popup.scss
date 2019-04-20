@@ -70,6 +70,9 @@ footer{
   overflow: hidden;
 }
 @media only screen and (max-width: 600px) {
+  .details{
+    font-size: 18px;
+  }
   .popup {
     .popup__content {
       width: 95%;

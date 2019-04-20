@@ -26,6 +26,10 @@ body {
 .clearfix{
     overflow: auto;
 }
+
+.transition-all{
+  transition: all 250ms ease;
+}
 //for change scroll ,fun :)
 // body::-webkit-scrollbar {
 //   width: 1rem;

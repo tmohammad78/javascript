@@ -82,13 +82,13 @@
   cursor: pointer;
   font-size: 23px;
 }
-.close-cart{
+.close-cart {
   color: white;
 }
 .btn-outline-white {
   @include btn-outline($color-white, $color-white);
 }
-.btn-showCount{
+.btn-showCount {
   border-radius: 5px;
   padding: 15px;
   position: absolute;
