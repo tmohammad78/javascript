@@ -717,9 +717,8 @@ footer {
   transform: translate(-110%, 0); }
   .active-shop .cartBox {
     transform: translate(0, 0); }
-
-.close-animation {
-  transform: translate(-110%, 0); }
+  .close-animation .cartBox {
+    transform: translate(-110%, 0); }
 
 .lightBox {
   position: absolute;
@@ -731,6 +730,8 @@ footer {
   background-color: rgba(0, 0, 0, 0.7); }
   .active-shop .lightBox {
     opacity: 1; }
+  .close-animation .lightBox {
+    opacity: 0; }
 
 .cart-text {
   text-align: right;

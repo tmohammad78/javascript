@@ -32,9 +32,9 @@
   .active-shop & {
     transform: translate(0, 0);
   }
-}
-.close-animation {
-  transform: translate(-110%, 0);
+  .close-animation &{
+    transform: translate(-110%, 0);
+  }
 }
 
 .lightBox {
@@ -48,6 +48,10 @@
 
   .active-shop & {
     opacity: 1;
+  }
+
+  .close-animation &{
+    opacity: 0;
   }
 }
 .cart-text {

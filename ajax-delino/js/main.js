@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
@@ -69,7 +67,10 @@ $(document).ready(function() {
     }
     for (var catIndex = 0; catIndex < delinoData.length; catIndex++) {
       const data = delinoData[catIndex];
-      let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
+      let html =
+        '<h1 style="font-size: 20px; text-align: center">' +
+        data.title +
+        "</h1>";
       const tpl_Food = tmpl($("#template-food").html());
       const tpl_foodElse = tmpl($("#template-foodElse").html());
       for (var i = 0; i < data.sub.length; i++) {
@@ -217,7 +218,9 @@ $(document).ready(function() {
     if (!totalItems) {
       $(".totalPrice").remove();
       $(".finalOrder").remove();
-      $(".cart-bottom").html(`<div><img class="img-free-cart"  src="./img/shopping-cart.svg" alt="cart"><div style="text-align:center" > سبد شما خالی است</div></div>`);
+      $(".cart-bottom").html(
+        `<div><img class="img-free-cart"  src="./img/shopping-cart.svg" alt="cart"><div style="text-align:center" > سبد شما خالی است</div></div>`
+      );
     }
     $("#cart-count").text(totalItems || "");
 
@@ -308,20 +311,12 @@ $(document).ready(function() {
       .addClass("selected");
   });
 
-  $(".shop").on("click", ".anc-close", function() {
-    // $('.active-shop').css({
-    //   "animation":'close .5s'
-    // });
-    $(".shop")
-      .addClass("close")
-      .removeClass("active-shop");
-  });
+  $(".shop").on("click", "[data-close-modal]", function() {
+    $("#cart2").addClass("close-animation");
 
-  $(".shop").on("click", ".lightBox", function() {
-    //$("#cart2").addClass("close-animation");
     setTimeout(() => {
-      $("#cart2").removeClass("active-shop");
-    }, 3000);
+      $("#cart2").removeClass("close-animation active-shop");
+    }, 300);
   });
 
   //scrollwatcher
@@ -340,7 +335,7 @@ $(document).ready(function() {
 
     if (text) {
       $(".parent").hide();
-      $('.food_section-infobox').css({ "border":"none" })
+      $(".food_section-infobox").css({ border: "none" });
       $(window).scrollTop(0);
     } else {
       $(".parent").show();
