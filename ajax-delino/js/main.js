@@ -2,7 +2,10 @@ $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
-  const $shop = $(".shop");
+  const $shop=$('.shop');
+  const $finalModal= $(".finalModal");
+  
+
   let delinoData,
     CART_NAME = "cart",
     cart = {},
@@ -161,9 +164,18 @@ $(document).ready(function() {
     }
   }
 
+  function renderModal(){
+    const tpl_modal= tmpl($("#template-modal").html());
+
+    $finalModal.addClass("popup").html(tpl_modal);
+  }
+
   $modal.on("click", ".quantity-holder button", updateCart);
   $wrapper.on("click", ".quantity-holder button", updateCart);
   $shop.on("click", ".quantity-holder button", updateCart);
+  $shop.on("click",".finalOrder",function(){
+    renderModal();
+  });
 
   function updateCart(e) {
     if (e) {
@@ -293,7 +305,7 @@ $(document).ready(function() {
 
   //close popuo
   $modal.on("click", ".anc-close", function() {
-    $(".modal").removeClass("popup");
+    $(".modal").removeClass("popup").hide();
   });
 
   //show popup after click on img in it
@@ -301,6 +313,8 @@ $(document).ready(function() {
     const itemData = $(this)
       .closest(".food_section-category")
       .data("food-id");
+      $(".modal").removeClass("popup").show();
+
     renderPopup(itemData);
   });
 

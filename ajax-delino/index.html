@@ -37,6 +37,7 @@
       </section>
     </div>
     <div class="modal"></div>
+    <div class="finalModal" ></div>
     <!-- its for showing food -->
  
     <script type="text/html" id="template-food">
@@ -134,16 +135,7 @@
       </div>
     </script>
 
-    <!-- Cart  -->
-    <!-- <script type="text/html" id="template-cart">
-      <%for(var i=0; i< foodList.length; i++){%>
-        <div>
-          <span class="orderNumbers"><%=foodList[i].quantity%></span>
-          <div class="foodName"><%=foodList[i].title%></div>
-          <div class="price"><%=foodList[i].price%></div>
-        </div>
-      <%}%>
-    </script> -->
+
     <!-- cart -->
     <script type="text/html" id="template-Cart">
       <div class="lightBox transition-all" data-close-modal></div>
@@ -184,11 +176,22 @@
         </div>
     </script>
     <!-- cart -->
-    <!-- <script type="text/html" id="template-shopping" >
-      
-    </script> -->
+   
 
-    <!-- cart -->
+    <script type="text/html" id="template-modal" >
+      <div class="popup__content food-box-holder" data-close-modal>
+        <header>
+          <button class="btn-action anc-close">
+              <i class="fas fa-times"></i>
+          </button>
+        </header>
+        <section>
+          <div class="parent-btn">
+            <button class="btn-cart">ادامه</button>
+          </div>
+        </section>
+      </div>
+    </script>
     <script src="js/modul.js"></script>
     <script src="js/main.js"></script>
     <script src="js/persianumber.js"></script>

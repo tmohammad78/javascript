@@ -429,7 +429,7 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 4000; }
   .popup .popup__content {
     border-radius: 5px;
