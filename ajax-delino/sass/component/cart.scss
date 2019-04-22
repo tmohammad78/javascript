@@ -28,11 +28,15 @@
   width: 350px;
   background: white;
   transform: translate(-110%, 0);
-
+  
   .active-shop & {
     transform: translate(0, 0);
   }
 }
+.close-animation {
+  transform: translate(-110%, 0);
+}
+
 .lightBox {
   position: absolute;
   top: 0;

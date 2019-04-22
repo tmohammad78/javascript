@@ -718,6 +718,9 @@ footer {
   .active-shop .cartBox {
     transform: translate(0, 0); }
 
+.close-animation {
+  transform: translate(-110%, 0); }
+
 .lightBox {
   position: absolute;
   top: 0;

@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
   const $categoryWrapper = $(".categories");
   const $wrapper = $(".food_section-info");
@@ -316,9 +318,10 @@ $(document).ready(function() {
   });
 
   $(".shop").on("click", ".lightBox", function() {
-    $(".shop")
-      .addClass("close")
-      .removeClass("active-shop");
+    //$("#cart2").addClass("close-animation");
+    setTimeout(() => {
+      $("#cart2").removeClass("active-shop");
+    }, 3000);
   });
 
   //scrollwatcher
