@@ -27,7 +27,7 @@ $(document).ready(function() {
   $.get(`https://api.delino.com/restaurant/menu/${key}`)
     .done(result => {
       delinoData = result.categories;
-      renderCategory();
+      renderCategory(true);
       renderFoodList(true); // true: first init
 
       //$(window).trigger("resize")
@@ -40,6 +40,7 @@ $(document).ready(function() {
     });
 
   function renderCategory() {
+    console.log($(".parent").data("show-category"));
     let html = "",
       data = delinoData;
     if (data) {
@@ -47,6 +48,7 @@ $(document).ready(function() {
         return a.index - b.index;
       });
       const tpl_catItem = tmpl($("#template-category").html());
+
       const itemMenue = data.map((item, i) => {
         return tpl_catItem({
           id: item.id,
@@ -60,14 +62,15 @@ $(document).ready(function() {
   }
 
   function renderFoodList(first = false) {
+    if (!first) {
+      //debugger
+      $wrapper.html("");
+      //return;
+    }
     for (var catIndex = 0; catIndex < delinoData.length; catIndex++) {
       const data = delinoData[catIndex];
-      console.log(data)
-      if (!first) {
-        //debugger
-        $wrapper.html("")
-        //return;
-      }
+      // console.log(data)
+
       let html =
         '<h1 style="font-size: 20px; text-align: center">' +
         data.title +
@@ -88,17 +91,19 @@ $(document).ready(function() {
               if (first) {
                 item.visible = true;
               }
-              console.log(item.title,  item.visible)
-              itemsBox.push(tpl_Food({
-                id: item.id,
-                //items: JSON.stringify(item),
-                image,
-                title: item.title,
-                ingredient: helper.truncate(item.ingredient),
-                price: helper.currancy(item.price),
-                quantity: cart[item.id] || "",
-                visible: item.visible
-              }))
+              // console.log(item.title,  item.visible)
+              itemsBox.push(
+                tpl_Food({
+                  id: item.id,
+                  //items: JSON.stringify(item),
+                  image,
+                  title: item.title,
+                  ingredient: helper.truncate(item.ingredient),
+                  price: helper.currancy(item.price),
+                  quantity: cart[item.id] || "",
+                  visible: item.visible
+                })
+              );
             });
 
             html +=
@@ -135,21 +140,23 @@ $(document).ready(function() {
     updateCart();
   }
 
-  function renderPopup(data) {
-    let id = data.id;
-    let image = data.img
+  function renderPopup(id) {
+    let title = getFood(id).title;
+    let ingredient = getFood(id).ingredient;
+    let price = getFood(id).price;
+    let image = getFood(id).img
       ? '<img  class="imageFood"" src="' +
-        data.img.replace("#SIZEOFIMAGE#", "560x350") +
+        getFood(id).img.replace("#SIZEOFIMAGE#", "560x350") +
         '"/>'
       : ""; //560×350
     const tpl_popup = tmpl($("#template-popup").html());
     //Add to html
     const itempopup = tpl_popup({
-      id: id,
-      image: image,
-      title: data.title,
-      ingredient: data.ingredient,
-      currancy: helper.currancy(data.price),
+      id,
+      image,
+      title,
+      ingredient,
+      currancy: helper.currancy(price),
       quantity: cart[id] || 0
     });
     $modal.addClass("popup").html(itempopup);
@@ -212,7 +219,11 @@ $(document).ready(function() {
     $("#cart2").html(
       tpl_Cart({ foodList, totalPrice: helper.currancy(totalPrice) })
     );
-
+    if (!totalItems) {
+      $(".totalPrice").remove();
+      $(".finalOrder").remove();
+      $(".cart-bottom").html("<div>سبد خرید شما خالی استسثشق</div>");
+    }
     $("#cart-count").text(totalItems || "");
 
     sessionStorage.setItem(CART_NAME, cart_arr.join("-"));
@@ -291,7 +302,7 @@ $(document).ready(function() {
   $wrapper.on("click", "img", function() {
     const itemData = $(this)
       .closest(".food_section-category")
-      .data("food");
+      .data("food-id");
     renderPopup(itemData);
   });
 
@@ -330,7 +341,19 @@ $(document).ready(function() {
 
   const $searchInput = $('input[name="search-input"]').on("keyup", e => {
     const text = $searchInput.val();
-    console.log(text);
+
+    
+    if (text) {
+      $(".parent").hide();
+      $(window).scrollTop(0);
+    } else {
+      $(".parent").show();
+    }
+
+
+    // $(".parent")[text ? "hide" : "show"]();
+
+
 
     //  make food visible
     for (var i = 0; i < delinoData.length; i++) {
@@ -340,9 +363,12 @@ $(document).ready(function() {
           if (subData) {
             for (var z = 0; z < subData.length; z++) {
               if (text) {
-                if (subData[z].title.indexOf(text) > -1) {
+                if (
+                  subData[z].title.indexOf(text) > -1 ||
+                  subData[z].ingredient.indexOf(text) > -1
+                ) {
                   subData[z].visible = true;
-                  console.log(subData[z].title);
+                  // console.log(subData[z].title);
                 } else {
                   subData[z].visible = false;
                 }
@@ -356,7 +382,6 @@ $(document).ready(function() {
         }
       }
     }
-
     renderFoodList();
   });
 
