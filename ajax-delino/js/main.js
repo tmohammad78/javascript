@@ -63,18 +63,11 @@ $(document).ready(function() {
 
   function renderFoodList(first = false) {
     if (!first) {
-      //debugger
       $wrapper.html("");
-      //return;
     }
     for (var catIndex = 0; catIndex < delinoData.length; catIndex++) {
       const data = delinoData[catIndex];
-      // console.log(data)
-
-      let html =
-        '<h1 style="font-size: 20px; text-align: center">' +
-        data.title +
-        "</h1>";
+      let html = '<h1 style="font-size: 20px; text-align: center">' + data.title + "</h1>";
       const tpl_Food = tmpl($("#template-food").html());
       const tpl_foodElse = tmpl($("#template-foodElse").html());
       for (var i = 0; i < data.sub.length; i++) {
@@ -222,7 +215,7 @@ $(document).ready(function() {
     if (!totalItems) {
       $(".totalPrice").remove();
       $(".finalOrder").remove();
-      $(".cart-bottom").html("<div>سبد خرید شما خالی استسثشق</div>");
+      $(".cart-bottom").html(`<div><img class="img-free-cart"  src="./img/shopping-cart.svg" alt="cart"><div style="text-align:center" > سبد شما خالی است</div></div>`);
     }
     $("#cart-count").text(totalItems || "");
 
@@ -342,19 +335,15 @@ $(document).ready(function() {
   const $searchInput = $('input[name="search-input"]').on("keyup", e => {
     const text = $searchInput.val();
 
-    
     if (text) {
       $(".parent").hide();
+      $('.food_section-infobox').css({ "border":"none" })
       $(window).scrollTop(0);
     } else {
       $(".parent").show();
     }
 
-
     // $(".parent")[text ? "hide" : "show"]();
-
-
-
     //  make food visible
     for (var i = 0; i < delinoData.length; i++) {
       for (var j = 0; j < delinoData[i].sub.length; j++) {

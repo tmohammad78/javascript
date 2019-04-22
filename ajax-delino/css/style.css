@@ -215,8 +215,7 @@ body {
     background-color: #ffffff;
     text-align: right;
     direction: rtl;
-    font-size: 1.2rem;
-    cursor: pointer; }
+    font-size: 1.2rem; }
     .food_section .food_section-description .food_section-description-index {
       padding: 8px 0px; }
     .food_section .food_section-description .food_section-description-title {
@@ -306,8 +305,7 @@ body {
       text-align: right;
       direction: rtl;
       font-size: 3rem;
-      float: right;
-      cursor: pointer; }
+      float: right; }
       .food_section .food_section-description .food_section-description-index {
         font-size: 15px;
         padding: 8px 0px; }
@@ -757,6 +755,11 @@ footer {
   border-top: 1px solid #eeeeee;
   padding-top: 10px;
   text-align: center; }
+
+.img-free-cart {
+  width: 350px;
+  height: 177px;
+  fill: red; }
 
 .itemOrder {
   border-bottom: 1px solid #eeeeee;
