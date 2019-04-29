@@ -3,6 +3,7 @@ $(document).ready(function() {
   const $wrapper = $(".food_section-info");
   const $modal = $(".modal");
   const $shop=$('.shop');
+  const $test=$('.food_section-infobox');
   const $finalModal= $(".finalModal");
   
 
@@ -32,7 +33,6 @@ $(document).ready(function() {
       delinoData = result.categories;
       renderCategory(true);
       renderFoodList(true); // true: first init
-
       //$(window).trigger("resize")
       onResize();
     })
@@ -349,7 +349,7 @@ $(document).ready(function() {
 
     if (text) {
       $(".parent").hide();
-      $(".food_section-infobox").css({ border: "none" });
+      $(".food_section-infobox").css("color","red");
       $(window).scrollTop(0);
     } else {
       $(".parent").show();
